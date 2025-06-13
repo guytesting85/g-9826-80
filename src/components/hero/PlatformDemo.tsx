@@ -6,6 +6,7 @@ import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChar
 const PlatformDemo = () => {
   const [activeTab, setActiveTab] = useState('cues');
   const [isHeartLiked, setIsHeartLiked] = useState(false);
+  const [isFloatingHeartLiked, setIsFloatingHeartLiked] = useState(false);
 
   const tabContent = {
     cues: {
@@ -38,17 +39,17 @@ const PlatformDemo = () => {
               <div className="flex items-center justify-between p-4 border-t border-gray-200">
                 <div className="flex items-center space-x-4 text-gray-500">
                   <button 
-                    className="flex items-center space-x-2 hover:text-red-500 transition-colors"
+                    className="flex items-center space-x-2 hover:text-red-500 transition-colors cursor-pointer"
                     onClick={() => setIsHeartLiked(!isHeartLiked)}
                   >
-                    <Heart className={`w-5 h-5 ${isHeartLiked ? 'fill-red-500 text-red-500' : ''}`} />
+                    <Heart className={`w-5 h-5 transition-all duration-300 ${isHeartLiked ? 'fill-red-500 text-red-500 scale-110' : ''}`} />
                     <span className="text-sm font-medium">{isHeartLiked ? '90' : '89'}</span>
                   </button>
-                  <button className="flex items-center space-x-2 hover:text-blue-500 transition-colors">
+                  <button className="flex items-center space-x-2 hover:text-blue-500 transition-colors cursor-pointer">
                     <MessageCircle className="w-5 h-5" />
                     <span className="text-sm font-medium">12</span>
                   </button>
-                  <button className="flex items-center space-x-2 hover:text-green-500 transition-colors">
+                  <button className="flex items-center space-x-2 hover:text-green-500 transition-colors cursor-pointer">
                     <ThumbsUp className="w-5 h-5" />
                     <span className="text-sm font-medium">Share</span>
                   </button>
@@ -121,7 +122,7 @@ const PlatformDemo = () => {
             { name: "Sarah Chen", company: "TechStart", status: "Hot", interactions: 8, stage: "Proposal" },
             { name: "David Kim", company: "InnovateLab", status: "Cold", interactions: 2, stage: "Research" }
           ].map((seed, i) => (
-            <div key={i} className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+            <div key={i} className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer">
               <div className="flex items-center justify-between">
                 <div className="flex items-center space-x-4">
                   <div className="w-12 h-12 rounded-full bg-gray-200 flex items-center justify-center">
@@ -160,7 +161,7 @@ const PlatformDemo = () => {
               { name: "Twitter Outreach Agent", status: "Active", tasks: 8, efficiency: "87%" },
               { name: "Content Interaction AI", status: "Paused", tasks: 0, efficiency: "91%" }
             ].map((agent, i) => (
-              <div key={i} className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow">
+              <div key={i} className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center space-x-4">
                     <div className="w-12 h-12 rounded-full bg-convrt-purple/20 flex items-center justify-center">
@@ -189,7 +190,7 @@ const PlatformDemo = () => {
   };
 
   return (
-    <div className="relative max-w-6xl mx-auto mb-20">
+    <div className="relative max-w-6xl mx-auto">
       {/* Gradient background */}
       <div className="absolute inset-0 -m-10 bg-gradient-to-br from-convrt-purple/20 via-convrt-purple/20 to-convrt-purple/20 rounded-3xl blur-3xl opacity-40"></div>
       
@@ -205,7 +206,7 @@ const PlatformDemo = () => {
           <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
             <button 
               onClick={() => setActiveTab('cues')}
-              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer ${
                 activeTab === 'cues' 
                   ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
                   : 'text-gray-600 hover:bg-gray-100 border-transparent'
@@ -215,7 +216,7 @@ const PlatformDemo = () => {
             </button>
             <button 
               onClick={() => setActiveTab('heatbox')}
-              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer ${
                 activeTab === 'heatbox' 
                   ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
                   : 'text-gray-600 hover:bg-gray-100 border-transparent'
@@ -225,7 +226,7 @@ const PlatformDemo = () => {
             </button>
             <button 
               onClick={() => setActiveTab('seeds')}
-              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer ${
                 activeTab === 'seeds' 
                   ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
                   : 'text-gray-600 hover:bg-gray-100 border-transparent'
@@ -235,7 +236,7 @@ const PlatformDemo = () => {
             </button>
             <button 
               onClick={() => setActiveTab('agents')}
-              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+              className={`px-5 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer ${
                 activeTab === 'agents' 
                   ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
                   : 'text-gray-600 hover:bg-gray-100 border-transparent'
@@ -261,7 +262,7 @@ const PlatformDemo = () => {
         </div>
         
         {/* Main Content Area */}
-        <div className="bg-gray-50 p-8 min-h-[500px]">
+        <div className="bg-gray-50 p-8 min-h-[600px]">
           <motion.div 
             key={activeTab}
             initial={{ opacity: 0, y: 20 }}
@@ -279,22 +280,29 @@ const PlatformDemo = () => {
         </div>
       </div>
       
-      {/* Floating UI Element */}
+      {/* Floating UI Element - Made Clickable */}
       <motion.div
         initial={{ y: 20, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
         transition={{ delay: 1.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
         className="absolute -left-8 top-1/3 z-10"
       >
-        <div className="animate-float bg-white/70 backdrop-blur-md p-3 rounded-xl shadow-xl border border-white/20 flex items-center">
-          <div className="bg-[#6936F5]/20 rounded-lg p-2 mr-3">
-            <Heart className="w-4 h-4 text-[#6936F5]" />
+        <button
+          onClick={() => setIsFloatingHeartLiked(!isFloatingHeartLiked)}
+          className="animate-float bg-white/70 backdrop-blur-md p-3 rounded-xl shadow-xl border border-white/20 flex items-center cursor-pointer hover:bg-white/80 transition-all duration-300"
+        >
+          <div className={`rounded-lg p-2 mr-3 transition-all duration-300 ${
+            isFloatingHeartLiked ? 'bg-red-100' : 'bg-[#6936F5]/20'
+          }`}>
+            <Heart className={`w-4 h-4 transition-all duration-300 ${
+              isFloatingHeartLiked ? 'text-red-500 fill-red-500 scale-110' : 'text-[#6936F5]'
+            }`} />
           </div>
           <div>
             <div className="text-gray-800 text-xs font-medium">New interaction</div>
             <div className="text-gray-600 text-xs">Liked your comment</div>
           </div>
-        </div>
+        </button>
       </motion.div>
     </div>
   );

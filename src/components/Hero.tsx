@@ -66,7 +66,7 @@ const Hero = () => {
           
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-16"
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20"
           >
             <a href="#cta" className="button-primary flex items-center group font-inter font-medium">
               Get Started
@@ -81,6 +81,7 @@ const Hero = () => {
           <motion.div 
             ref={demoRef}
             variants={itemVariants}
+            className="mb-24"
           >
             <PlatformDemo />
           </motion.div>
