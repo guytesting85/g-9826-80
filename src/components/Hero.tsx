@@ -76,12 +76,15 @@ const Hero = () => {
             </a>
           </motion.div>
           
-          {/* Modern Platform Showcase - Only render if showDemo is true */}
+          {/* Modern Platform Showcase - Conditionally render with no space when hidden */}
           {showDemo && (
             <motion.div 
               ref={demoRef}
               variants={itemVariants}
-              className="mb-8 transform scale-105"
+              className="transform scale-105"
+              initial={{ opacity: 1, height: "auto" }}
+              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
+              transition={{ duration: 0.3 }}
             >
               <PlatformDemo 
                 onClose={() => setShowDemo(false)} 
