@@ -2,6 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
 import { Menu, X } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -29,7 +30,7 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6",
         isScrolled 
-          ? "bg-white/80 backdrop-blur-lg shadow-sm" 
+          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm" 
           : "bg-transparent"
       )}
     >
@@ -50,20 +51,22 @@ const Navbar = () => {
             <a 
               key={item.href}
               href={item.href} 
-              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
+              className="text-convrt-dark-blue/80 dark:text-gray-300 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors"
             >
               {item.label}
             </a>
           ))}
+          <ThemeToggle />
           <a href="#contact" className="button-primary">
             Get Started
           </a>
         </div>
         
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center">
+        <div className="md:hidden flex items-center space-x-2">
+          <ThemeToggle />
           <button 
-            className="text-convrt-dark-blue" 
+            className="text-convrt-dark-blue dark:text-white" 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -73,13 +76,13 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4 px-6">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg py-4 px-6 border-t border-gray-200 dark:border-gray-700">
           <div className="flex flex-col space-y-4">
             {navigationItems.map((item) => (
               <a 
                 key={item.href}
                 href={item.href} 
-                className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
+                className="text-convrt-dark-blue/80 dark:text-gray-300 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 {item.label}

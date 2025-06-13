@@ -28,7 +28,6 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
   return (
     <motion.div 
       variants={floatingVariants}
-      // animate="animate"
       className={`relative ${platformDemo.isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'max-w-7xl mx-auto'}`}
     >
       {!platformDemo.isFullscreen && (
@@ -68,14 +67,14 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
       <AnimatePresence>
         <NotificationPanel 
           isOpen={platformDemo.showNotifications}
-          onClose={platformDemo.closeNotificationPanel}
+          onClose={platformDemo.closeNotifications}
         />
       </AnimatePresence>
 
       <AnimatePresence>
         <AvatarMenu
           isOpen={platformDemo.showAvatarMenu}
-          onClose={platformDemo.closeAvatarPanel}
+          onClose={platformDemo.closeAvatarMenu}
           onUploadClick={() => avatar.setShowAvatarUpload(true)}
           avatarImage={avatar.avatarImage}
         />

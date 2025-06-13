@@ -11,21 +11,21 @@ const Hero = () => {
   const [showDemo, setShowDemo] = useState(true);
 
   return (
-    <section className="relative min-h-0 pt-20 pb-10 overflow-hidden bg-gradient-to-br from-slate-50 via-purple-50/40 to-blue-50/40">
+    <section className="relative min-h-0 pt-20 pb-10 overflow-hidden bg-gradient-to-br from-slate-50 via-purple-50/40 to-blue-50/40 dark:from-gray-900 dark:via-gray-800/40 dark:to-gray-900/40">
       <AnimatedBackground />
       
       <div className="container-section relative z-10">
         <motion.div initial="hidden" animate="visible" variants={containerVariants} className="max-w-6xl mx-auto text-center">
-          <motion.div variants={itemVariants} className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6">
+          <motion.div variants={itemVariants} className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 dark:bg-convrt-purple/20 text-convrt-purple mb-6">
             <Zap className="w-4 h-4 mr-2" />
             <span className="text-sm font-medium font-inter tracking-wide">Where my code comes to life</span>
           </motion.div>
           
-          <motion.h1 variants={itemVariants} className="font-inter font-bold text-4xl md:text-5xl lg:text-7xl tracking-tight max-w-4xl mx-auto mb-6 text-convrt-dark-blue leading-[1.1]">
+          <motion.h1 variants={itemVariants} className="font-inter font-bold text-4xl md:text-5xl lg:text-7xl tracking-tight max-w-4xl mx-auto mb-6 text-convrt-dark-blue dark:text-white leading-[1.1]">
             From <span className="text-[#EA384C] font-extrabold">@lifeispranav</span> to <span className="text-[#6936F5] font-extrabold">.me</span>
           </motion.h1>
           
-          <motion.p variants={itemVariants} className="font-inter text-xl text-convrt-dark-blue/80 max-w-3xl mx-auto mb-8 leading-relaxed">
+          <motion.p variants={itemVariants} className="font-inter text-xl text-convrt-dark-blue/80 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
             Software Engineer | Async mind. Strategic build. 
           </motion.p>
           
