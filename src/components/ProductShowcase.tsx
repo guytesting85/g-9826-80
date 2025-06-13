@@ -1,6 +1,6 @@
 
 import React, { useRef, useState } from 'react';
-import { Check, X, Maximize2, Minimize2 } from 'lucide-react';
+import { Check, X, Maximize2, Minimize2, TrendingUp, Users, BarChart3, Activity } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { floatingVariants } from '../utils/animations';
 
@@ -52,42 +52,47 @@ const ProductShowcase = () => {
   const renderTabContent = () => {
     if (activeTab === 'analytics') {
       return (
-        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-[20px] border border-white/60 dark:border-gray-600/60 shadow-lg p-6 transition-colors duration-300">
-          <div className="flex items-center mb-4">
-            <div className="h-8 w-8 rounded-full bg-[#6936F5] flex items-center justify-center text-white mr-3">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M3 3v5h5" />
-                <path d="M6 17l4-4 4 4 6-6" />
-                <path d="M18 7h5v5" />
-              </svg>
+        <div className="grid grid-cols-2 gap-4">
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-6 shadow-lg">
+            <div className="flex items-center mb-4">
+              <div className="h-8 w-8 rounded-lg bg-[#6936F5] flex items-center justify-center text-white mr-3">
+                <TrendingUp className="w-4 h-4" />
+              </div>
+              <h3 className="text-lg font-semibold text-convrt-dark-blue dark:text-white">Growth Metrics</h3>
             </div>
-            <h3 className="text-lg font-semibold text-convrt-dark-blue dark:text-white">Performance Analytics</h3>
-          </div>
-          
-          <div className="space-y-4">
-            <div className="grid grid-cols-2 gap-4">
-              <div className="p-4 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
+            
+            <div className="space-y-4">
+              <div className="p-4 bg-[#F9F6F3] dark:bg-gray-700 rounded-xl border-2 border-gray-100 dark:border-gray-600">
                 <div className="text-2xl font-bold text-convrt-purple">94%</div>
                 <div className="text-sm text-gray-600 dark:text-gray-300">Engagement Rate</div>
               </div>
-              <div className="p-4 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
+              <div className="p-4 bg-[#F9F6F3] dark:bg-gray-700 rounded-xl border-2 border-gray-100 dark:border-gray-600">
                 <div className="text-2xl font-bold text-green-600">3.2x</div>
                 <div className="text-sm text-gray-600 dark:text-gray-300">Response Improvement</div>
               </div>
             </div>
+          </div>
+
+          <div className="bg-white dark:bg-gray-800 rounded-2xl border-2 border-gray-200 dark:border-gray-700 p-6 shadow-lg">
+            <div className="flex items-center mb-4">
+              <div className="h-8 w-8 rounded-lg bg-[#6936F5] flex items-center justify-center text-white mr-3">
+                <BarChart3 className="w-4 h-4" />
+              </div>
+              <h3 className="text-lg font-semibold text-convrt-dark-blue dark:text-white">Activity Overview</h3>
+            </div>
             
             <div>
-              <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Recent Metrics:</h4>
-              <ul className="space-y-2">
-                <li className="flex items-start">
+              <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-3">Recent Metrics:</h4>
+              <ul className="space-y-3">
+                <li className="flex items-start p-2 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
                   <span className="text-[#6936F5] mr-2">•</span>
                   <span className="text-sm text-gray-700 dark:text-gray-300">256 prospects engaged this week</span>
                 </li>
-                <li className="flex items-start">
+                <li className="flex items-start p-2 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
                   <span className="text-[#6936F5] mr-2">•</span>
                   <span className="text-sm text-gray-700 dark:text-gray-300">87% positive sentiment score</span>
                 </li>
-                <li className="flex items-start">
+                <li className="flex items-start p-2 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
                   <span className="text-[#6936F5] mr-2">•</span>
                   <span className="text-sm text-gray-700 dark:text-gray-300">42 qualified meetings scheduled</span>
                 </li>
@@ -103,13 +108,7 @@ const ProductShowcase = () => {
       <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-[20px] border border-white/60 dark:border-gray-600/60 shadow-lg p-6 transition-colors duration-300">
         <div className="flex items-center mb-4">
           <div className="h-8 w-8 rounded-full bg-[#6936F5] flex items-center justify-center text-white mr-3">
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-              <path d="M9.5 2a4.61 4.61 0 0 1 2.44 6.47A4.25 4.25 0 0 1 15.45 12h.05c2.5.1 4.25 1 4.5 2.73V15a3 3 0 0 1-2.3 2.92l-2.53.42a3.52 3.52 0 0 0-3.77-1.65L10.5 15.5"></path>
-              <path d="M15 9.5a4.61 4.61 0 0 0-2.44-6.47A4.25 4.25 0 0 0 9.55 0H9.5c-2.5.1-4.25 1-4.5 2.73V3a3 3 0 0 0 2.3 2.92l2.53.42a3.52 3.52 0 0 0 3.77-1.65L14.5 3.5"></path>
-              <path d="M4 8h2.5a1.5 1.5 0 0 1 1.5 1.5V12"></path>
-              <path d="M4 16h2.5a1.5 1.5 0 0 0 1.5-1.5V12"></path>
-              <path d="M13 16a3 3 0 1 0 0-6"></path>
-            </svg>
+            <Activity className="w-4 h-4" />
           </div>
           <h3 className="text-lg font-semibold text-convrt-dark-blue dark:text-white">Insights Report</h3>
         </div>
