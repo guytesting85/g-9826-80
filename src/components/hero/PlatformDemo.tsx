@@ -1,9 +1,185 @@
 
-import React from 'react';
+import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X } from 'lucide-react';
+import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot } from 'lucide-react';
 
 const PlatformDemo = () => {
+  const [activeTab, setActiveTab] = useState('cues');
+
+  const tabContent = {
+    cues: {
+      title: "Cues Management",
+      subtitle: "AI-Identified Engagement Opportunities",
+      description: "Track and manage AI-discovered conversation starters and engagement opportunities with your prospects.",
+      content: (
+        <div className="space-y-4">
+          <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
+            <div className="p-4">
+              <div className="flex items-center space-x-3 mb-3">
+                <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
+                  <img src="/lovable-uploads/0f228602-2449-495f-866b-df124fde272a.png" alt="Profile" className="w-full h-full object-cover" />
+                </div>
+                <div>
+                  <div className="flex items-center">
+                    <h3 className="font-medium text-gray-900">Sarah Chen</h3>
+                    <div className="ml-2 text-xs text-white bg-blue-600 px-1.5 py-0.5 rounded">LinkedIn</div>
+                  </div>
+                  <p className="text-xs text-gray-500">VP Marketing at TechStart • 3h ago</p>
+                </div>
+              </div>
+              
+              <div className="mb-4">
+                <p className="text-sm text-gray-700">
+                  Excited to share that our team just hit 200% of our Q4 targets! The new marketing automation tools have been game-changing. 🚀
+                </p>
+              </div>
+              
+              <div className="flex items-center justify-between p-3 border-t border-gray-200">
+                <div className="flex items-center space-x-3 text-gray-500 text-sm">
+                  <div className="flex items-center space-x-1">
+                    <Heart className="w-4 h-4" />
+                    <span>89</span>
+                  </div>
+                  <div className="flex items-center space-x-1">
+                    <MessageCircle className="w-4 h-4" />
+                    <span>12</span>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-1 bg-convrt-purple/10 text-convrt-purple px-2 py-1 rounded-md">
+                  <Target className="w-4 h-4" />
+                  <span className="text-xs font-medium">High Priority Cue</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    heatbox: {
+      title: "Heatbox Analytics", 
+      subtitle: "Engagement Heat Mapping",
+      description: "Visualize where your prospects are most active and engaged across different platforms and topics.",
+      content: (
+        <div className="space-y-4">
+          <div className="grid grid-cols-2 gap-4">
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">LinkedIn</span>
+                <span className="text-convrt-purple font-bold">89%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="bg-convrt-purple h-2 rounded-full" style={{width: '89%'}}></div>
+              </div>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">Twitter</span>
+                <span className="text-blue-600 font-bold">67%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="bg-blue-600 h-2 rounded-full" style={{width: '67%'}}></div>
+              </div>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">Facebook</span>
+                <span className="text-green-600 font-bold">45%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="bg-green-600 h-2 rounded-full" style={{width: '45%'}}></div>
+              </div>
+            </div>
+            <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center justify-between mb-2">
+                <span className="text-sm font-medium text-gray-700">Reddit</span>
+                <span className="text-orange-600 font-bold">23%</span>
+              </div>
+              <div className="w-full bg-gray-200 rounded-full h-2">
+                <div className="bg-orange-600 h-2 rounded-full" style={{width: '23%'}}></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )
+    },
+    seeds: {
+      title: "Seeds Database",
+      subtitle: "Relationship Building Progress", 
+      description: "Track your relationship-building journey with prospects from first contact to closed deals.",
+      content: (
+        <div className="space-y-3">
+          {[
+            { name: "Michael Anderson", company: "TechCorp", status: "Warm", interactions: 5, stage: "Qualified" },
+            { name: "Sarah Chen", company: "TechStart", status: "Hot", interactions: 8, stage: "Proposal" },
+            { name: "David Kim", company: "InnovateLab", status: "Cold", interactions: 2, stage: "Research" }
+          ].map((seed, i) => (
+            <div key={i} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 rounded-full bg-gray-200 flex items-center justify-center">
+                    <User className="w-5 h-5 text-gray-600" />
+                  </div>
+                  <div>
+                    <h4 className="font-medium text-gray-900">{seed.name}</h4>
+                    <p className="text-xs text-gray-500">{seed.company}</p>
+                  </div>
+                </div>
+                <div className="text-right">
+                  <div className={`text-xs px-2 py-1 rounded-full ${
+                    seed.status === 'Hot' ? 'bg-red-100 text-red-700' :
+                    seed.status === 'Warm' ? 'bg-orange-100 text-orange-700' :
+                    'bg-blue-100 text-blue-700'
+                  }`}>
+                    {seed.status}
+                  </div>
+                  <p className="text-xs text-gray-500 mt-1">{seed.interactions} interactions</p>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    },
+    agents: {
+      title: "AI Agents",
+      subtitle: "Autonomous Engagement Bots",
+      description: "Deploy AI agents that automatically engage with prospects, comment on posts, and nurture relationships 24/7.",
+      content: (
+        <div className="space-y-4">
+          <div className="grid grid-cols-1 gap-3">
+            {[
+              { name: "LinkedIn Engagement Bot", status: "Active", tasks: 12, efficiency: "94%" },
+              { name: "Twitter Outreach Agent", status: "Active", tasks: 8, efficiency: "87%" },
+              { name: "Content Interaction AI", status: "Paused", tasks: 0, efficiency: "91%" }
+            ].map((agent, i) => (
+              <div key={i} className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center space-x-3">
+                    <div className="w-10 h-10 rounded-full bg-convrt-purple/20 flex items-center justify-center">
+                      <Bot className="w-5 h-5 text-convrt-purple" />
+                    </div>
+                    <div>
+                      <h4 className="font-medium text-gray-900">{agent.name}</h4>
+                      <p className="text-xs text-gray-500">{agent.tasks} active tasks</p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className={`text-xs px-2 py-1 rounded-full ${
+                      agent.status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700'
+                    }`}>
+                      {agent.status}
+                    </div>
+                    <p className="text-xs text-convrt-purple font-medium mt-1">{agent.efficiency} efficiency</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      )
+    }
+  };
+
   return (
     <div className="relative max-w-5xl mx-auto mb-20">
       {/* Gradient background */}
@@ -19,18 +195,46 @@ const PlatformDemo = () => {
           </div>
           
           <div className="flex space-x-1 overflow-x-auto scrollbar-hide">
-            <div className="px-4 py-2 text-convrt-purple bg-convrt-purple/10 rounded-t-lg font-medium text-sm border-b-2 border-convrt-purple">
+            <button 
+              onClick={() => setActiveTab('cues')}
+              className={`px-4 py-2 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+                activeTab === 'cues' 
+                  ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
+                  : 'text-gray-600 hover:bg-gray-100 border-transparent'
+              }`}
+            >
               Cues (24)
-            </div>
-            <div className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-t-lg font-medium text-sm">
+            </button>
+            <button 
+              onClick={() => setActiveTab('heatbox')}
+              className={`px-4 py-2 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+                activeTab === 'heatbox' 
+                  ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
+                  : 'text-gray-600 hover:bg-gray-100 border-transparent'
+              }`}
+            >
               Heatbox (12)
-            </div>
-            <div className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-t-lg font-medium text-sm">
+            </button>
+            <button 
+              onClick={() => setActiveTab('seeds')}
+              className={`px-4 py-2 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+                activeTab === 'seeds' 
+                  ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
+                  : 'text-gray-600 hover:bg-gray-100 border-transparent'
+              }`}
+            >
               Seeds (156)
-            </div>
-            <div className="px-4 py-2 text-gray-600 hover:bg-gray-100 rounded-t-lg font-medium text-sm">
+            </button>
+            <button 
+              onClick={() => setActiveTab('agents')}
+              className={`px-4 py-2 rounded-t-lg font-medium text-sm border-b-2 transition-all ${
+                activeTab === 'agents' 
+                  ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
+                  : 'text-gray-600 hover:bg-gray-100 border-transparent'
+              }`}
+            >
               AI Agents
-            </div>
+            </button>
           </div>
           
           <div className="ml-auto flex items-center space-x-4">
@@ -48,189 +252,22 @@ const PlatformDemo = () => {
           </div>
         </div>
         
-        {/* Main Content Area - LinkedIn Style Post with AI-Generated Comment */}
+        {/* Main Content Area */}
         <div className="bg-gray-50 p-6">
-          <div className="grid grid-cols-12 gap-6">
-            {/* Left Panel - Profile and Post */}
-            <div className="col-span-8 space-y-6">
-              {/* Prompt Area */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <div className="flex items-start space-x-3">
-                  <div className="w-10 h-10 rounded-full bg-convrt-purple/20 flex items-center justify-center">
-                    <User className="w-5 h-5 text-convrt-purple" />
-                  </div>
-                  <div>
-                    <p className="text-sm text-gray-700">
-                      Hey Roy, I found a post that's relevant to your ICO with 65% match. What do you want me to do?
-                    </p>
-                    <div className="mt-3 bg-convrt-purple/5 p-3 rounded-lg">
-                      <p className="text-xs text-gray-600 font-medium">Generate an insightful comment about the market trends.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              
-              {/* LinkedIn Post */}
-              <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
-                <div className="p-4">
-                  <div className="flex items-center space-x-3 mb-3">
-                    <div className="w-12 h-12 rounded-full bg-gray-200 overflow-hidden">
-                      <img src="/lovable-uploads/0f228602-2449-495f-866b-df124fde272a.png" alt="Profile" className="w-full h-full object-cover" />
-                    </div>
-                    <div>
-                      <div className="flex items-center">
-                        <h3 className="font-medium text-gray-900">Michael Anderson</h3>
-                        <div className="ml-2 text-xs text-white bg-blue-600 px-1.5 py-0.5 rounded">LinkedIn</div>
-                      </div>
-                      <p className="text-xs text-gray-500">Growth Lead at TechCorp • 2h ago</p>
-                    </div>
-                  </div>
-                  
-                  <div className="mb-4">
-                    <p className="text-sm text-gray-700">
-                      Just launched our new AI-powered analytics dashboard and the initial feedback has been incredible! 🚀 We're seeing a 47% improvement in user engagement and a 3x increase in data processing speed. Would love to hear your thoughts on the future of AI in analytics.
-                    </p>
-                  </div>
-                  
-                  <div className="flex items-center space-x-3 py-2 border-t border-b border-gray-100 text-gray-500 text-sm">
-                    <div className="flex items-center space-x-1">
-                      <Heart className="w-4 h-4" />
-                      <span>124</span>
-                    </div>
-                    <div className="flex items-center space-x-1">
-                      <MessageCircle className="w-4 h-4" />
-                      <span>38</span>
-                    </div>
-                    <div className="ml-auto flex items-center space-x-1 bg-convrt-purple/10 text-convrt-purple px-2 py-1 rounded-md">
-                      <Save className="w-4 h-4" />
-                      <span className="text-xs font-medium">Save to Seeds</span>
-                    </div>
-                  </div>
-                  
-                  {/* AI Generated Comment */}
-                  <div className="mt-4 relative">
-                    <div className="flex items-center mb-2">
-                      <div className="flex items-center bg-gray-100 px-2 py-1 rounded text-xs font-medium text-gray-600">
-                        <Sparkles className="w-3 h-3 mr-1 text-convrt-purple" />
-                        Generated Comment
-                      </div>
-                      <div className="ml-2 text-xs text-gray-500">AI Generated</div>
-                      <div className="ml-auto">
-                        <button className="bg-green-500 text-white px-3 py-1 rounded-md text-xs font-medium flex items-center">
-                          <Check className="w-3 h-3 mr-1" />
-                          Approve
-                        </button>
-                      </div>
-                    </div>
-                    
-                    <div className="text-sm text-gray-700 bg-gray-50 p-3 rounded-md border border-gray-200">
-                      The integration of AI in analytics represents a significant leap forward in how businesses process and utilize data. Your 47% engagement improvement highlights the value of intuitive, AI-driven interfaces that present insights in more actionable ways. As AI continues to evolve, we'll likely see more predictive analytics capabilities that not only tell us what happened but guide strategic decision-making in real-time. Exciting times ahead for the analytics space!
-                    </div>
-                  </div>
-                </div>
-                
-                {/* Engagement Score */}
-                <div className="bg-convrt-purple/5 p-4">
-                  <div className="flex justify-between items-center mb-2">
-                    <span className="text-sm font-medium text-gray-700">Engagement Score</span>
-                    <span className="text-convrt-purple font-bold">+25</span>
-                  </div>
-                  <div className="w-full bg-gray-200 rounded-full h-2">
-                    <div className="bg-convrt-purple h-2 rounded-full" style={{width: '75%'}}></div>
-                  </div>
-                  <div className="text-xs text-gray-500 mt-1">75/100 points to next level</div>
-                </div>
-                
-                <div className="flex items-center justify-between p-3 border-t border-gray-200">
-                  <button className="text-gray-500 flex items-center text-sm">
-                    <ArrowLeft className="w-4 h-4 mr-1" />
-                    Previous
-                  </button>
-                  <button className="text-red-500 flex items-center text-sm">
-                    <X className="w-4 h-4 mr-1" />
-                    Irrelevant
-                  </button>
-                  <button className="text-gray-500 flex items-center text-sm">
-                    Next
-                    <ArrowRight className="w-4 h-4 ml-1" />
-                  </button>
-                </div>
-              </div>
+          <motion.div 
+            key={activeTab}
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.3 }}
+            className="space-y-4"
+          >
+            <div className="text-center mb-6">
+              <h3 className="text-xl font-bold text-gray-900 mb-2">{tabContent[activeTab].title}</h3>
+              <p className="text-sm text-convrt-purple font-medium mb-1">{tabContent[activeTab].subtitle}</p>
+              <p className="text-sm text-gray-600">{tabContent[activeTab].description}</p>
             </div>
-            
-            {/* Right Panel - Context and Insights */}
-            <div className="col-span-4 space-y-4">
-              {/* Warmth Level */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Warmth Level</h3>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-convrt-purple rounded-full"></div>
-                  <span className="text-convrt-purple font-medium">Warm</span>
-                </div>
-              </div>
-              
-              {/* Previous Touchpoints */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Previous Touchpoints</h3>
-                <div className="text-convrt-purple font-medium text-sm">3 Interactions</div>
-              </div>
-              
-              {/* Engagement Potential */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Engagement Potential</h3>
-                <div className="w-full bg-gray-200 rounded-full h-2 mb-1">
-                  <div className="bg-convrt-purple h-2 rounded-full" style={{width: '85%'}}></div>
-                </div>
-                <div className="text-right text-sm font-medium text-convrt-purple">85%</div>
-              </div>
-              
-              {/* Relationship Status */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Relationship Status</h3>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-convrt-purple rounded-full"></div>
-                  <span className="text-convrt-purple font-medium">Warm - 3 Previous Interactions</span>
-                </div>
-              </div>
-              
-              {/* Topics of Interest */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Topics of Interest</h3>
-                <div className="flex flex-wrap gap-2">
-                  <span className="bg-convrt-purple/10 text-convrt-purple text-xs px-2 py-1 rounded-md">AI Analytics</span>
-                  <span className="bg-blue-50 text-blue-600 text-xs px-2 py-1 rounded-md">SaaS</span>
-                  <span className="bg-green-50 text-green-600 text-xs px-2 py-1 rounded-md">Growth</span>
-                </div>
-              </div>
-              
-              {/* Best Time to Engage */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-sm font-medium text-gray-700 mb-3">Best Time to Engage</h3>
-                <div className="flex items-center space-x-2">
-                  <Clock className="w-4 h-4 text-convrt-purple" />
-                  <span className="text-convrt-purple font-medium">Active Now</span>
-                </div>
-              </div>
-              
-              {/* Recommended Actions */}
-              <div className="bg-white p-4 rounded-xl shadow-sm border border-gray-100">
-                <h3 className="text-sm font-medium text-gray-700 mb-3 flex items-center">
-                  <Sparkles className="w-4 h-4 text-convrt-purple mr-1" />
-                  Recommended Actions
-                </h3>
-                <div className="space-y-2">
-                  <button className="w-full bg-convrt-purple text-white py-2 rounded-lg text-sm font-medium flex items-center justify-center">
-                    <Send className="w-4 h-4 mr-2" />
-                    Send to Sequence
-                  </button>
-                  <button className="w-full border border-convrt-purple text-convrt-purple py-2 rounded-lg text-sm font-medium flex items-center justify-center">
-                    <User className="w-4 h-4 mr-2" />
-                    Give to Agent
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+            {tabContent[activeTab].content}
+          </motion.div>
         </div>
       </div>
       

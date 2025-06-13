@@ -1,9 +1,11 @@
 
-import React from 'react';
-import { X, Check, PhoneCall, Mail, MessageSquare, Users, Zap, BarChart3 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { X, Check, PhoneCall, Mail, MessageSquare, Users, Zap, BarChart3, ArrowRight, TrendingUp, Target } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ProblemStatement = () => {
+  const [hoveredSide, setHoveredSide] = useState<'traditional' | 'ai' | null>(null);
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
@@ -59,13 +61,15 @@ const ProblemStatement = () => {
           whileInView="visible"
           viewport={{ once: true, margin: "-100px" }}
           variants={containerVariants}
-          className="grid md:grid-cols-2 gap-10"
+          className="grid md:grid-cols-2 gap-10 relative"
         >
-          {/* Traditional Cold Outbound - simplified box */}
+          {/* Traditional Cold Outbound */}
           <motion.div 
             variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="bg-[#F9F6F3] rounded-[20px] p-8 border border-gray-100 relative overflow-hidden group"
+            whileHover={{ y: -5, scale: 1.02 }}
+            onHoverStart={() => setHoveredSide('traditional')}
+            onHoverEnd={() => setHoveredSide(null)}
+            className="bg-[#F9F6F3] rounded-[20px] p-8 border border-gray-100 relative overflow-hidden group cursor-pointer transition-all duration-300"
           >
             <div className="absolute top-0 right-0 bg-red-50 px-4 py-2 rounded-bl-2xl">
               <X className="w-5 h-5 text-[#EA384C]" />
@@ -73,65 +77,66 @@ const ProblemStatement = () => {
             
             <h3 className="heading-sm text-convrt-dark-blue mb-8 flex items-center">
               Traditional Cold Outbound
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: hoveredSide === 'traditional' ? 1 : 0 }}
+                className="ml-2 bg-red-100 p-1 rounded-full"
+              >
+                <TrendingUp className="w-4 h-4 text-red-600 rotate-180" />
+              </motion.div>
             </h3>
             
             <ul className="space-y-6">
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-4">
-                  <X className="w-4 h-4 text-[#EA384C]" />
-                </div>
-                <div>
-                  <p className="font-semibold text-lg text-convrt-dark-blue">1% cold email response rates</p>
-                  <p className="text-convrt-dark-blue/70 mt-1">Millions of emails sent, almost all ignored</p>
-                </div>
-              </li>
-              
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-4">
-                  <X className="w-4 h-4 text-[#EA384C]" />
-                </div>
-                <div>
-                  <p className="font-semibold text-lg text-convrt-dark-blue">80% of calls screened out</p>
-                  <p className="text-convrt-dark-blue/70 mt-1">Decision makers don't take cold calls</p>
-                </div>
-              </li>
-              
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-4">
-                  <X className="w-4 h-4 text-[#EA384C]" />
-                </div>
-                <div>
-                  <p className="font-semibold text-lg text-convrt-dark-blue">No relationship before outreach</p>
-                  <p className="text-convrt-dark-blue/70 mt-1">Cold outreach feels impersonal and salesy</p>
-                </div>
-              </li>
+              {[
+                { stat: "1% cold email response rates", desc: "Millions of emails sent, almost all ignored" },
+                { stat: "80% of calls screened out", desc: "Decision makers don't take cold calls" },
+                { stat: "No relationship before outreach", desc: "Cold outreach feels impersonal and salesy" }
+              ].map((item, i) => (
+                <motion.li 
+                  key={i}
+                  initial={{ x: -20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-start"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-4">
+                    <X className="w-4 h-4 text-[#EA384C]" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-lg text-convrt-dark-blue">{item.stat}</p>
+                    <p className="text-convrt-dark-blue/70 mt-1">{item.desc}</p>
+                  </div>
+                </motion.li>
+              ))}
             </ul>
             
             <div className="mt-12 grid grid-cols-3 gap-4">
-              <div className="aspect-square flex flex-col items-center justify-center bg-red-50 rounded-xl p-3">
-                <PhoneCall className="w-8 h-8 text-[#EA384C] mb-2" />
-                <div className="text-sm text-center text-[#EA384C] font-medium">Cold Calls</div>
-              </div>
-              
-              <div className="aspect-square flex flex-col items-center justify-center bg-red-50 rounded-xl p-3">
-                <Mail className="w-8 h-8 text-[#EA384C] mb-2" />
-                <div className="text-sm text-center text-[#EA384C] font-medium">Mass Emails</div>
-              </div>
-              
-              <div className="aspect-square flex flex-col items-center justify-center bg-red-50 rounded-xl p-3">
-                <MessageSquare className="w-8 h-8 text-[#EA384C] mb-2" />
-                <div className="text-sm text-center text-[#EA384C] font-medium">Generic Messages</div>
-              </div>
+              {[
+                { icon: PhoneCall, label: "Cold Calls" },
+                { icon: Mail, label: "Mass Emails" },
+                { icon: MessageSquare, label: "Generic Messages" }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  whileHover={{ scale: 1.1, rotate: 5 }}
+                  className="aspect-square flex flex-col items-center justify-center bg-red-50 rounded-xl p-3 cursor-pointer"
+                >
+                  <item.icon className="w-8 h-8 text-[#EA384C] mb-2" />
+                  <div className="text-sm text-center text-[#EA384C] font-medium">{item.label}</div>
+                </motion.div>
+              ))}
             </div>
             
             <div className="absolute -bottom-1 left-0 right-0 h-1 bg-[#EA384C]"></div>
           </motion.div>
           
-          {/* AI Organic Outbound - simplified box */}
+          {/* AI Organic Outbound */}
           <motion.div 
             variants={itemVariants}
-            whileHover={{ y: -5 }}
-            className="bg-[#F9F6F3] rounded-[20px] p-8 border border-gray-100 relative overflow-hidden group"
+            whileHover={{ y: -5, scale: 1.02 }}
+            onHoverStart={() => setHoveredSide('ai')}
+            onHoverEnd={() => setHoveredSide(null)}
+            className="bg-[#F9F6F3] rounded-[20px] p-8 border border-gray-100 relative overflow-hidden group cursor-pointer transition-all duration-300"
           >
             <div className="absolute top-0 right-0 bg-convrt-purple/10 px-4 py-2 rounded-bl-2xl">
               <Check className="w-5 h-5 text-convrt-purple" />
@@ -140,59 +145,74 @@ const ProblemStatement = () => {
             <h3 className="heading-sm text-convrt-dark-blue mb-8 flex items-center">
               AI Organic Outbound
               <span className="ml-2 px-2 py-0.5 text-xs font-medium bg-convrt-purple/10 text-convrt-purple rounded-full">Convrt.ai</span>
+              <motion.div
+                initial={{ scale: 0 }}
+                animate={{ scale: hoveredSide === 'ai' ? 1 : 0 }}
+                className="ml-2 bg-convrt-purple/10 p-1 rounded-full"
+              >
+                <TrendingUp className="w-4 h-4 text-convrt-purple" />
+              </motion.div>
             </h3>
             
             <ul className="space-y-6">
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-convrt-purple/10 flex items-center justify-center mt-0.5 mr-4">
-                  <Check className="w-4 h-4 text-convrt-purple" />
-                </div>
-                <div>
-                  <p className="font-semibold text-lg text-convrt-dark-blue">15x higher conversion rates</p>
-                  <p className="text-convrt-dark-blue/70 mt-1">Build trust before you reach out</p>
-                </div>
-              </li>
-              
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-convrt-purple/10 flex items-center justify-center mt-0.5 mr-4">
-                  <Check className="w-4 h-4 text-convrt-purple" />
-                </div>
-                <div>
-                  <p className="font-semibold text-lg text-convrt-dark-blue">Key touchpoints and discussions</p>
-                  <p className="text-convrt-dark-blue/70 mt-1">Tracks the entire buyer's journey</p>
-                </div>
-              </li>
-              
-              <li className="flex items-start">
-                <div className="flex-shrink-0 w-8 h-8 rounded-full bg-convrt-purple/10 flex items-center justify-center mt-0.5 mr-4">
-                  <Check className="w-4 h-4 text-convrt-purple" />
-                </div>
-                <div>
-                  <p className="font-semibold text-lg text-convrt-dark-blue">Fully automated growth hacking</p>
-                  <p className="text-convrt-dark-blue/70 mt-1">Enterprise-grade AI engagement</p>
-                </div>
-              </li>
+              {[
+                { stat: "15x higher conversion rates", desc: "Build trust before you reach out" },
+                { stat: "Key touchpoints and discussions", desc: "Tracks the entire buyer's journey" },
+                { stat: "Fully automated growth hacking", desc: "Enterprise-grade AI engagement" }
+              ].map((item, i) => (
+                <motion.li 
+                  key={i}
+                  initial={{ x: 20, opacity: 0 }}
+                  animate={{ x: 0, opacity: 1 }}
+                  transition={{ delay: i * 0.1 }}
+                  className="flex items-start"
+                >
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-convrt-purple/10 flex items-center justify-center mt-0.5 mr-4">
+                    <Check className="w-4 h-4 text-convrt-purple" />
+                  </div>
+                  <div>
+                    <p className="font-semibold text-lg text-convrt-dark-blue">{item.stat}</p>
+                    <p className="text-convrt-dark-blue/70 mt-1">{item.desc}</p>
+                  </div>
+                </motion.li>
+              ))}
             </ul>
             
             <div className="mt-12 grid grid-cols-3 gap-4">
-              <div className="aspect-square flex flex-col items-center justify-center bg-convrt-purple/5 rounded-xl p-3">
-                <Users className="w-8 h-8 text-convrt-purple mb-2" />
-                <div className="text-sm text-center text-convrt-purple font-medium">Engagement</div>
-              </div>
-              
-              <div className="aspect-square flex flex-col items-center justify-center bg-convrt-purple/5 rounded-xl p-3">
-                <Zap className="w-8 h-8 text-convrt-purple mb-2" />
-                <div className="text-sm text-center text-convrt-purple font-medium">Trust Building</div>
-              </div>
-              
-              <div className="aspect-square flex flex-col items-center justify-center bg-convrt-purple/5 rounded-xl p-3">
-                <BarChart3 className="w-8 h-8 text-convrt-purple mb-2" />
-                <div className="text-sm text-center text-convrt-purple font-medium">Win More Deals</div>
-              </div>
+              {[
+                { icon: Users, label: "Engagement" },
+                { icon: Zap, label: "Trust Building" },
+                { icon: BarChart3, label: "Win More Deals" }
+              ].map((item, i) => (
+                <motion.div 
+                  key={i}
+                  whileHover={{ scale: 1.1, rotate: -5 }}
+                  className="aspect-square flex flex-col items-center justify-center bg-convrt-purple/5 rounded-xl p-3 cursor-pointer"
+                >
+                  <item.icon className="w-8 h-8 text-convrt-purple mb-2" />
+                  <div className="text-sm text-center text-convrt-purple font-medium">{item.label}</div>
+                </motion.div>
+              ))}
             </div>
             
             <div className="absolute -bottom-1 left-0 right-0 h-1 bg-convrt-purple"></div>
           </motion.div>
+
+          {/* Animated Arrow */}
+          <AnimatePresence>
+            {hoveredSide && (
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
+              >
+                <div className="bg-white rounded-full p-4 shadow-xl border border-gray-200">
+                  <ArrowRight className={`w-8 h-8 ${hoveredSide === 'ai' ? 'text-convrt-purple' : 'text-red-500'}`} />
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
