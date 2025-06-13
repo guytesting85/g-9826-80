@@ -1,14 +1,16 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2 } from 'lucide-react';
+import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2, Trash2, Upload, Camera } from 'lucide-react';
 
 const PlatformDemo = () => {
   const [activeTab, setActiveTab] = useState('cues');
   const [isHeartLiked, setIsHeartLiked] = useState(false);
   const [isFloatingHeartLiked, setIsFloatingHeartLiked] = useState(false);
+  const [showFloatingHeart, setShowFloatingHeart] = useState(true);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [showAvatarUpload, setShowAvatarUpload] = useState(false);
+  const [avatarImage, setAvatarImage] = useState<string | null>(null);
   const [newComment, setNewComment] = useState('');
   const [comments, setComments] = useState([
     { id: 1, user: 'Mike Johnson', text: 'Great achievement! Congratulations on hitting your targets.', time: '2h ago' },
@@ -17,7 +19,14 @@ const PlatformDemo = () => {
 
   const handleLikeClick = () => {
     setIsHeartLiked(!isHeartLiked);
-    // Add animation effect that pops up and vanishes
+  };
+
+  const handleFloatingHeartClick = () => {
+    setIsFloatingHeartLiked(true);
+    // Hide the floating heart after animation
+    setTimeout(() => {
+      setShowFloatingHeart(false);
+    }, 1000);
   };
 
   const handleAddComment = () => {
@@ -33,9 +42,25 @@ const PlatformDemo = () => {
     }
   };
 
+  const handleDeleteComment = (commentId: number) => {
+    setComments(comments.filter(comment => comment.id !== commentId));
+  };
+
   const handleShare = () => {
     navigator.clipboard.writeText(window.location.href);
-    // You could add a toast notification here
+  };
+
+  const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        setAvatarImage(e.target?.result as string);
+        setShowAvatarUpload(false);
+        setShowAvatarMenu(false);
+      };
+      reader.readAsDataURL(file);
+    }
   };
 
   const tabContent = {
@@ -107,11 +132,19 @@ const PlatformDemo = () => {
                     </div>
                     <div className="flex-1">
                       <div className="bg-gray-50 rounded-lg p-3">
-                        <div className="flex items-center space-x-2 mb-1">
-                          <span className="text-sm font-medium text-gray-900">{comment.user}</span>
-                          <span className="text-xs text-gray-500">{comment.time}</span>
+                        <div className="flex items-center justify-between mb-1">
+                          <div className="flex items-center space-x-2">
+                            <span className="text-sm font-medium text-gray-900">{comment.user}</span>
+                            <span className="text-xs text-gray-500">{comment.time}</span>
+                          </div>
+                          <button
+                            onClick={() => handleDeleteComment(comment.id)}
+                            className="text-gray-400 hover:text-red-500 transition-colors"
+                          >
+                            <Trash2 className="w-3 h-3" />
+                          </button>
                         </div>
-                        <p className="text-sm text-gray-700">{comment.text}</p>
+                        <p className="text-sm text-gray-700 text-left">{comment.text}</p>
                       </div>
                     </div>
                   </div>
@@ -401,9 +434,13 @@ const PlatformDemo = () => {
             <div className="relative">
               <button
                 onClick={() => setShowAvatarMenu(!showAvatarMenu)}
-                className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:ring-2 hover:ring-convrt-purple/20 transition-all"
+                className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:ring-2 hover:ring-convrt-purple/20 transition-all overflow-hidden"
               >
-                <User className="w-4 h-4 text-gray-600" />
+                {avatarImage ? (
+                  <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover" />
+                ) : (
+                  <User className="w-4 h-4 text-gray-600" />
+                )}
               </button>
               
               <AnimatePresence>
@@ -416,8 +453,12 @@ const PlatformDemo = () => {
                   >
                     <div className="p-4 border-b border-gray-100">
                       <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 rounded-full bg-convrt-purple/20 flex items-center justify-center">
-                          <User className="w-5 h-5 text-convrt-purple" />
+                        <div className="w-10 h-10 rounded-full bg-convrt-purple/20 flex items-center justify-center overflow-hidden">
+                          {avatarImage ? (
+                            <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover" />
+                          ) : (
+                            <User className="w-5 h-5 text-convrt-purple" />
+                          )}
                         </div>
                         <div>
                           <h3 className="font-medium text-gray-900">John Doe</h3>
@@ -426,6 +467,13 @@ const PlatformDemo = () => {
                       </div>
                     </div>
                     <div className="p-2">
+                      <button
+                        onClick={() => setShowAvatarUpload(true)}
+                        className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors text-left"
+                      >
+                        <Camera className="w-4 h-4 text-gray-500" />
+                        <span className="text-sm text-gray-700">Change Avatar</span>
+                      </button>
                       {[
                         { icon: Settings, label: "Account Settings" },
                         { icon: BarChart2, label: "My Performance" },
@@ -447,6 +495,56 @@ const PlatformDemo = () => {
                         <span className="text-sm text-red-500">Sign Out</span>
                       </button>
                     </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+              
+              {/* Avatar Upload Modal */}
+              <AnimatePresence>
+                {showAvatarUpload && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+                    onClick={() => setShowAvatarUpload(false)}
+                  >
+                    <motion.div
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.95, opacity: 0 }}
+                      className="bg-white rounded-xl p-6 w-80 mx-4"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-medium text-gray-900">Upload Avatar</h3>
+                        <button
+                          onClick={() => setShowAvatarUpload(false)}
+                          className="text-gray-400 hover:text-gray-600"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-20 h-20 rounded-full bg-gray-100 mx-auto mb-4 flex items-center justify-center overflow-hidden">
+                          {avatarImage ? (
+                            <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover" />
+                          ) : (
+                            <Camera className="w-8 h-8 text-gray-400" />
+                          )}
+                        </div>
+                        <label className="button-primary cursor-pointer inline-flex items-center">
+                          <Upload className="w-4 h-4 mr-2" />
+                          Choose Image
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleAvatarUpload}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+                    </motion.div>
                   </motion.div>
                 )}
               </AnimatePresence>
@@ -477,37 +575,48 @@ const PlatformDemo = () => {
       </div>
       
       {/* Floating UI Element - Smooth animation */}
-      <motion.div
-        initial={{ y: 20, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ delay: 1.2, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-        className="absolute -left-8 top-1/3 z-10"
-      >
-        <motion.button
-          onClick={() => setIsFloatingHeartLiked(!isFloatingHeartLiked)}
-          animate={{ 
-            y: [0, -6, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          className="bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20 flex items-center cursor-pointer hover:bg-white/90 transition-all duration-300 hover:scale-105"
-        >
-          <div className={`rounded-lg p-2 mr-3 transition-all duration-300 ${
-            isFloatingHeartLiked ? 'bg-red-100' : 'bg-[#6936F5]/20'
-          }`}>
-            <Heart className={`w-4 h-4 transition-all duration-300 ${
-              isFloatingHeartLiked ? 'text-red-500 fill-red-500 scale-110' : 'text-[#6936F5]'
-            }`} />
-          </div>
-          <div>
-            <div className="text-gray-800 text-sm font-medium">New interaction</div>
-            <div className="text-gray-600 text-xs">Liked your comment</div>
-          </div>
-        </motion.button>
-      </motion.div>
+      <AnimatePresence>
+        {showFloatingHeart && (
+          <motion.div
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ 
+              scale: [1, 1.2, 0],
+              opacity: [1, 1, 0],
+              y: [0, -10, -20]
+            }}
+            transition={{ 
+              exit: { duration: 1, ease: "easeOut" }
+            }}
+            className="absolute -left-8 top-1/3 z-10"
+          >
+            <motion.button
+              onClick={handleFloatingHeartClick}
+              animate={{ 
+                y: [0, -6, 0],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                ease: "easeInOut"
+              }}
+              className="bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20 flex items-center cursor-pointer hover:bg-white/90 transition-all duration-300 hover:scale-105"
+            >
+              <div className={`rounded-lg p-2 mr-3 transition-all duration-300 ${
+                isFloatingHeartLiked ? 'bg-red-100' : 'bg-[#6936F5]/20'
+              }`}>
+                <Heart className={`w-4 h-4 transition-all duration-300 ${
+                  isFloatingHeartLiked ? 'text-red-500 fill-red-500 scale-110' : 'text-[#6936F5]'
+                }`} />
+              </div>
+              <div>
+                <div className="text-gray-800 text-sm font-medium">New interaction</div>
+                <div className="text-gray-600 text-xs">Liked your comment</div>
+              </div>
+            </motion.button>
+          </motion.div>
+        )}
+      </AnimatePresence>
       
       {/* Click outside handlers */}
       {(showAvatarMenu || showNotifications) && (
