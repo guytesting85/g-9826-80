@@ -37,11 +37,14 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="flex items-center">
-            <img 
-              src="/lovable-uploads/ce207080-f6c2-430d-9621-79d32ab08655.png" 
-              alt="Convrt.ai Logo" 
-              className="h-8 md:h-10"
-            />
+            <div className="flex items-center space-x-2">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-convrt-purple to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+                P
+              </div>
+              <span className="text-xl font-bold text-convrt-dark-blue dark:text-white">
+                Pranav
+              </span>
+            </div>
           </a>
         </div>
         

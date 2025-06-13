@@ -97,24 +97,28 @@ const ChatPlayground = () => {
       className="space-y-4"
     >
       <div className="text-center mb-6">
-        <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
+        <h3 className={`text-2xl font-bold mb-2 ${
+          theme === 'dark' ? 'text-white' : 'text-gray-900'
+        }`}>
           Chat Playground
         </h3>
-        <p className="text-gray-600 dark:text-gray-400">
+        <p className={`${
+          theme === 'dark' ? 'text-gray-300' : 'text-gray-600'
+        }`}>
           Multi-user chat simulation with QR pairing
         </p>
       </div>
 
-      <div className={`rounded-2xl overflow-hidden shadow-2xl border ${
+      <div className={`rounded-2xl overflow-hidden shadow-2xl border transition-all duration-300 ${
         theme === 'dark' 
-          ? 'bg-gray-800 border-gray-700' 
-          : 'bg-white border-gray-200'
+          ? 'bg-gray-800 border-gray-600 shadow-gray-900/50' 
+          : 'bg-white border-gray-200 shadow-gray-200/50'
       }`}>
         <div className="flex h-[600px]">
           {/* Left Sidebar */}
-          <div className={`w-1/5 min-w-[200px] border-r flex flex-col ${
+          <div className={`w-1/5 min-w-[200px] border-r flex flex-col transition-all duration-300 ${
             theme === 'dark' 
-              ? 'bg-gray-900 border-gray-700' 
+              ? 'bg-gray-900 border-gray-600' 
               : 'bg-gray-50 border-gray-200'
           }`}>
             <UserSwitcher
@@ -139,7 +143,9 @@ const ChatPlayground = () => {
 
       {/* Mobile Responsive Note */}
       <div className="md:hidden text-center">
-        <p className="text-sm text-gray-500 dark:text-gray-400">
+        <p className={`text-sm ${
+          theme === 'dark' ? 'text-gray-400' : 'text-gray-500'
+        }`}>
           Best viewed on desktop for full experience
         </p>
       </div>
