@@ -1,13 +1,11 @@
 
 import React, { useState, useEffect } from 'react';
 import { cn } from '@/lib/utils';
-import { Menu, X, Moon, Sun } from 'lucide-react';
-import { useTheme } from './ThemeProvider';
+import { Menu, X } from 'lucide-react';
 
 const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const { theme, toggleTheme } = useTheme();
   
   useEffect(() => {
     const handleScroll = () => {
@@ -23,7 +21,7 @@ const Navbar = () => {
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-300 py-4 px-6",
         isScrolled 
-          ? "bg-white/80 dark:bg-gray-900/80 backdrop-blur-lg shadow-sm" 
+          ? "bg-white/80 backdrop-blur-lg shadow-sm" 
           : "bg-transparent"
       )}
     >
@@ -40,52 +38,27 @@ const Navbar = () => {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#how-it-works" className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors">
+          <a href="#how-it-works" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
             How It Works
           </a>
-          <a href="#testimonials" className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors">
+          <a href="#testimonials" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
             Case Studies
           </a>
-          <a href="#product" className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors">
+          <a href="#product" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
             Product
           </a>
-          <a href="#skills" className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors">
+          <a href="#skills" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
             Technologies
           </a>
-          <a href="#pricing" className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors">
-            Pricing
-          </a>
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? (
-              <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-            ) : (
-              <Sun className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-            )}
-          </button>
           <a href="#contact" className="button-primary">
             Get Started
           </a>
         </div>
         
         {/* Mobile Menu Button */}
-        <div className="md:hidden flex items-center space-x-2">
-          <button
-            onClick={toggleTheme}
-            className="p-2 rounded-lg bg-gray-100 dark:bg-gray-800 hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors"
-            aria-label="Toggle theme"
-          >
-            {theme === 'light' ? (
-              <Moon className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-            ) : (
-              <Sun className="w-5 h-5 text-gray-600 dark:text-gray-300" />
-            )}
-          </button>
+        <div className="md:hidden flex items-center">
           <button 
-            className="text-convrt-dark-blue dark:text-white" 
+            className="text-convrt-dark-blue" 
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
             {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
@@ -95,42 +68,35 @@ const Navbar = () => {
       
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-white dark:bg-gray-900 shadow-lg py-4 px-6">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4 px-6">
           <div className="flex flex-col space-y-4">
             <a 
               href="#how-it-works" 
-              className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors"
+              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               How It Works
             </a>
             <a 
               href="#testimonials" 
-              className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors"
+              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Case Studies
             </a>
             <a 
               href="#product" 
-              className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors"
+              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Product
             </a>
             <a 
               href="#skills" 
-              className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors"
+              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
               onClick={() => setIsMobileMenuOpen(false)}
             >
               Technologies
-            </a>
-            <a 
-              href="#pricing" 
-              className="text-convrt-dark-blue/80 dark:text-white/80 hover:text-convrt-dark-blue dark:hover:text-white font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Pricing
             </a>
             <a 
               href="#contact" 

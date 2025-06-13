@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2, Trash2, Upload, Camera } from 'lucide-react';
