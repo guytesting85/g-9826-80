@@ -218,16 +218,16 @@ const ProductShowcase = () => {
                     <div className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">{getCurrentUrl()}</div>
                   </div>
                   
-                  {/* Tabs */}
-                  <div className="flex space-x-1">
+                  {/* Updated Tabs with rounded design */}
+                  <div className="flex space-x-2 bg-gray-100 dark:bg-gray-700 p-1 rounded-xl">
                     {tabs.map((tab) => (
                       <button
                         key={tab.key}
                         onClick={() => setActiveTab(tab.key)}
-                        className={`px-4 py-2 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer whitespace-nowrap ${
+                        className={`px-6 py-2 rounded-lg font-medium text-sm transition-all cursor-pointer whitespace-nowrap ${
                           activeTab === tab.key 
-                            ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
-                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border-transparent'
+                            ? 'text-convrt-purple bg-white dark:bg-gray-800 shadow-sm' 
+                            : 'text-gray-600 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600'
                         }`}
                       >
                         {tab.label}

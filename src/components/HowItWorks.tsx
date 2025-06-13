@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Target, Users, LineChart, ChevronLeft, ChevronRight, Lightbulb, MessageCircle, TrendingUp, Zap, Bot, BarChart2 } from 'lucide-react';
 import StepContent from './how-it-works/StepContent';
+import ImageSlider from './how-it-works/ImageSlider';
 import { motion } from 'framer-motion';
 
 const HowItWorks = () => {
@@ -21,7 +22,8 @@ const HowItWorks = () => {
           description: "Our AI scans social media to find where your target audience is most active, identifying the exact channels, topics, and content they engage with.",
           highlightText: "AI identifies:",
           highlightDetails: "Relevant conversations, active communities, and engagement opportunities",
-          gifUrl: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png"
+          beforeImage: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png",
+          afterImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800"
         },
         {
           id: 2,
@@ -30,7 +32,8 @@ const HowItWorks = () => {
           description: "Convrt creates meaningful touchpoints that position you as a trusted advisor by engaging with prospects' content and contributing value.",
           highlightText: "AI automates:",
           highlightDetails: "Targeted comments, relevant reactions, and personalized interactions",
-          gifUrl: "https://api.microlink.io?url=https%3A%2F%2Fgiphy.com%2Fgifs%2Frevolutioncomedy-handshake-revolutioncomedy-icommitcombustion-kFHbqSdogIS0qtX6Pf&embed=true&screenshot=true&meta=false"
+          beforeImage: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800",
+          afterImage: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800"
         },
         {
           id: 3,
@@ -39,7 +42,8 @@ const HowItWorks = () => {
           description: "With pre-established trust, your outreach achieves 15x higher conversion rates, turning social connections into qualified leads and deals.",
           highlightText: "AI delivers:",
           highlightDetails: "Warmed leads, engagement analytics, and conversion opportunities",
-          gifUrl: "https://api.microlink.io?url=https%3A%2F%2Fgiphy.com%2Fgifs%2Fchart-jtECu4TAPnhbGv2iwx&embed=true&screenshot=true&meta=false"
+          beforeImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+          afterImage: "https://images.unsplash.com/photo-1579952363873-27d3bfad9c0d?w=800"
         }
       ]
     },
@@ -54,7 +58,8 @@ const HowItWorks = () => {
           description: "Set up your target audience parameters, including industry, company size, role, and key interests to help AI find the right prospects.",
           highlightText: "Configure:",
           highlightDetails: "Demographics, psychographics, and behavioral patterns",
-          gifUrl: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png"
+          beforeImage: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png",
+          afterImage: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=800"
         },
         {
           id: 2,
@@ -63,7 +68,8 @@ const HowItWorks = () => {
           description: "Activate intelligent agents that will monitor social platforms, identify opportunities, and begin building relationships on your behalf.",
           highlightText: "AI agents handle:",
           highlightDetails: "Content discovery, engagement timing, and relationship mapping",
-          gifUrl: "https://api.microlink.io?url=https%3A%2F%2Fgiphy.com%2Fgifs%2Frevolutioncomedy-handshake-revolutioncomedy-icommitcombustion-kFHbqSdogIS0qtX6Pf&embed=true&screenshot=true&meta=false"
+          beforeImage: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=800",
+          afterImage: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800"
         },
         {
           id: 3,
@@ -72,7 +78,8 @@ const HowItWorks = () => {
           description: "Monitor AI-generated comments and interactions before they're posted, ensuring brand consistency and message quality.",
           highlightText: "You control:",
           highlightDetails: "Content approval, timing, and engagement strategy",
-          gifUrl: "https://api.microlink.io?url=https%3A%2F%2Fgiphy.com%2Fgifs%2Fchart-jtECu4TAPnhbGv2iwx&embed=true&screenshot=true&meta=false"
+          beforeImage: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800",
+          afterImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800"
         },
         {
           id: 4,
@@ -81,7 +88,8 @@ const HowItWorks = () => {
           description: "Leverage the trust and familiarity built through AI engagement to reach out with personalized messages that convert.",
           highlightText: "Results include:",
           highlightDetails: "Higher response rates, shorter sales cycles, and better deal quality",
-          gifUrl: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png"
+          beforeImage: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png",
+          afterImage: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=800"
         }
       ]
     },
@@ -96,7 +104,8 @@ const HowItWorks = () => {
           description: "Deploy across LinkedIn, Twitter, Reddit, and other platforms with platform-specific engagement strategies and compliance.",
           highlightText: "Platforms include:",
           highlightDetails: "LinkedIn, Twitter, Reddit, Facebook, and industry forums",
-          gifUrl: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png"
+          beforeImage: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png",
+          afterImage: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=800"
         },
         {
           id: 2,
@@ -105,7 +114,8 @@ const HowItWorks = () => {
           description: "Deep dive into engagement metrics, relationship strength scores, and conversion attribution across your entire pipeline.",
           highlightText: "Track everything:",
           highlightDetails: "Engagement rates, relationship progression, and ROI metrics",
-          gifUrl: "https://api.microlink.io?url=https%3A%2F%2Fgiphy.com%2Fgifs%2Frevolutioncomedy-handshake-revolutioncomedy-icommitcombustion-kFHbqSdogIS0qtX6Pf&embed=true&screenshot=true&meta=false"
+          beforeImage: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=800",
+          afterImage: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=800"
         },
         {
           id: 3,
@@ -114,7 +124,8 @@ const HowItWorks = () => {
           description: "Scale your social selling across entire teams with role-based permissions, shared prospect databases, and collaborative workflows.",
           highlightText: "Team features:",
           highlightDetails: "Shared databases, approval workflows, and performance tracking",
-          gifUrl: "https://api.microlink.io?url=https%3A%2F%2Fgiphy.com%2Fgifs%2Fchart-jtECu4TAPnhbGv2iwx&embed=true&screenshot=true&meta=false"
+          beforeImage: "https://images.unsplash.com/photo-1522202176988-66273c2fd55f?w=800",
+          afterImage: "https://images.unsplash.com/photo-1559136555-9303baea8ebd?w=800"
         }
       ]
     }
@@ -225,14 +236,14 @@ const HowItWorks = () => {
               ))}
             </div>
             
-            {/* Image Display */}
+            {/* Image Display with Slider */}
             <div className={`${
               currentSteps.steps.length === 4 ? 'lg:w-3/5' : 'lg:w-2/3'
             } relative h-full`}>
               {currentSteps.steps.map((step) => (
                 <motion.div 
                   key={step.id}
-                  className="absolute inset-0 h-full w-full"
+                  className="absolute inset-0 h-full w-full p-4"
                   initial={{ opacity: 0 }}
                   animate={{ 
                     opacity: activeStep === step.id ? 1 : 0,
@@ -243,10 +254,11 @@ const HowItWorks = () => {
                     ease: "easeInOut"
                   }}
                 >
-                  <img 
-                    src={step.gifUrl} 
-                    alt={`Step ${step.id}: ${step.title}`} 
-                    className="w-full h-full object-cover object-center"
+                  <ImageSlider
+                    beforeImage={step.beforeImage}
+                    afterImage={step.afterImage}
+                    altText={step.title}
+                    className="h-full"
                   />
                 </motion.div>
               ))}
