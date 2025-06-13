@@ -58,7 +58,7 @@ const stats = [
 
 const Testimonials = () => {
   return (
-    <section className="py-8 bg-white" id="testimonials">
+    <section className="py-8 pt-20 bg-white" id="testimonials">
       <div className="container-section max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

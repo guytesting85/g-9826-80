@@ -30,14 +30,14 @@ const AvatarMenu = ({ isOpen, onClose, onUploadClick, avatarImage }: AvatarMenuP
       <div className="p-4 border-b border-gray-100">
         <div className="flex items-center justify-between">
           <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-convrt-purple/20 flex items-center justify-center overflow-hidden">
+            <div onClick={onUploadClick} className="w-10 h-10 rounded-full bg-convrt-purple/20 flex items-center justify-center overflow-hidden cursor-pointer">
               {avatarImage ? (
                 <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover" />
               ) : (
                 <User className="w-5 h-5 text-convrt-purple" />
               )}
             </div>
-            <div>
+            <div className="flex flex-col items-start" >
               <h3 className="font-medium text-gray-900">John Doe</h3>
               <p className="text-sm text-gray-500">Sales Manager</p>
             </div>

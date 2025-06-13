@@ -87,7 +87,7 @@ const ProductShowcase = () => {
             >
               <motion.div 
                 variants={{...itemVariants, ...floatingVariants}}
-                animate="animate"
+                // animate="animate"
                 className={`relative bg-white/95 backdrop-blur-sm rounded-[20px] overflow-hidden border border-white/50 shadow-2xl shadow-purple-500/20 ${
                   isFullscreen ? 'fixed inset-4 z-50' : ''
                 }`}

@@ -28,7 +28,7 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
   return (
     <motion.div 
       variants={floatingVariants}
-      animate="animate"
+      // animate="animate"
       className={`relative ${platformDemo.isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'max-w-7xl mx-auto'}`}
     >
       {!platformDemo.isFullscreen && (

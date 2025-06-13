@@ -112,7 +112,7 @@ const ImagePortionSlider = () => {
   const currentSlideData = slides[currentSlide];
 
   return (
-    <section className="py-16 bg-white">
+    <section className="pb-16 bg-white">
       <div className="container-section max-w-5xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}

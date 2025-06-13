@@ -29,21 +29,21 @@ const SkillsShowcase = () => {
     },
     {
       id: 4,
-      title: "Cybersecurity",
+      title: "Error Handling | Logging",
       description: "Protect your data and systems with robust cybersecurity measures and threat detection.",
       icon: Shield,
       color: "#32CD32",
     },
     {
       id: 5,
-      title: "Mobile Optimization",
+      title: "Backend | Microservices",
       description: "Ensure a seamless user experience across all devices with mobile-first design principles.",
       icon: Smartphone,
       color: "#FFD700",
     },
     {
       id: 6,
-      title: "Global Reach",
+      title: "Redis",
       description: "Expand your reach with multi-language support and localized content delivery.",
       icon: Globe,
       color: "#E9967A",
@@ -57,7 +57,7 @@ const SkillsShowcase = () => {
     },
     {
       id: 8,
-      title: "User Management",
+      title: "Containers",
       description: "Manage user access and permissions with a centralized user management system.",
       icon: Users,
       color: "#4682B4",
@@ -71,7 +71,7 @@ const SkillsShowcase = () => {
     },
     {
       id: 10,
-      title: "Database Solutions",
+      title: "Databases",
       description: "Efficiently store and manage your data with scalable database solutions.",
       icon: Database,
       color: "#D2691E",
@@ -109,7 +109,7 @@ const SkillsShowcase = () => {
       y: 0,
       opacity: 1,
       transition: {
-        duration: 0.6,
+        duration: 0.1,
         ease: "easeInOut",
       },
     },
@@ -117,7 +117,7 @@ const SkillsShowcase = () => {
       scale: 1.05,
       y: -10,
       transition: {
-        duration: 0.3,
+        duration: 0.05,
         ease: "easeInOut",
       },
     },
@@ -125,7 +125,7 @@ const SkillsShowcase = () => {
 
   return (
     <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" id="skills">
-      <div className="container-section max-w-7xl mx-auto">
+      <div className="container-section-1">
         <div className="text-center mb-16">
           <h2 className="text-3xl md:text-4xl font-bold text-convrt-dark-blue mb-6">
             Advanced Technologies
@@ -136,7 +136,7 @@ const SkillsShowcase = () => {
         </div>
 
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
           variants={containerVariants}
           initial="hidden"
           whileInView="visible"

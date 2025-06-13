@@ -34,7 +34,7 @@ const HiddenContactForm = () => {
   };
 
   return (
-    <section className="py-24 bg-gradient-to-br from-convrt-purple/5 via-white to-convrt-purple/10 relative overflow-hidden">
+    <section id='contact' className="py-24 bg-gradient-to-br from-convrt-purple/5 via-white to-convrt-purple/10 relative overflow-hidden">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
       <div className="absolute top-10 left-10 w-32 h-32 bg-convrt-purple/10 rounded-full blur-3xl"></div>
