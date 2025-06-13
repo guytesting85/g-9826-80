@@ -76,22 +76,24 @@ const Hero = () => {
             </a>
           </motion.div>
           
-          {/* Modern Platform Showcase - Only render when showDemo is true */}
+          {/* Modern Platform Showcase - Properly animated container */}
           <AnimatePresence mode="wait">
             {showDemo && (
               <motion.div 
                 ref={demoRef}
                 variants={itemVariants}
-                className="mt-12"
-                initial={{ opacity: 1, scale: 1 }}
+                initial={{ opacity: 1, scale: 1, height: "auto" }}
                 exit={{ 
                   opacity: 0,
                   scale: 0.95,
+                  height: 0,
+                  marginTop: 0,
                   transition: { 
-                    duration: 0.3,
+                    duration: 0.4,
                     ease: "easeInOut"
                   }
                 }}
+                className="mt-12 overflow-hidden"
                 layout
               >
                 <PlatformDemo 
