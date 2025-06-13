@@ -4,8 +4,10 @@ import { motion } from 'framer-motion';
 import Editor from '@monaco-editor/react';
 import { Play, Copy, Download } from 'lucide-react';
 import { platforms } from '../../../../config/mockData';
+import { useTheme } from '../../../ThemeProvider';
 
 const HeatboxTab = () => {
+  const { theme } = useTheme();
   const [selectedLanguage, setSelectedLanguage] = useState('javascript');
   const [code, setCode] = useState(`// Welcome to the Code Editor
 function fibonacci(n) {
@@ -141,13 +143,13 @@ h1 {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: i * 0.1 }}
-            className="bg-white p-6 rounded-xl shadow-sm border border-gray-100"
+            className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700"
           >
             <div className="flex items-center justify-between mb-3">
-              <span className="font-medium text-gray-700">{item.platform}</span>
+              <span className="font-medium text-gray-700 dark:text-gray-300">{item.platform}</span>
               <span className={`text-${item.color} font-bold text-lg`}>{item.percentage}%</span>
             </div>
-            <div className="w-full bg-gray-200 rounded-full h-3">
+            <div className="w-full bg-gray-200 dark:bg-gray-600 rounded-full h-3">
               <div 
                 className={`bg-${item.color} h-3 rounded-full transition-all duration-1000`} 
                 style={{width: `${item.percentage}%`}}
@@ -162,16 +164,16 @@ h1 {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ delay: 0.4 }}
-        className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden"
+        className="bg-white dark:bg-gray-800 rounded-xl shadow-sm border border-gray-100 dark:border-gray-700 overflow-hidden"
       >
-        <div className="bg-gray-50 px-6 py-4 border-b border-gray-200">
+        <div className="bg-gray-50 dark:bg-gray-700 px-6 py-4 border-b border-gray-200 dark:border-gray-600">
           <div className="flex items-center justify-between">
-            <h3 className="text-lg font-semibold text-gray-900">Code Editor</h3>
+            <h3 className="text-lg font-semibold text-gray-900 dark:text-white">Code Editor</h3>
             <div className="flex items-center space-x-4">
               <select
                 value={selectedLanguage}
                 onChange={(e) => handleLanguageChange(e.target.value)}
-                className="px-3 py-2 border border-gray-300 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-convrt-purple"
+                className="px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-convrt-purple bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
               >
                 {languages.map((lang) => (
                   <option key={lang.value} value={lang.value}>
@@ -182,14 +184,14 @@ h1 {
               <div className="flex items-center space-x-2">
                 <button
                   onClick={copyToClipboard}
-                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors"
                   title="Copy code"
                 >
                   <Copy className="w-4 h-4" />
                 </button>
                 <button
                   onClick={downloadCode}
-                  className="p-2 text-gray-600 hover:text-gray-900 hover:bg-gray-100 rounded-lg transition-colors"
+                  className="p-2 text-gray-600 dark:text-gray-400 hover:text-gray-900 dark:hover:text-white hover:bg-gray-100 dark:hover:bg-gray-600 rounded-lg transition-colors"
                   title="Download code"
                 >
                   <Download className="w-4 h-4" />
@@ -205,7 +207,7 @@ h1 {
             language={selectedLanguage}
             value={code}
             onChange={(value) => setCode(value || '')}
-            theme="light"
+            theme={theme === 'dark' ? 'vs-dark' : 'light'}
             options={{
               minimap: { enabled: false },
               fontSize: 14,
@@ -219,9 +221,9 @@ h1 {
           />
         </div>
         
-        <div className="px-6 py-4 bg-gray-50 border-t border-gray-200">
+        <div className="px-6 py-4 bg-gray-50 dark:bg-gray-700 border-t border-gray-200 dark:border-gray-600">
           <div className="flex items-center justify-between">
-            <div className="text-sm text-gray-600">
+            <div className="text-sm text-gray-600 dark:text-gray-400">
               Language: <span className="font-medium">{languages.find(l => l.value === selectedLanguage)?.label}</span>
             </div>
             <button
@@ -240,7 +242,7 @@ h1 {
         <motion.div 
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="bg-gray-900 text-green-400 p-6 rounded-xl font-mono text-sm"
+          className="bg-gray-900 dark:bg-black text-green-400 p-6 rounded-xl font-mono text-sm"
         >
           <div className="flex items-center justify-between mb-3">
             <h4 className="text-green-300 font-semibold">Output:</h4>

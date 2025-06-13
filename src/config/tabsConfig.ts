@@ -4,7 +4,7 @@ import { TabInfo } from '../types';
 export const tabContent = {
   cues: 'Cues (24)',
   heatbox: 'Heatbox (12)',
-  seeds: 'Seeds (156)',
+  seeds: 'Chat (2)',
   agents: 'AI Agents',
   campaigns: 'Campaigns'
 };
@@ -21,9 +21,9 @@ export const tabInfo: Record<string, TabInfo> = {
     description: "Visualize where your prospects are most active and engaged across different platforms and topics."
   },
   seeds: {
-    title: "Seeds Database",
-    subtitle: "Relationship Building Progress", 
-    description: "Track your relationship-building journey with prospects from first contact to closed deals."
+    title: "Real-time Chat",
+    subtitle: "WhatsApp-like Communication", 
+    description: "Connect with team members and prospects through instant messaging with real-time capabilities."
   },
   agents: {
     title: "AI Agents",

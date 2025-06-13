@@ -2,7 +2,7 @@
 import React from 'react';
 import CuesTab from './CuesTab';
 import HeatboxTab from './tabs/HeatboxTab';
-import SeedsTab from './tabs/SeedsTab';
+import ChatTab from './tabs/ChatTab';
 import AgentsTab from './tabs/AgentsTab';
 import CampaignsTab from './tabs/CampaignsTab';
 import { tabInfo } from '../../../config/tabsConfig';
@@ -16,7 +16,7 @@ const TabContent = ({ activeTab }: TabContentProps) => {
     switch (activeTab) {
       case 'cues': return <CuesTab />;
       case 'heatbox': return <HeatboxTab />;
-      case 'seeds': return <SeedsTab />;
+      case 'seeds': return <ChatTab />;
       case 'agents': return <AgentsTab />;
       case 'campaigns': return <CampaignsTab />;
       default: return <CuesTab />;
@@ -28,9 +28,9 @@ const TabContent = ({ activeTab }: TabContentProps) => {
   return (
     <div className="space-y-8">
       <div className="text-center mb-10">
-        <h3 className="text-3xl font-bold text-gray-900 mb-3">{currentTabInfo.title}</h3>
+        <h3 className="text-3xl font-bold text-gray-900 dark:text-white mb-3">{currentTabInfo.title}</h3>
         <p className="text-lg text-convrt-purple font-medium mb-3">{currentTabInfo.subtitle}</p>
-        <p className="text-gray-600 max-w-2xl mx-auto">{currentTabInfo.description}</p>
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">{currentTabInfo.description}</p>
       </div>
       {renderTabContent()}
     </div>
