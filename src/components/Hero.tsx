@@ -4,11 +4,20 @@ import AnimatedBackground from './AnimatedBackground';
 import { ArrowRight, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PlatformDemo from './hero/PlatformDemo';
+import RotatingText from './hero/RotatingText';
 import { containerVariants, itemVariants } from '../utils/animations';
 
 const Hero = () => {
   const demoRef = useRef<HTMLDivElement>(null);
   const [showDemo, setShowDemo] = useState(true);
+
+  const jobTitles = [
+    'Software Engineer',
+    'Backend Developer', 
+    'Tech Enthusiast',
+    'Full-Stack Developer',
+    'Problem Solver'
+  ];
 
   return (
     <section className="relative min-h-0 pt-20 pb-10 overflow-hidden bg-gradient-to-br from-slate-50 via-purple-50/40 to-blue-50/40 dark:from-gray-900 dark:via-gray-800/40 dark:to-gray-900/40">
@@ -26,7 +35,7 @@ const Hero = () => {
           </motion.h1>
           
           <motion.p variants={itemVariants} className="font-inter text-xl text-convrt-dark-blue/80 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-            Software Engineer | Async mind. Strategic build. 
+            <RotatingText texts={jobTitles} interval={2500} className="text-convrt-purple font-semibold" /> | Async mind. Strategic build. 
           </motion.p>
           
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">

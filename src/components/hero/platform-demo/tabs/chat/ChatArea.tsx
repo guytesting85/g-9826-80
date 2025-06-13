@@ -16,14 +16,30 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
   const { theme } = useTheme();
   const [newMessage, setNewMessage] = useState('');
   const messagesEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
+  const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
 
   const scrollToBottom = () => {
-    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });
+    if (shouldAutoScroll && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  // Check if user is near bottom of chat
+  const checkScrollPosition = () => {
+    if (messagesContainerRef.current) {
+      const { scrollTop, scrollHeight, clientHeight } = messagesContainerRef.current;
+      const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+      setShouldAutoScroll(isNearBottom);
+    }
   };
 
   useEffect(() => {
-    scrollToBottom();
-  }, [messages]);
+    // Only scroll if user is near the bottom
+    if (shouldAutoScroll) {
+      scrollToBottom();
+    }
+  }, [messages, shouldAutoScroll]);
 
   const handleSend = (e?: React.FormEvent) => {
     if (e) {
@@ -31,6 +47,7 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
       e.stopPropagation();
     }
     if (newMessage.trim()) {
+      setShouldAutoScroll(true); // Enable auto-scroll when user sends message
       onSendMessage(newMessage.trim());
       setNewMessage('');
     }
@@ -71,9 +88,13 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
       </div>
 
       {/* Messages Area */}
-      <div className={`flex-1 overflow-y-auto p-4 space-y-4 ${
-        theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'
-      }`}>
+      <div 
+        ref={messagesContainerRef}
+        onScroll={checkScrollPosition}
+        className={`flex-1 overflow-y-auto p-4 space-y-4 ${
+          theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'
+        }`}
+      >
         <AnimatePresence>
           {messages.map((message) => (
             <motion.div
