@@ -18,39 +18,29 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
-  const [userHasScrolled, setUserHasScrolled] = useState(false);
 
   const scrollToBottom = () => {
-    if (shouldAutoScroll && !userHasScrolled && messagesEndRef.current) {
-      messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
+    if (shouldAutoScroll && messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
   };
 
-  // Check if user is near bottom of chat
   const checkScrollPosition = () => {
     if (messagesContainerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = messagesContainerRef.current;
-      const isNearBottom = scrollHeight - scrollTop - clientHeight < 50;
+      const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
       setShouldAutoScroll(isNearBottom);
-      
-      // Track if user has manually scrolled
-      if (scrollTop < scrollHeight - clientHeight - 50) {
-        setUserHasScrolled(true);
-      } else {
-        setUserHasScrolled(false);
-      }
     }
   };
 
   useEffect(() => {
-    // Only scroll on new messages if user hasn't manually scrolled up
-    if (shouldAutoScroll && !userHasScrolled) {
+    if (shouldAutoScroll) {
       const timer = setTimeout(() => {
         scrollToBottom();
-      }, 100);
+      }, 50);
       return () => clearTimeout(timer);
     }
-  }, [messages, shouldAutoScroll, userHasScrolled]);
+  }, [messages, shouldAutoScroll]);
 
   const handleSend = (e?: React.FormEvent) => {
     if (e) {
@@ -58,8 +48,6 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
       e.stopPropagation();
     }
     if (newMessage.trim()) {
-      // Reset scroll behavior when user sends message
-      setUserHasScrolled(false);
       setShouldAutoScroll(true);
       onSendMessage(newMessage.trim());
       setNewMessage('');
@@ -83,7 +71,7 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
   };
 
   return (
-    <div className="flex flex-col h-full">
+    <div className="flex flex-col h-full" onClick={(e) => e.stopPropagation()}>
       {/* Chat Header */}
       <div className={`px-6 py-4 border-b ${
         theme === 'dark' 
@@ -107,6 +95,7 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
         className={`flex-1 overflow-y-auto p-4 space-y-4 ${
           theme === 'dark' ? 'bg-gray-900' : 'bg-gray-50'
         }`}
+        style={{ scrollBehavior: 'smooth' }}
       >
         <AnimatePresence>
           {messages.map((message) => (

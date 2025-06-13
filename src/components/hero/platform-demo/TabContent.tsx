@@ -32,7 +32,9 @@ const TabContent = ({ activeTab }: TabContentProps) => {
         <p className="text-lg text-convrt-purple font-medium mb-3">{currentTabInfo.subtitle}</p>
         <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">{currentTabInfo.description}</p>
       </div>
-      {renderTabContent()}
+      <div onClick={(e) => e.stopPropagation()}>
+        {renderTabContent()}
+      </div>
     </div>
   );
 };
