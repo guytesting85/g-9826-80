@@ -1,15 +1,11 @@
 
 import React from 'react';
 import { Bot } from 'lucide-react';
+import { agents } from '../../../../config/mockData';
+import { Agent } from '../../../../types';
 
 const AgentsTab = () => {
-  const agents = [
-    { name: "LinkedIn Engagement Bot", status: "Active", tasks: 12, efficiency: "94%" },
-    { name: "Twitter Outreach Agent", status: "Active", tasks: 8, efficiency: "87%" },
-    { name: "Content Interaction AI", status: "Paused", tasks: 0, efficiency: "91%" }
-  ];
-
-  const getStatusStyle = (status: string) => {
+  const getStatusStyle = (status: Agent['status']) => {
     return status === 'Active' ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-700';
   };
 

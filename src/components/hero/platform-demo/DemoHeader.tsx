@@ -1,6 +1,7 @@
 
 import React from 'react';
-import { Minimize2, Maximize2, X, Bell, User } from 'lucide-react';
+import { Minimize2, Maximize2, Bell, User } from 'lucide-react';
+import { tabContent } from '../../../config/tabsConfig';
 
 interface DemoHeaderProps {
   activeTab: string;
@@ -29,14 +30,6 @@ const DemoHeader = ({
   notificationsRead,
   avatarImage
 }: DemoHeaderProps) => {
-  const tabContent = {
-    cues: 'Cues (24)',
-    heatbox: 'Heatbox (12)',
-    seeds: 'Seeds (156)',
-    agents: 'AI Agents',
-    campaigns: 'Campaigns'
-  };
-
   return (
     <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
       <div className="flex space-x-1 mr-4">
@@ -83,7 +76,6 @@ const DemoHeader = ({
           <span className="text-xs font-medium text-orange-700">12 Streak</span>
         </div>
         
-        {/* Notifications Bell */}
         {showNotificationPanel && (
           <div className="relative">
             <button
@@ -100,7 +92,6 @@ const DemoHeader = ({
           </div>
         )}
         
-        {/* Interactive Avatar */}
         {showAvatarPanel && (
           <div className="relative">
             <button

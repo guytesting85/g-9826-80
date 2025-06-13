@@ -1,14 +1,8 @@
 
 import React from 'react';
+import { platforms } from '../../../../config/mockData';
 
 const HeatboxTab = () => {
-  const platforms = [
-    { platform: 'LinkedIn', percentage: 89, color: 'convrt-purple' },
-    { platform: 'Twitter', percentage: 67, color: 'blue-600' },
-    { platform: 'Facebook', percentage: 45, color: 'green-600' },
-    { platform: 'Reddit', percentage: 23, color: 'orange-600' }
-  ];
-
   return (
     <div className="space-y-6">
       <div className="grid grid-cols-2 gap-6">

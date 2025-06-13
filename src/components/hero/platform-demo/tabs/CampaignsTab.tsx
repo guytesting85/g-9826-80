@@ -1,14 +1,10 @@
 
 import React from 'react';
+import { campaigns } from '../../../../config/mockData';
+import { Campaign } from '../../../../types';
 
 const CampaignsTab = () => {
-  const campaigns = [
-    { name: "Q4 Enterprise Outreach", status: "Running", sent: 245, opened: 89, replied: 23 },
-    { name: "Product Demo Follow-up", status: "Scheduled", sent: 0, opened: 0, replied: 0 },
-    { name: "Re-engagement Campaign", status: "Completed", sent: 156, opened: 67, replied: 12 }
-  ];
-
-  const getStatusStyle = (status: string) => {
+  const getStatusStyle = (status: Campaign['status']) => {
     switch (status) {
       case 'Running': return 'bg-green-100 text-green-700';
       case 'Scheduled': return 'bg-yellow-100 text-yellow-700';

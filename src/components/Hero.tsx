@@ -1,40 +1,17 @@
+
 import React, { useRef, useState } from 'react';
 import AnimatedBackground from './AnimatedBackground';
 import { ArrowRight, Zap } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import PlatformDemo from './hero/PlatformDemo';
+import { containerVariants, itemVariants } from '../utils/animations';
+
 const Hero = () => {
   const demoRef = useRef<HTMLDivElement>(null);
   const [showDemo, setShowDemo] = useState(true);
 
-  // Animation variants
-  const containerVariants = {
-    hidden: {
-      opacity: 0
-    },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.15,
-        delayChildren: 0.3
-      }
-    }
-  };
-  const itemVariants = {
-    hidden: {
-      y: 40,
-      opacity: 0
-    },
-    visible: {
-      y: 0,
-      opacity: 1,
-      transition: {
-        duration: 0.7,
-        ease: [0.22, 1, 0.36, 1]
-      }
-    }
-  };
-  return <section className="relative min-h-0 pt-20 pb-32 overflow-hidden bg-[#F9F6F3]">
+  return (
+    <section className="relative min-h-0 pt-20 pb-32 overflow-hidden bg-[#F9F6F3]">
       <AnimatedBackground />
       
       <div className="container-section relative z-10">
@@ -62,27 +39,24 @@ const Hero = () => {
             </a>
           </motion.div>
           
-          {/* Modern Platform Showcase - Properly animated container */}
           <AnimatePresence mode="wait">
-            {showDemo && <motion.div ref={demoRef} variants={itemVariants} initial={{
-            opacity: 1,
-            scale: 1,
-            height: "auto"
-          }} exit={{
-            opacity: 0,
-            scale: 0.95,
-            height: 0,
-            marginTop: 0,
-            transition: {
-              duration: 0.4,
-              ease: "easeInOut"
-            }
-          }} className="mt-12 overflow-hidden" layout>
+            {showDemo && (
+              <motion.div 
+                ref={demoRef} 
+                variants={itemVariants} 
+                initial={{ opacity: 1, scale: 1, height: "auto" }} 
+                exit={{ opacity: 0, scale: 0.95, height: 0, marginTop: 0, transition: { duration: 0.4, ease: "easeInOut" } }} 
+                className="mt-12 overflow-hidden" 
+                layout
+              >
                 <PlatformDemo onClose={() => setShowDemo(false)} onCloseBadge={() => {}} showBadge={true} />
-              </motion.div>}
+              </motion.div>
+            )}
           </AnimatePresence>
         </motion.div>
       </div>
-    </section>;
+    </section>
+  );
 };
+
 export default Hero;

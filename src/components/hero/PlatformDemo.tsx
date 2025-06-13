@@ -1,11 +1,13 @@
 
-import React, { useState } from 'react';
+import React from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import DemoHeader from './platform-demo/DemoHeader';
 import TabContent from './platform-demo/TabContent';
 import NotificationPanel from './platform-demo/NotificationPanel';
 import AvatarMenu from './platform-demo/AvatarMenu';
 import AvatarUploadModal from './platform-demo/AvatarUploadModal';
+import { usePlatformDemo } from '../../hooks/usePlatformDemo';
+import { useAvatar } from '../../hooks/useAvatar';
 
 interface PlatformDemoProps {
   onClose: () => void;
@@ -13,123 +15,80 @@ interface PlatformDemoProps {
   showBadge: boolean;
 }
 
-const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) => {
-  const [activeTab, setActiveTab] = useState('cues');
-  const [showAvatarMenu, setShowAvatarMenu] = useState(false);
-  const [showNotifications, setShowNotifications] = useState(false);
-  const [showAvatarUpload, setShowAvatarUpload] = useState(false);
-  const [avatarImage, setAvatarImage] = useState<string | null>(null);
-  const [notificationsRead, setNotificationsRead] = useState(false);
-  const [showNotificationPanel, setShowNotificationPanel] = useState(true);
-  const [showAvatarPanel, setShowAvatarPanel] = useState(true);
-  const [isFullscreen, setIsFullscreen] = useState(false);
+const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
+  const platformDemo = usePlatformDemo();
+  const avatar = useAvatar();
 
   const handleAvatarUpload = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        setAvatarImage(e.target?.result as string);
-        setShowAvatarUpload(false);
-        setShowAvatarMenu(false);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleNotificationClick = () => {
-    setShowNotifications(!showNotifications);
-    if (!showNotifications) {
-      setNotificationsRead(true);
-    }
-  };
-
-  const handleCloseNotifications = () => {
-    setShowNotificationPanel(false);
-    setShowNotifications(false);
-  };
-
-  const handleCloseAvatarMenu = () => {
-    setShowAvatarPanel(false);
-    setShowAvatarMenu(false);
-  };
-
-  const toggleFullscreen = () => {
-    setIsFullscreen(!isFullscreen);
+    avatar.handleAvatarUpload(event);
+    platformDemo.closeAvatarMenu();
   };
 
   return (
-    <div className={`relative ${isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'max-w-7xl mx-auto'}`}>
-      {/* Gradient background */}
-      {!isFullscreen && (
+    <div className={`relative ${platformDemo.isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'max-w-7xl mx-auto'}`}>
+      {!platformDemo.isFullscreen && (
         <div className="absolute inset-0 -m-10 bg-gradient-to-br from-convrt-purple/20 via-convrt-purple/20 to-convrt-purple/20 rounded-3xl blur-3xl opacity-40"></div>
       )}
       
-      <div className={`relative ${isFullscreen ? 'h-full' : 'rounded-2xl'} overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm`}>
-        {/* Platform UI Header */}
+      <div className={`relative ${platformDemo.isFullscreen ? 'h-full' : 'rounded-2xl'} overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm`}>
         <DemoHeader
-          activeTab={activeTab}
-          setActiveTab={setActiveTab}
-          isFullscreen={isFullscreen}
+          activeTab={platformDemo.activeTab}
+          setActiveTab={platformDemo.setActiveTab}
+          isFullscreen={platformDemo.isFullscreen}
           onClose={onClose}
-          onToggleFullscreen={toggleFullscreen}
-          showNotificationPanel={showNotificationPanel}
-          showAvatarPanel={showAvatarPanel}
-          onNotificationClick={handleNotificationClick}
-          onAvatarClick={() => setShowAvatarMenu(!showAvatarMenu)}
-          notificationsRead={notificationsRead}
-          avatarImage={avatarImage}
+          onToggleFullscreen={platformDemo.toggleFullscreen}
+          showNotificationPanel={platformDemo.showNotificationPanel}
+          showAvatarPanel={platformDemo.showAvatarPanel}
+          onNotificationClick={platformDemo.toggleNotifications}
+          onAvatarClick={platformDemo.toggleAvatarMenu}
+          notificationsRead={platformDemo.notificationsRead}
+          avatarImage={avatar.avatarImage}
         />
         
-        {/* Main Content Area */}
-        <div className={`bg-gray-50 p-10 ${isFullscreen ? 'h-[calc(100vh-80px)] overflow-y-auto' : 'min-h-[700px]'} relative`}>
+        <div className={`bg-gray-50 p-10 ${platformDemo.isFullscreen ? 'h-[calc(100vh-80px)] overflow-y-auto' : 'min-h-[700px]'} relative`}>
           <AnimatePresence mode="wait">
             <motion.div 
-              key={activeTab}
+              key={platformDemo.activeTab}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -20 }}
               transition={{ duration: 0.3 }}
             >
-              <TabContent activeTab={activeTab} />
+              <TabContent activeTab={platformDemo.activeTab} />
             </motion.div>
           </AnimatePresence>
         </div>
       </div>
       
-      {/* Notifications Panel */}
       <AnimatePresence>
         <NotificationPanel 
-          isOpen={showNotifications}
-          onClose={handleCloseNotifications}
+          isOpen={platformDemo.showNotifications}
+          onClose={platformDemo.closeNotificationPanel}
         />
       </AnimatePresence>
 
-      {/* Avatar Menu */}
       <AnimatePresence>
         <AvatarMenu
-          isOpen={showAvatarMenu}
-          onClose={handleCloseAvatarMenu}
-          onUploadClick={() => setShowAvatarUpload(true)}
-          avatarImage={avatarImage}
+          isOpen={platformDemo.showAvatarMenu}
+          onClose={platformDemo.closeAvatarPanel}
+          onUploadClick={() => avatar.setShowAvatarUpload(true)}
+          avatarImage={avatar.avatarImage}
         />
       </AnimatePresence>
       
-      {/* Avatar Upload Modal */}
       <AvatarUploadModal
-        isOpen={showAvatarUpload}
-        onClose={() => setShowAvatarUpload(false)}
+        isOpen={avatar.showAvatarUpload}
+        onClose={() => avatar.setShowAvatarUpload(false)}
         onUpload={handleAvatarUpload}
-        currentAvatar={avatarImage}
+        currentAvatar={avatar.avatarImage}
       />
       
-      {/* Click outside handlers */}
-      {(showAvatarMenu || showNotifications) && (
+      {(platformDemo.showAvatarMenu || platformDemo.showNotifications) && (
         <div 
           className="fixed inset-0 z-40" 
           onClick={() => {
-            setShowAvatarMenu(false);
-            setShowNotifications(false);
+            platformDemo.closeAvatarMenu();
+            platformDemo.closeNotifications();
           }}
         />
       )}

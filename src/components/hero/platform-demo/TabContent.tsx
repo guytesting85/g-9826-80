@@ -5,40 +5,13 @@ import HeatboxTab from './tabs/HeatboxTab';
 import SeedsTab from './tabs/SeedsTab';
 import AgentsTab from './tabs/AgentsTab';
 import CampaignsTab from './tabs/CampaignsTab';
+import { tabInfo } from '../../../config/tabsConfig';
 
 interface TabContentProps {
   activeTab: string;
 }
 
 const TabContent = ({ activeTab }: TabContentProps) => {
-  const tabInfo = {
-    cues: {
-      title: "Cues Management",
-      subtitle: "AI-Identified Engagement Opportunities",
-      description: "Track and manage AI-discovered conversation starters and engagement opportunities with your prospects."
-    },
-    heatbox: {
-      title: "Heatbox Analytics", 
-      subtitle: "Engagement Heat Mapping",
-      description: "Visualize where your prospects are most active and engaged across different platforms and topics."
-    },
-    seeds: {
-      title: "Seeds Database",
-      subtitle: "Relationship Building Progress", 
-      description: "Track your relationship-building journey with prospects from first contact to closed deals."
-    },
-    agents: {
-      title: "AI Agents",
-      subtitle: "Autonomous Engagement Bots",
-      description: "Deploy AI agents that automatically engage with prospects, comment on posts, and nurture relationships 24/7."
-    },
-    campaigns: {
-      title: "Smart Campaigns",
-      subtitle: "Automated Outreach Sequences",
-      description: "Launch personalized multi-touch campaigns that adapt based on prospect behavior and engagement."
-    }
-  };
-
   const renderTabContent = () => {
     switch (activeTab) {
       case 'cues': return <CuesTab />;

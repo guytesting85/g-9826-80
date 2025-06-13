@@ -1,15 +1,11 @@
 
 import React from 'react';
 import { User } from 'lucide-react';
+import { seeds } from '../../../../config/mockData';
+import { Seed } from '../../../../types';
 
 const SeedsTab = () => {
-  const seeds = [
-    { name: "Michael Anderson", company: "TechCorp", status: "Warm", interactions: 5, stage: "Qualified" },
-    { name: "Sarah Chen", company: "TechStart", status: "Hot", interactions: 8, stage: "Proposal" },
-    { name: "David Kim", company: "InnovateLab", status: "Cold", interactions: 2, stage: "Research" }
-  ];
-
-  const getStatusStyle = (status: string) => {
+  const getStatusStyle = (status: Seed['status']) => {
     switch (status) {
       case 'Hot': return 'bg-red-100 text-red-700';
       case 'Warm': return 'bg-orange-100 text-orange-700';

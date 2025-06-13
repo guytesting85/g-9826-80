@@ -4,34 +4,14 @@ import { Heart, MessageCircle, Share2, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
 import CommentItem from './comment/CommentItem';
 import CommentInput from './comment/CommentInput';
+import { useComments } from '../../../hooks/useComments';
 
 const CuesTab = () => {
   const [isHeartLiked, setIsHeartLiked] = useState(false);
-  const [newComment, setNewComment] = useState('');
-  const [comments, setComments] = useState([
-    { id: 1, user: 'Mike Johnson', text: 'Great achievement! Congratulations on hitting your targets.', time: '2h ago' },
-    { id: 2, user: 'Lisa Wang', text: 'Would love to learn more about the automation tools you mentioned.', time: '1h ago' }
-  ]);
+  const { comments, newComment, setNewComment, addComment, deleteComment } = useComments();
 
   const handleLikeClick = () => {
     setIsHeartLiked(!isHeartLiked);
-  };
-
-  const handleAddComment = () => {
-    if (newComment.trim()) {
-      const comment = {
-        id: comments.length + 1,
-        user: 'You',
-        text: newComment,
-        time: 'now'
-      };
-      setComments([...comments, comment]);
-      setNewComment('');
-    }
-  };
-
-  const handleDeleteComment = (commentId: number) => {
-    setComments(comments.filter(comment => comment.id !== commentId));
   };
 
   const handleShare = () => {
@@ -92,14 +72,13 @@ const CuesTab = () => {
           </div>
         </div>
         
-        {/* Comments Section */}
         <div className="border-t border-gray-200 p-4">
           <div className="space-y-3 mb-4">
             {comments.map((comment) => (
               <CommentItem
                 key={comment.id}
                 comment={comment}
-                onDelete={handleDeleteComment}
+                onDelete={deleteComment}
               />
             ))}
           </div>
@@ -107,7 +86,7 @@ const CuesTab = () => {
           <CommentInput
             value={newComment}
             onChange={setNewComment}
-            onSubmit={handleAddComment}
+            onSubmit={addComment}
           />
         </div>
       </div>

@@ -2,6 +2,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { X } from 'lucide-react';
+import { notifications } from '../../../config/mockData';
 
 interface NotificationPanelProps {
   isOpen: boolean;
@@ -9,12 +10,6 @@ interface NotificationPanelProps {
 }
 
 const NotificationPanel = ({ isOpen, onClose }: NotificationPanelProps) => {
-  const notifications = [
-    { text: "New high-priority cue from Sarah Chen", time: "2m ago", type: "cue" },
-    { text: "Campaign 'Q4 Enterprise' reached 90% completion", time: "15m ago", type: "campaign" },
-    { text: "AI Agent discovered 5 new engagement opportunities", time: "1h ago", type: "agent" }
-  ];
-
   if (!isOpen) return null;
 
   return (
