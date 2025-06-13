@@ -132,17 +132,17 @@ const ImagePortionSlider = () => {
             <span className="text-sm font-medium font-inter tracking-wide">My Journey</span>
           </div>
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold text-convrt-dark-blue dark:text-white mb-6">
-            Education vs Experience vs <span className="gradient-text">Achievements</span>
+            <span className="gradient-text">About Me</span>
           </h2>
           <p className="text-convrt-dark-blue/80 dark:text-gray-300 text-base md:text-lg max-w-2xl mx-auto">
             Drag the sliders to explore my educational background, coding experience, and professional achievements.
           </p>
         </div>
 
-        <div className="relative select-none" style={{ userSelect: 'none' }}>
+        <div className="relative select-none">
           <div 
             ref={sliderContainerRef}
-            className="relative h-[450px] md:h-[550px] rounded-3xl overflow-hidden border-4 border-gradient-to-r from-blue-300 via-purple-300 to-yellow-300 dark:border-gray-700 shadow-2xl bg-gradient-to-br from-slate-50 via-purple-50 to-amber-50 dark:from-gray-800 dark:to-gray-800 transform rotate-1 hover:rotate-0 transition-transform duration-500"
+            className="relative h-[450px] md:h-[550px] rounded-3xl overflow-hidden border-4 border-gradient-to-r from-blue-300 via-purple-300 to-yellow-300 dark:border-gray-700 shadow-2xl bg-gradient-to-br from-slate-50 via-purple-50 to-amber-50 dark:from-gray-800 dark:to-gray-800"
             style={{ userSelect: 'none' }}
           >
             {/* Education Section */}
@@ -177,12 +177,6 @@ const ImagePortionSlider = () => {
                       <p className="text-xs md:text-sm text-blue-700 dark:text-blue-400">{feature.description}</p>
                     </motion.div>
                   ))}
-                </div>
-                <div className="mt-6 md:mt-8 p-3 md:p-4 bg-blue-200 dark:bg-blue-900/50 rounded-xl shadow-lg">
-                  <div className="flex items-center justify-center space-x-2">
-                    <Target className="w-5 h-5 text-blue-700" />
-                    <p className="text-blue-800 dark:text-blue-300 font-semibold text-sm md:text-base">Strong Academic Foundation</p>
-                  </div>
                 </div>
               </div>
             </div>
@@ -220,12 +214,6 @@ const ImagePortionSlider = () => {
                     </motion.div>
                   ))}
                 </div>
-                <div className="mt-6 md:mt-8 p-3 md:p-4 bg-purple-200 dark:bg-purple-900/50 rounded-xl shadow-lg">
-                  <div className="flex items-center justify-center space-x-2">
-                    <Code className="w-5 h-5 text-purple-700" />
-                    <p className="text-purple-800 dark:text-purple-300 font-semibold text-sm md:text-base">Hands-on Development Skills</p>
-                  </div>
-                </div>
               </div>
             </div>
 
@@ -262,18 +250,12 @@ const ImagePortionSlider = () => {
                     </motion.div>
                   ))}
                 </div>
-                <div className="mt-6 md:mt-8 p-3 md:p-4 bg-yellow-200 dark:bg-yellow-900/50 rounded-xl shadow-lg">
-                  <div className="flex items-center justify-center space-x-2">
-                    <Trophy className="w-5 h-5 text-yellow-700" />
-                    <p className="text-yellow-800 dark:text-yellow-300 font-semibold text-sm md:text-base">Recognition and Excellence</p>
-                  </div>
-                </div>
               </div>
             </div>
 
             {/* First Slider Handle */}
             <div 
-              className="absolute top-0 bottom-0 w-2 bg-gradient-to-b from-blue-500 to-purple-500 cursor-col-resize z-10 transform -rotate-12 hover:rotate-0 transition-transform duration-300 shadow-lg"
+              className="absolute top-0 bottom-0 w-2 bg-gradient-to-b from-blue-500 to-purple-500 cursor-col-resize z-10 shadow-lg"
               style={{ left: `${firstSliderPosition}%`, userSelect: 'none' }}
               onMouseDown={(e) => {
                 e.preventDefault();
@@ -287,7 +269,7 @@ const ImagePortionSlider = () => {
 
             {/* Second Slider Handle */}
             <div 
-              className="absolute top-0 bottom-0 w-2 bg-gradient-to-b from-purple-500 to-yellow-500 cursor-col-resize z-10 transform rotate-12 hover:rotate-0 transition-transform duration-300 shadow-lg"
+              className="absolute top-0 bottom-0 w-2 bg-gradient-to-b from-purple-500 to-yellow-500 cursor-col-resize z-10 shadow-lg"
               style={{ left: `${secondSliderPosition}%`, userSelect: 'none' }}
               onMouseDown={(e) => {
                 e.preventDefault();
