@@ -1,7 +1,9 @@
 
 import React, { useState } from 'react';
-import { Heart, MessageCircle, Share2, Target, User, Send, Trash2 } from 'lucide-react';
+import { Heart, MessageCircle, Share2, Target } from 'lucide-react';
 import { motion } from 'framer-motion';
+import CommentItem from './comment/CommentItem';
+import CommentInput from './comment/CommentInput';
 
 const CuesTab = () => {
   const [isHeartLiked, setIsHeartLiked] = useState(false);
@@ -94,53 +96,19 @@ const CuesTab = () => {
         <div className="border-t border-gray-200 p-4">
           <div className="space-y-3 mb-4">
             {comments.map((comment) => (
-              <div key={comment.id} className="flex space-x-3">
-                <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
-                  <User className="w-4 h-4 text-gray-600" />
-                </div>
-                <div className="flex-1">
-                  <div className="bg-gray-50 rounded-lg p-3">
-                    <div className="flex items-center justify-between mb-1">
-                      <div className="flex items-center space-x-2">
-                        <span className="text-sm font-medium text-gray-900">{comment.user}</span>
-                        <span className="text-xs text-gray-500">{comment.time}</span>
-                      </div>
-                      <button
-                        onClick={() => handleDeleteComment(comment.id)}
-                        className="text-gray-400 hover:text-red-500 transition-colors"
-                      >
-                        <Trash2 className="w-3 h-3" />
-                      </button>
-                    </div>
-                    <p className="text-sm text-gray-700 text-left">{comment.text}</p>
-                  </div>
-                </div>
-              </div>
+              <CommentItem
+                key={comment.id}
+                comment={comment}
+                onDelete={handleDeleteComment}
+              />
             ))}
           </div>
           
-          {/* Add Comment Input */}
-          <div className="flex space-x-3">
-            <div className="w-8 h-8 rounded-full bg-convrt-purple/20 flex items-center justify-center">
-              <User className="w-4 h-4 text-convrt-purple" />
-            </div>
-            <div className="flex-1 flex space-x-2">
-              <input
-                type="text"
-                value={newComment}
-                onChange={(e) => setNewComment(e.target.value)}
-                placeholder="Write a comment..."
-                className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-convrt-purple/20"
-                onKeyPress={(e) => e.key === 'Enter' && handleAddComment()}
-              />
-              <button
-                onClick={handleAddComment}
-                className="px-4 py-2 bg-convrt-purple text-white rounded-lg text-sm hover:bg-convrt-purple-hover transition-colors"
-              >
-                <Send className="w-4 h-4" />
-              </button>
-            </div>
-          </div>
+          <CommentInput
+            value={newComment}
+            onChange={setNewComment}
+            onSubmit={handleAddComment}
+          />
         </div>
       </div>
     </div>
