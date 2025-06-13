@@ -1,4 +1,3 @@
-
 import React, { useState, useRef, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { GraduationCap, Book, Code, Github, Trophy, Star, Award, School, ExternalLink, Calendar, MapPin, Users, Target, Briefcase, Medal } from 'lucide-react';
@@ -147,53 +146,59 @@ const ImagePortionSlider = () => {
           >
             {/* Education Section - LEFT ALIGNED */}
             <div 
-              className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 flex items-center"
+              className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30 flex items-center justify-start"
               style={{ 
                 clipPath: `inset(0 ${100 - firstSliderPosition}% 0 0)`,
                 userSelect: 'none'
               }}
             >
-              <div className="w-full p-4 md:p-8 text-left" style={{ userSelect: 'none' }}>
-                <div className="flex items-center justify-start mb-6">
-                  <Target className="w-8 h-8 text-blue-600 dark:text-blue-400 mr-3" />
-                  <h3 className="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-400">EDUCATION</h3>
-                </div>
-                <div className="space-y-4 md:space-y-6">
-                  {educationItems.map((item, index) => (
-                    <motion.div
-                      key={index}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: index * 0.1 }}
-                      className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-700"
-                      style={{ userSelect: 'none' }}
-                    >
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color}`} />
-                          <div className="text-left">
-                            <h4 className="text-sm md:text-base font-semibold text-blue-800 dark:text-blue-300">{item.title}</h4>
-                            <p className="text-xs md:text-sm text-blue-600 dark:text-blue-400">{item.subtitle}</p>
-                            {item.year && (
-                              <div className="flex items-center mt-1">
-                                <Calendar className="w-3 h-3 mr-1 text-blue-500" />
-                                <span className="text-xs text-blue-500">{item.year}</span>
-                              </div>
-                            )}
+              {/* Decorative Icon */}
+              <GraduationCap 
+                className="absolute opacity-10 text-blue-400 dark:text-blue-700 pointer-events-none"
+                style={{
+                  fontSize: '18rem',
+                  left: '55%',
+                  top: '15%',
+                  zIndex: 0,
+                }}
+              />
+              <div className="p-4 md:p-8" style={{ userSelect: 'none' }}>
+                <div className="text-left">
+                  <div className="flex items-center justify-start mb-6">
+                    <Target className="w-8 h-8 text-blue-600 dark:text-blue-400 mr-3" />
+                    <h3 className="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-400">EDUCATION</h3>
+                  </div>
+                  <div className="space-y-4 md:space-y-6">
+                    {educationItems.map((item, index) => (
+                      <motion.div
+                        key={index}
+                        initial={{ opacity: 0, x: -20 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                        transition={{ delay: index * 0.1 }}
+                        className="w-full max-w-md bg-blue-50 dark:bg-blue-900/20 p-4 md:p-6 rounded-lg border border-blue-200 dark:border-blue-700 mx-auto"
+                        style={{ userSelect: 'none' }}
+                      >
+                        <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color}`} />
+                            <div>
+                              <h4 className="text-sm md:text-base font-semibold text-blue-800 dark:text-blue-300">{item.title}</h4>
+                              <p className="text-xs md:text-sm text-blue-600 dark:text-blue-400">{item.subtitle}</p>
+                            </div>
                           </div>
+                          <a 
+                            href={item.link} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="text-blue-500 hover:text-blue-700 transition-colors ml-3"
+                            onClick={(e) => e.stopPropagation()}
+                          >
+                            <ExternalLink className="w-4 h-4" />
+                          </a>
                         </div>
-                        <a 
-                          href={item.link} 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-blue-500 hover:text-blue-700 transition-colors"
-                          onClick={(e) => e.stopPropagation()}
-                        >
-                          <ExternalLink className="w-4 h-4" />
-                        </a>
-                      </div>
-                    </motion.div>
-                  ))}
+                      </motion.div>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -206,6 +211,16 @@ const ImagePortionSlider = () => {
                 userSelect: 'none'
               }}
             >
+              {/* Decorative Icon */}
+              <Code 
+                className="absolute opacity-10 text-purple-400 dark:text-purple-700 pointer-events-none"
+                style={{
+                  fontSize: '18rem',
+                  left: '50%',
+                  top: '20%',
+                  zIndex: 0,
+                }}
+              />
               <div className="text-center p-4 md:p-8" style={{ userSelect: 'none' }}>
                 <div className="flex items-center justify-center mb-6">
                   <Code className="w-8 h-8 text-purple-600 dark:text-purple-400 mr-3" />
@@ -218,13 +233,13 @@ const ImagePortionSlider = () => {
                       initial={{ opacity: 0, y: 20 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-purple-50 dark:bg-purple-900/20 p-4 rounded-lg border border-purple-200 dark:border-purple-700"
+                      className="w-full max-w-md bg-purple-50 dark:bg-purple-900/20 p-4 md:p-6 rounded-lg border border-purple-200 dark:border-purple-700 mx-auto"
                       style={{ userSelect: 'none' }}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center space-x-3">
                           <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color}`} />
-                          <div className="text-left">
+                          <div>
                             <h4 className="text-sm md:text-base font-semibold text-purple-800 dark:text-purple-300">{item.title}</h4>
                             <p className="text-xs md:text-sm text-purple-600 dark:text-purple-400">{item.subtitle}</p>
                           </div>
@@ -233,7 +248,7 @@ const ImagePortionSlider = () => {
                           href={item.link} 
                           target="_blank" 
                           rel="noopener noreferrer"
-                          className="text-purple-500 hover:text-purple-700 transition-colors"
+                          className="text-purple-500 hover:text-purple-700 transition-colors ml-3"
                           onClick={(e) => e.stopPropagation()}
                         >
                           <ExternalLink className="w-4 h-4" />
@@ -253,6 +268,16 @@ const ImagePortionSlider = () => {
                 userSelect: 'none'
               }}
             >
+              {/* Decorative Icon */}
+              <Trophy 
+                className="absolute opacity-10 text-yellow-400 dark:text-yellow-700 pointer-events-none"
+                style={{
+                  fontSize: '18rem',
+                  right: '55%',
+                  top: '18%',
+                  zIndex: 0,
+                }}
+              />
               <div className="p-4 md:p-8" style={{ userSelect: 'none' }}>
                 <div className="text-right">
                   <div className="flex items-center justify-end mb-6">
@@ -266,26 +291,26 @@ const ImagePortionSlider = () => {
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-200 dark:border-yellow-700"
+                        className="w-full max-w-md bg-yellow-50 dark:bg-yellow-900/20 p-4 md:p-6 rounded-lg border border-yellow-200 dark:border-yellow-700 mx-auto"
                         style={{ userSelect: 'none' }}
                       >
                         <div className="flex items-center justify-between">
+                          <div className="flex items-center space-x-3">
+                            <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color}`} />
+                            <div>
+                              <h4 className="text-sm md:text-base font-semibold text-yellow-800 dark:text-yellow-300">{item.title}</h4>
+                              <p className="text-xs md:text-sm text-yellow-600 dark:text-yellow-400">{item.subtitle}</p>
+                            </div>
+                          </div>
                           <a 
                             href={item.link} 
                             target="_blank" 
                             rel="noopener noreferrer"
-                            className="text-yellow-500 hover:text-yellow-700 transition-colors"
+                            className="text-yellow-500 hover:text-yellow-700 transition-colors ml-3"
                             onClick={(e) => e.stopPropagation()}
                           >
                             <ExternalLink className="w-4 h-4" />
                           </a>
-                          <div className="flex items-center space-x-3">
-                            <div className="text-right">
-                              <h4 className="text-sm md:text-base font-semibold text-yellow-800 dark:text-yellow-300">{item.title}</h4>
-                              <p className="text-xs md:text-sm text-yellow-600 dark:text-yellow-400">{item.subtitle}</p>
-                            </div>
-                            <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color}`} />
-                          </div>
                         </div>
                       </motion.div>
                     ))}

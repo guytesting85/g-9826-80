@@ -14,11 +14,10 @@ const Index = () => {
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       <Hero />
-      <ProductShowcase />
       <HowItWorks />
       <Testimonials />
-      <SkillsShowcase />
-      <ImagePortionSlider />
+      <ProductShowcase />
+      {/* <ImagePortionSlider /> */}
       <HiddenContactForm />
       <Footer />
     </div>
