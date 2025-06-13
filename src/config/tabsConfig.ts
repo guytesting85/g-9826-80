@@ -1,4 +1,3 @@
-
 import { TabInfo } from '../types';
 
 export const tabContent = {
@@ -9,30 +8,30 @@ export const tabContent = {
   campaigns: 'Campaigns'
 };
 
-export const tabInfo: Record<string, TabInfo> = {
+export const tabInfo = {
   cues: {
-    title: "Cues Management",
-    subtitle: "AI-Identified Engagement Opportunities",
-    description: "Track and manage AI-discovered conversation starters and engagement opportunities with your prospects."
+    title: "Relationship Intelligence",
+    subtitle: "AI-powered insights at your fingertips",
+    description: "Transform your business relationships with intelligent conversation starters, recent touchpoints, and actionable insights powered by advanced AI."
   },
   heatbox: {
-    title: "Heatbox Analytics", 
-    subtitle: "Engagement Heat Mapping",
-    description: "Visualize where your prospects are most active and engaged across different platforms and topics."
+    title: "Code Playground",
+    subtitle: "Interactive development environment",
+    description: "Write, test, and debug code in real-time with our advanced IDE featuring syntax highlighting, error detection, and performance monitoring."
   },
   seeds: {
-    title: "Real-time Chat",
-    subtitle: "WhatsApp-like Communication", 
-    description: "Connect with team members and prospects through instant messaging with real-time capabilities."
+    title: "Chat Playground",
+    subtitle: "Multi-user chat simulation",
+    description: "Experience real-time messaging with QR-based device pairing, user switching, and WebSocket-ready architecture for seamless communication."
   },
   agents: {
-    title: "AI Agents",
-    subtitle: "Autonomous Engagement Bots",
-    description: "Deploy AI agents that automatically engage with prospects, comment on posts, and nurture relationships 24/7."
+    title: "AI Agent Management",
+    subtitle: "Intelligent automation at scale",
+    description: "Deploy and manage AI agents that handle tasks, conversations, and workflows automatically while maintaining human oversight and control."
   },
   campaigns: {
-    title: "Smart Campaigns",
-    subtitle: "Automated Outreach Sequences",
-    description: "Launch personalized multi-touch campaigns that adapt based on prospect behavior and engagement."
+    title: "Campaign Analytics",
+    subtitle: "Data-driven outreach insights",
+    description: "Track, analyze, and optimize your outreach campaigns with detailed metrics, performance insights, and automated reporting."
   }
 };
