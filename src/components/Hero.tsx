@@ -40,7 +40,7 @@ const Hero = () => {
           initial="hidden"
           animate="visible"
           variants={containerVariants}
-          className="max-w-5xl mx-auto text-center"
+          className="max-w-6xl mx-auto text-center"
         >
           <motion.div 
             variants={itemVariants}
@@ -77,16 +77,16 @@ const Hero = () => {
             </a>
           </motion.div>
           
-          {/* Modern Platform Showcase */}
+          {/* Modern Platform Showcase - Made bigger */}
           <motion.div 
             ref={demoRef}
             variants={itemVariants}
-            className="mb-24"
+            className="mb-32 transform scale-105"
           >
             <PlatformDemo />
           </motion.div>
           
-          {/* Stats Section - Enhanced with better styling and icons */}
+          {/* Stats Section - More spacing from showcase */}
           <StatsSection statsRef={statsRef} />
         </motion.div>
       </div>

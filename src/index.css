@@ -1,3 +1,4 @@
+
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
 @tailwind base;
@@ -179,6 +180,10 @@
     background-image: linear-gradient(to right, rgb(226 232 240 / 10%) 1px, transparent 1px),
                       linear-gradient(to bottom, rgb(226 232 240 / 10%) 1px, transparent 1px);
   }
+  
+  .animate-smooth-float {
+    animation: smoothFloat 4s ease-in-out infinite;
+  }
 }
 
 @keyframes fadeIn {
@@ -209,5 +214,14 @@
   }
   50% {
     transform: translateY(-20px);
+  }
+}
+
+@keyframes smoothFloat {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-12px);
   }
 }
