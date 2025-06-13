@@ -7,7 +7,6 @@ import SkillsShowcase from "../components/SkillsShowcase";
 import Navbar from "../components/Navbar";
 import ImagePortionSlider from "../components/ImagePortionSlider";
 import HiddenContactForm from "../components/HiddenContactForm";
-import Footer from "../components/Footer";
 
 const Index = () => {
   return (
@@ -20,7 +19,6 @@ const Index = () => {
       <SkillsShowcase />
       <ImagePortionSlider />
       <HiddenContactForm />
-      <Footer />
     </div>
   );
 };

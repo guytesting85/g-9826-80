@@ -1,133 +1,168 @@
-
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code2, Database, Globe, Smartphone, Cloud, Zap } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Code, Database, Cloud, Brain, Globe, Shield, Zap, Users, BarChart3, Smartphone, Palette, Settings } from "lucide-react";
 
 const SkillsShowcase = () => {
-  const skills = [
+  const [hoveredCard, setHoveredCard] = useState(null);
+
+  const skillsData = [
     {
-      category: "AI & Machine Learning",
-      icon: Zap,
-      technologies: ["Natural Language Processing", "Predictive Analytics", "Deep Learning", "Computer Vision"],
-      color: "from-purple-500 to-purple-600"
+      id: 1,
+      title: "AI-Driven Automation",
+      description: "Automate repetitive tasks and streamline workflows with intelligent AI agents.",
+      icon: Brain,
+      color: "#6936F5",
     },
     {
-      category: "Web Development",
-      icon: Code2,
-      technologies: ["React", "Node.js", "TypeScript", "Next.js"],
-      color: "from-blue-500 to-blue-600"
-    },
-    {
-      category: "Database & Backend",
-      icon: Database,
-      technologies: ["PostgreSQL", "MongoDB", "Redis", "GraphQL"],
-      color: "from-green-500 to-green-600"
-    },
-    {
-      category: "Cloud & DevOps",
+      id: 2,
+      title: "Cloud Infrastructure",
+      description: "Scalable and secure cloud infrastructure ensures high availability and performance.",
       icon: Cloud,
-      technologies: ["AWS", "Docker", "Kubernetes", "CI/CD"],
-      color: "from-orange-500 to-orange-600"
+      color: "#00A3FF",
     },
     {
-      category: "Mobile Development",
+      id: 3,
+      title: "Data Analytics",
+      description: "Gain actionable insights from your data with advanced analytics and visualization tools.",
+      icon: BarChart3,
+      color: "#FF6B6B",
+    },
+    {
+      id: 4,
+      title: "Error Handling | Logging",
+      description: "Protect your data and systems with robust cybersecurity measures and threat detection.",
+      icon: Shield,
+      color: "#32CD32",
+    },
+    {
+      id: 5,
+      title: "Backend | Microservices",
+      description: "Ensure a seamless user experience across all devices with mobile-first design principles.",
       icon: Smartphone,
-      technologies: ["React Native", "Flutter", "iOS", "Android"],
-      color: "from-pink-500 to-pink-600"
+      color: "#FFD700",
     },
     {
-      category: "API & Integration",
+      id: 6,
+      title: "Redis",
+      description: "Expand your reach with multi-language support and localized content delivery.",
       icon: Globe,
-      technologies: ["REST APIs", "Webhooks", "Third-party APIs", "Microservices"],
-      color: "from-indigo-500 to-indigo-600"
-    }
+      color: "#E9967A",
+    },
+    {
+      id: 7,
+      title: "API Integrations",
+      description: "Seamlessly integrate with other platforms and services through robust API integrations.",
+      icon: Zap,
+      color: "#9400D3",
+    },
+    {
+      id: 8,
+      title: "Containers",
+      description: "Manage user access and permissions with a centralized user management system.",
+      icon: Users,
+      color: "#4682B4",
+    },
+    {
+      id: 9,
+      title: "Customization",
+      description: "Tailor the platform to your specific needs with customizable features and settings.",
+      icon: Settings,
+      color: "#808080",
+    },
+    {
+      id: 10,
+      title: "Databases",
+      description: "Efficiently store and manage your data with scalable database solutions.",
+      icon: Database,
+      color: "#D2691E",
+    },
+    {
+      id: 11,
+      title: "UI/UX Design",
+      description: "Intuitive and visually appealing user interface and user experience design.",
+      icon: Palette,
+      color: "#8FBC8F",
+    },
+    {
+      id: 12,
+      title: "Code Quality",
+      description: "High-quality code ensures reliability, maintainability, and scalability.",
+      icon: Code,
+      color: "#A9A9A9",
+    },
   ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
-    visible: { 
+    visible: {
       opacity: 1,
-      transition: { 
-        staggerChildren: 0.1,
-        delayChildren: 0.3
-      }
-    }
+      transition: {
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
   };
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
-    visible: { 
-      y: 0, 
+  const cardVariants = {
+    hidden: { y: 50, opacity: 0 },
+    visible: {
+      y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-    }
+      transition: {
+        duration: 0.1,
+        ease: "easeInOut",
+      },
+    },
+    hover: {
+      scale: 1.05,
+      y: -10,
+      transition: {
+        duration: 0.05,
+        ease: "easeInOut",
+      },
+    },
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-slate-50 via-purple-50/30 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/30 dark:to-gray-900/30 transition-colors duration-300" id="skills">
-      <div className="container-section max-w-6xl mx-auto">
-        <motion.div 
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true }}
-          variants={containerVariants}
-          className="text-center mb-16"
-        >
-          <motion.div 
-            variants={itemVariants}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6"
-          >
-            <Code2 className="w-4 h-4 mr-2" />
-            <span className="text-sm font-medium tracking-wide">Technologies</span>
-          </motion.div>
-          <motion.h2 
-            variants={itemVariants}
-            className="text-4xl md:text-5xl font-bold text-convrt-dark-blue dark:text-white mb-6 tracking-tight transition-colors duration-300"
-          >
-            Powered by <span className="text-convrt-purple">Cutting-Edge</span> Technology
-          </motion.h2>
-          <motion.p 
-            variants={itemVariants}
-            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-300"
-          >
-            Our platform leverages the latest technologies to deliver intelligent, scalable, and reliable AI-powered outreach solutions.
-          </motion.p>
-        </motion.div>
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" id="skills">
+      <div className="container-section-1">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-convrt-dark-blue mb-6">
+            Advanced Technologies
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Explore the cutting-edge technologies that power our AI platform and drive exceptional results.
+          </p>
+        </div>
 
-        <motion.div 
+        <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
           viewport={{ once: true }}
-          variants={containerVariants}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
         >
-          {skills.map((skill, index) => (
-            <motion.div 
-              key={index}
-              variants={itemVariants}
-              className="group"
+          {skillsData.map((skill) => (
+            <motion.div
+              key={skill.id}
+              className="relative p-6 rounded-2xl bg-white border border-gray-100 transition-all duration-300 hover:shadow-xl hover:shadow-convrt-purple/5"
+              variants={cardVariants}
+              whileHover="hover"
+              onMouseEnter={() => setHoveredCard(skill.id)}
+              onMouseLeave={() => setHoveredCard(null)}
             >
-              <div className="bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-white/60 dark:border-gray-700/60 h-full hover:-translate-y-2">
-                <div className={`w-16 h-16 rounded-2xl bg-gradient-to-r ${skill.color} flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300`}>
-                  <skill.icon className="w-8 h-8 text-white" />
-                </div>
-                
-                <h3 className="text-xl font-bold text-convrt-dark-blue dark:text-white mb-4 transition-colors duration-300">
-                  {skill.category}
-                </h3>
-                
-                <div className="space-y-2">
-                  {skill.technologies.map((tech, techIndex) => (
-                    <div 
-                      key={techIndex}
-                      className="flex items-center text-gray-600 dark:text-gray-300 transition-colors duration-300"
-                    >
-                      <div className="w-2 h-2 rounded-full bg-convrt-purple mr-3"></div>
-                      <span className="text-sm">{tech}</span>
-                    </div>
-                  ))}
+              <div className="absolute top-4 right-4">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: `${skill.color}20` }}
+                >
+                  <skill.icon className="w-5 h-5" style={{ color: skill.color }} />
                 </div>
               </div>
+              <h3 className="text-xl font-semibold text-convrt-dark-blue mb-3">
+                {skill.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">{skill.description}</p>
             </motion.div>
           ))}
         </motion.div>
