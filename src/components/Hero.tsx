@@ -2,7 +2,7 @@
 import React, { useRef, useState } from 'react';
 import AnimatedBackground from './AnimatedBackground';
 import { ArrowRight, Zap } from 'lucide-react';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import PlatformDemo from './hero/PlatformDemo';
 
 const Hero = () => {
@@ -65,7 +65,7 @@ const Hero = () => {
           
           <motion.div 
             variants={itemVariants}
-            className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-20"
+            className={`flex flex-col sm:flex-row justify-center items-center gap-4 ${showDemo ? 'mb-20' : 'mb-0'}`}
           >
             <a href="#cta" className="button-primary flex items-center group font-inter font-medium">
               Get Started
@@ -76,23 +76,30 @@ const Hero = () => {
             </a>
           </motion.div>
           
-          {/* Modern Platform Showcase - Conditionally render with no space when hidden */}
-          {showDemo && (
-            <motion.div 
-              ref={demoRef}
-              variants={itemVariants}
-              className="transform scale-105"
-              initial={{ opacity: 1, height: "auto" }}
-              exit={{ opacity: 0, height: 0, marginBottom: 0 }}
-              transition={{ duration: 0.3 }}
-            >
-              <PlatformDemo 
-                onClose={() => setShowDemo(false)} 
-                onCloseBadge={() => {}} 
-                showBadge={true}
-              />
-            </motion.div>
-          )}
+          {/* Modern Platform Showcase with proper AnimatePresence */}
+          <AnimatePresence>
+            {showDemo && (
+              <motion.div 
+                ref={demoRef}
+                variants={itemVariants}
+                className="transform scale-105"
+                initial={{ opacity: 1, height: "auto" }}
+                exit={{ 
+                  opacity: 0, 
+                  height: 0,
+                  scale: 0.8,
+                  transition: { duration: 0.4, ease: "easeInOut" }
+                }}
+                transition={{ duration: 0.3 }}
+              >
+                <PlatformDemo 
+                  onClose={() => setShowDemo(false)} 
+                  onCloseBadge={() => {}} 
+                  showBadge={true}
+                />
+              </motion.div>
+            )}
+          </AnimatePresence>
         </motion.div>
       </div>
     </section>
