@@ -28,6 +28,7 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
   const handleSend = (e?: React.FormEvent) => {
     if (e) {
       e.preventDefault();
+      e.stopPropagation();
     }
     if (newMessage.trim()) {
       onSendMessage(newMessage.trim());
@@ -150,4 +151,3 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
 };
 
 export default ChatArea;
-
