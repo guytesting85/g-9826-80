@@ -7,10 +7,16 @@ import { notifications } from '../../../config/mockData';
 interface NotificationPanelProps {
   isOpen: boolean;
   onClose: () => void;
+  onMarkAsRead: () => void;
 }
 
-const NotificationPanel = ({ isOpen, onClose }: NotificationPanelProps) => {
+const NotificationPanel = ({ isOpen, onClose, onMarkAsRead }: NotificationPanelProps) => {
   if (!isOpen) return null;
+
+  const handleClose = () => {
+    onMarkAsRead();
+    onClose();
+  };
 
   return (
     <motion.div
@@ -22,7 +28,7 @@ const NotificationPanel = ({ isOpen, onClose }: NotificationPanelProps) => {
       <div className="p-4 border-b border-gray-100 flex items-center justify-between">
         <h3 className="font-medium text-gray-900">Notifications</h3>
         <button
-          onClick={onClose}
+          onClick={handleClose}
           className="text-gray-400 hover:text-gray-600"
         >
           <X className="w-4 h-4" />
