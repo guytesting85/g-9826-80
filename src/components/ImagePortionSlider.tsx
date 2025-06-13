@@ -145,7 +145,7 @@ const ImagePortionSlider = () => {
             className="relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden border-2 border-gray-200 dark:border-gray-700 shadow-2xl bg-gradient-to-r from-blue-50 via-purple-50 to-yellow-50 dark:from-gray-800 dark:to-gray-800"
             style={{ userSelect: 'none' }}
           >
-            {/* Education Section */}
+            {/* Education Section - LEFT ALIGNED */}
             <div 
               className="absolute inset-0 bg-gradient-to-br from-blue-100 to-blue-200 dark:from-blue-900/30 dark:to-blue-800/30 flex items-center"
               style={{ 
@@ -153,10 +153,10 @@ const ImagePortionSlider = () => {
                 userSelect: 'none'
               }}
             >
-              <div className="w-full p-4 md:p-8" style={{ userSelect: 'none' }}>
-                <div className="flex items-center justify-between mb-6">
+              <div className="w-full p-4 md:p-8 text-left" style={{ userSelect: 'none' }}>
+                <div className="flex items-center justify-start mb-6">
+                  <Target className="w-8 h-8 text-blue-600 dark:text-blue-400 mr-3" />
                   <h3 className="text-2xl md:text-3xl font-bold text-blue-700 dark:text-blue-400">EDUCATION</h3>
-                  <Target className="w-8 h-8 text-blue-600 dark:text-blue-400" />
                 </div>
                 <div className="space-y-4 md:space-y-6">
                   {educationItems.map((item, index) => (
@@ -198,7 +198,7 @@ const ImagePortionSlider = () => {
               </div>
             </div>
 
-            {/* Coding Experience Section */}
+            {/* Coding Experience Section - CENTER ALIGNED */}
             <div 
               className="absolute inset-0 bg-gradient-to-br from-purple-100 to-purple-200 dark:from-purple-900/30 dark:to-purple-800/30 flex items-center justify-center"
               style={{ 
@@ -245,18 +245,18 @@ const ImagePortionSlider = () => {
               </div>
             </div>
 
-            {/* Achievements Section */}
+            {/* Achievements Section - RIGHT ALIGNED */}
             <div 
-              className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30 flex items-center"
+              className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30 flex items-center justify-end"
               style={{ 
                 clipPath: `inset(0 0 0 ${secondSliderPosition}%)`,
                 userSelect: 'none'
               }}
             >
               <div className="w-full p-4 md:p-8 text-right" style={{ userSelect: 'none' }}>
-                <div className="flex items-center justify-between mb-6">
+                <div className="flex items-center justify-end mb-6">
+                  <h3 className="text-2xl md:text-3xl font-bold text-yellow-700 dark:text-yellow-400 mr-3">ACHIEVEMENTS</h3>
                   <Briefcase className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
-                  <h3 className="text-2xl md:text-3xl font-bold text-yellow-700 dark:text-yellow-400">ACHIEVEMENTS</h3>
                 </div>
                 <div className="space-y-4 md:space-y-6">
                   {achievementItems.map((item, index) => (

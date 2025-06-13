@@ -51,11 +51,11 @@ const ChatPlayground = () => {
     }
   ]);
 
-  const users: User[] = [
+  const [users, setUsers] = useState<User[]>([
     { id: 'user-a', name: 'User A', isOnline: true, unreadCount: 0 },
     { id: 'user-b', name: 'User B', isOnline: true, unreadCount: 2 },
     { id: 'user-c', name: 'User C', isOnline: false, unreadCount: 1 }
-  ];
+  ]);
 
   const handleSendMessage = (text: string) => {
     const newMessage: Message = {
@@ -65,12 +65,29 @@ const ChatPlayground = () => {
       timestamp: new Date()
     };
     setMessages(prev => [...prev, newMessage]);
+
+    // Update unread count for other users
+    setUsers(prevUsers => 
+      prevUsers.map(user => {
+        if (user.id !== activeUserId && user.isOnline) {
+          return { ...user, unreadCount: (user.unreadCount || 0) + 1 };
+        }
+        return user;
+      })
+    );
   };
 
   const handleUserSwitch = (userId: string) => {
     setActiveUserId(userId);
-    // Reset unread count for switched user
-    // This would be handled by backend in real implementation
+    // Clear unread count for switched user
+    setUsers(prevUsers => 
+      prevUsers.map(user => {
+        if (user.id === userId) {
+          return { ...user, unreadCount: 0 };
+        }
+        return user;
+      })
+    );
   };
 
   return (
