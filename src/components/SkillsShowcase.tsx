@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Cloud, Shield, Zap, Users, BarChart3, Bot, Mail, Target } from 'lucide-react';
+import { Code, Database, Cloud, Shield, Zap, Users, BarChart3, Bot, Mail, Target, Brain, Cpu, Globe, Lock } from 'lucide-react';
 
 const SkillsShowcase = () => {
   const containerVariants = {
@@ -30,7 +30,8 @@ const SkillsShowcase = () => {
       skills: [
         { name: "Natural Language Processing", icon: <Bot className="w-6 h-6" />, level: 95 },
         { name: "Predictive Analytics", icon: <BarChart3 className="w-6 h-6" />, level: 90 },
-        { name: "Behavioral Analysis", icon: <Users className="w-6 h-6" />, level: 88 }
+        { name: "Behavioral Analysis", icon: <Users className="w-6 h-6" />, level: 88 },
+        { name: "Deep Learning Models", icon: <Brain className="w-6 h-6" />, level: 92 }
       ]
     },
     {
@@ -38,7 +39,8 @@ const SkillsShowcase = () => {
       skills: [
         { name: "CRM Integration", icon: <Database className="w-6 h-6" />, level: 92 },
         { name: "Social Media APIs", icon: <Cloud className="w-6 h-6" />, level: 89 },
-        { name: "Email Automation", icon: <Mail className="w-6 h-6" />, level: 94 }
+        { name: "Email Automation", icon: <Mail className="w-6 h-6" />, level: 94 },
+        { name: "Real-time Processing", icon: <Cpu className="w-6 h-6" />, level: 87 }
       ]
     },
     {
@@ -46,7 +48,17 @@ const SkillsShowcase = () => {
       skills: [
         { name: "Lead Scoring", icon: <Target className="w-6 h-6" />, level: 91 },
         { name: "Conversion Tracking", icon: <Zap className="w-6 h-6" />, level: 87 },
-        { name: "Performance Analytics", icon: <BarChart3 className="w-6 h-6" />, level: 93 }
+        { name: "Performance Analytics", icon: <BarChart3 className="w-6 h-6" />, level: 93 },
+        { name: "Market Intelligence", icon: <Globe className="w-6 h-6" />, level: 85 }
+      ]
+    },
+    {
+      category: "Security & Compliance",
+      skills: [
+        { name: "Data Encryption", icon: <Shield className="w-6 h-6" />, level: 96 },
+        { name: "GDPR Compliance", icon: <Lock className="w-6 h-6" />, level: 94 },
+        { name: "Privacy Protection", icon: <Shield className="w-6 h-6" />, level: 91 },
+        { name: "Secure APIs", icon: <Code className="w-6 h-6" />, level: 89 }
       ]
     }
   ];
@@ -70,35 +82,35 @@ const SkillsShowcase = () => {
               Built with <span className="text-convrt-purple">Cutting-Edge</span> Technology
             </h2>
             <p className="text-xl text-convrt-dark-blue/70 max-w-3xl mx-auto leading-relaxed">
-              Our platform combines advanced AI, seamless integrations, and proven sales methodologies
+              Our platform combines advanced AI, seamless integrations, proven sales methodologies, and enterprise-grade security
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
             {skills.map((category, categoryIndex) => (
               <motion.div
                 key={categoryIndex}
                 variants={itemVariants}
-                className="feature-card p-8"
+                className="feature-card p-6"
               >
-                <h3 className="font-inter font-semibold text-xl text-convrt-dark-blue mb-6">
+                <h3 className="font-inter font-semibold text-lg text-convrt-dark-blue mb-6">
                   {category.category}
                 </h3>
-                <div className="space-y-6">
+                <div className="space-y-4">
                   {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-3">
+                    <div key={skillIndex} className="space-y-2">
                       <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-3">
-                          <div className="p-2 rounded-lg bg-convrt-purple/10 text-convrt-purple">
+                        <div className="flex items-center space-x-2">
+                          <div className="p-1.5 rounded-lg bg-convrt-purple/10 text-convrt-purple">
                             {skill.icon}
                           </div>
-                          <span className="font-medium text-convrt-dark-blue">{skill.name}</span>
+                          <span className="font-medium text-convrt-dark-blue text-sm">{skill.name}</span>
                         </div>
-                        <span className="text-sm font-semibold text-convrt-purple">{skill.level}%</span>
+                        <span className="text-xs font-semibold text-convrt-purple">{skill.level}%</span>
                       </div>
-                      <div className="w-full bg-gray-200 rounded-full h-2">
+                      <div className="w-full bg-gray-200 rounded-full h-1.5">
                         <motion.div
-                          className="bg-gradient-to-r from-convrt-purple to-convrt-purple-light h-2 rounded-full"
+                          className="bg-gradient-to-r from-convrt-purple to-convrt-purple-light h-1.5 rounded-full"
                           initial={{ width: 0 }}
                           whileInView={{ width: `${skill.level}%` }}
                           viewport={{ once: true }}
