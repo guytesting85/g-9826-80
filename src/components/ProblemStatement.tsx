@@ -27,7 +27,7 @@ const ProblemStatement = () => {
   };
 
   return (
-    <section className="relative py-16 overflow-hidden bg-white dark:bg-gray-900 transition-colors duration-300" id="problem">
+    <section className="relative py-16 overflow-hidden bg-white" id="problem">
       <div className="container-section relative z-10">
         <motion.div 
           initial="hidden"
@@ -42,7 +42,7 @@ const ProblemStatement = () => {
           
           <motion.h2 
             variants={itemVariants}
-            className="heading-lg text-convrt-dark-blue dark:text-white mb-6 transition-colors duration-300"
+            className="heading-lg text-convrt-dark-blue mb-6"
           >
             Cold Outreach Doesn't Work Anymore. <br />
             <span className="text-convrt-purple font-extrabold">AI Organic Outbound</span> Does.
@@ -50,7 +50,7 @@ const ProblemStatement = () => {
           
           <motion.p 
             variants={itemVariants}
-            className="text-convrt-dark-blue/80 dark:text-gray-300 text-lg mb-8 max-w-2xl mx-auto transition-colors duration-300"
+            className="text-convrt-dark-blue/80 text-lg mb-8 max-w-2xl mx-auto"
           >
             The days of cold calls and emails are over. Today's buyers expect personalized engagement from people they trust. Convrt.ai puts you exactly where your buyers make decisions.
           </motion.p>
@@ -69,20 +69,20 @@ const ProblemStatement = () => {
             whileHover={{ y: -5, scale: 1.02 }}
             onHoverStart={() => setHoveredSide('traditional')}
             onHoverEnd={() => setHoveredSide(null)}
-            className="bg-[#F9F6F3] dark:bg-gray-800 rounded-[20px] p-8 border border-gray-100 dark:border-gray-700 relative overflow-hidden group cursor-pointer transition-all duration-300"
+            className="bg-[#F9F6F3] rounded-[20px] p-8 border border-gray-100 relative overflow-hidden group cursor-pointer transition-all duration-300"
           >
-            <div className="absolute top-0 right-0 bg-red-50 dark:bg-red-900/30 px-4 py-2 rounded-bl-2xl">
+            <div className="absolute top-0 right-0 bg-red-50 px-4 py-2 rounded-bl-2xl">
               <X className="w-5 h-5 text-[#EA384C]" />
             </div>
             
-            <h3 className="heading-sm text-convrt-dark-blue dark:text-white mb-8 flex items-center transition-colors duration-300">
+            <h3 className="heading-sm text-convrt-dark-blue mb-8 flex items-center">
               Traditional Cold Outbound
               <motion.div
                 initial={{ scale: 0 }}
                 animate={{ scale: hoveredSide === 'traditional' ? 1 : 0 }}
-                className="ml-2 bg-red-100 dark:bg-red-900/50 p-1 rounded-full transition-colors duration-300"
+                className="ml-2 bg-red-100 p-1 rounded-full"
               >
-                <TrendingUp className="w-4 h-4 text-red-600 dark:text-red-400 rotate-180" />
+                <TrendingUp className="w-4 h-4 text-red-600 rotate-180" />
               </motion.div>
             </h3>
             
@@ -99,12 +99,12 @@ const ProblemStatement = () => {
                   transition={{ delay: i * 0.1 }}
                   className="flex items-start"
                 >
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 dark:bg-red-900/50 flex items-center justify-center mt-0.5 mr-4 transition-colors duration-300">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-red-100 flex items-center justify-center mt-0.5 mr-4">
                     <X className="w-4 h-4 text-[#EA384C]" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-convrt-dark-blue dark:text-white transition-colors duration-300">{item.stat}</p>
-                    <p className="text-convrt-dark-blue/70 dark:text-gray-300 mt-1 transition-colors duration-300">{item.desc}</p>
+                    <p className="font-semibold text-lg text-convrt-dark-blue">{item.stat}</p>
+                    <p className="text-convrt-dark-blue/70 mt-1">{item.desc}</p>
                   </div>
                 </motion.li>
               ))}
@@ -119,7 +119,7 @@ const ProblemStatement = () => {
                 <motion.div 
                   key={i}
                   whileHover={{ scale: 1.1, rotate: 5 }}
-                  className="aspect-square flex flex-col items-center justify-center bg-red-50 dark:bg-red-900/30 rounded-xl p-3 cursor-pointer transition-colors duration-300"
+                  className="aspect-square flex flex-col items-center justify-center bg-red-50 rounded-xl p-3 cursor-pointer"
                 >
                   <item.icon className="w-8 h-8 text-[#EA384C] mb-2" />
                   <div className="text-sm text-center text-[#EA384C] font-medium">{item.label}</div>
@@ -136,13 +136,13 @@ const ProblemStatement = () => {
             whileHover={{ y: -5, scale: 1.02 }}
             onHoverStart={() => setHoveredSide('ai')}
             onHoverEnd={() => setHoveredSide(null)}
-            className="bg-[#F9F6F3] dark:bg-gray-800 rounded-[20px] p-8 border border-gray-100 dark:border-gray-700 relative overflow-hidden group cursor-pointer transition-all duration-300"
+            className="bg-[#F9F6F3] rounded-[20px] p-8 border border-gray-100 relative overflow-hidden group cursor-pointer transition-all duration-300"
           >
-            <div className="absolute top-0 right-0 bg-convrt-purple/10 dark:bg-convrt-purple/20 px-4 py-2 rounded-bl-2xl">
+            <div className="absolute top-0 right-0 bg-convrt-purple/10 px-4 py-2 rounded-bl-2xl">
               <Check className="w-5 h-5 text-convrt-purple" />
             </div>
             
-            <h3 className="heading-sm text-convrt-dark-blue dark:text-white mb-8 flex items-center transition-colors duration-300">
+            <h3 className="heading-sm text-convrt-dark-blue mb-8 flex items-center">
               AI Organic Outbound
               <span className="ml-2 px-2 py-0.5 text-xs font-medium bg-convrt-purple/10 text-convrt-purple rounded-full">Convrt.ai</span>
               <motion.div
@@ -171,8 +171,8 @@ const ProblemStatement = () => {
                     <Check className="w-4 h-4 text-convrt-purple" />
                   </div>
                   <div>
-                    <p className="font-semibold text-lg text-convrt-dark-blue dark:text-white transition-colors duration-300">{item.stat}</p>
-                    <p className="text-convrt-dark-blue/70 dark:text-gray-300 mt-1 transition-colors duration-300">{item.desc}</p>
+                    <p className="font-semibold text-lg text-convrt-dark-blue">{item.stat}</p>
+                    <p className="text-convrt-dark-blue/70 mt-1">{item.desc}</p>
                   </div>
                 </motion.li>
               ))}
@@ -187,7 +187,7 @@ const ProblemStatement = () => {
                 <motion.div 
                   key={i}
                   whileHover={{ scale: 1.1, rotate: -5 }}
-                  className="aspect-square flex flex-col items-center justify-center bg-convrt-purple/5 dark:bg-convrt-purple/10 rounded-xl p-3 cursor-pointer transition-colors duration-300"
+                  className="aspect-square flex flex-col items-center justify-center bg-convrt-purple/5 rounded-xl p-3 cursor-pointer"
                 >
                   <item.icon className="w-8 h-8 text-convrt-purple mb-2" />
                   <div className="text-sm text-center text-convrt-purple font-medium">{item.label}</div>
