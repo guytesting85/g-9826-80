@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
-import { X, Check, PhoneCall, Mail, MessageSquare, Users, Zap, BarChart3, ArrowRight, TrendingUp, Target } from 'lucide-react';
-import { motion, AnimatePresence } from 'framer-motion';
+import { X, Check, PhoneCall, Mail, MessageSquare, Users, Zap, BarChart3, TrendingUp, Target } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const ProblemStatement = () => {
   const [hoveredSide, setHoveredSide] = useState<'traditional' | 'ai' | null>(null);
@@ -197,22 +197,6 @@ const ProblemStatement = () => {
             
             <div className="absolute -bottom-1 left-0 right-0 h-1 bg-convrt-purple"></div>
           </motion.div>
-
-          {/* Animated Arrow */}
-          <AnimatePresence>
-            {hoveredSide && (
-              <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
-                className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10"
-              >
-                <div className="bg-white rounded-full p-4 shadow-xl border border-gray-200">
-                  <ArrowRight className={`w-8 h-8 ${hoveredSide === 'ai' ? 'text-convrt-purple' : 'text-red-500'}`} />
-                </div>
-              </motion.div>
-            )}
-          </AnimatePresence>
         </motion.div>
       </div>
     </section>

@@ -203,11 +203,13 @@ const HowItWorks = () => {
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ duration: 0.5 }}
-          className="max-w-5xl mx-auto bg-gray-100 rounded-2xl overflow-hidden"
+          className="max-w-6xl mx-auto bg-gray-100 rounded-2xl overflow-hidden"
         >
-          <div className="flex flex-col lg:flex-row h-[600px]">
+          <div className="flex flex-col lg:flex-row h-[700px]">
             {/* Steps Section */}
-            <div className="lg:w-1/3 flex flex-col gap-1 p-4 bg-gray-50">
+            <div className={`${
+              currentSteps.steps.length === 4 ? 'lg:w-2/5' : 'lg:w-1/3'
+            } flex flex-col gap-1 p-6 bg-gray-50 overflow-y-auto`}>
               {currentSteps.steps.map((step) => (
                 <StepContent
                   key={step.id}
@@ -224,7 +226,9 @@ const HowItWorks = () => {
             </div>
             
             {/* Image Display */}
-            <div className="lg:w-2/3 relative h-full">
+            <div className={`${
+              currentSteps.steps.length === 4 ? 'lg:w-3/5' : 'lg:w-2/3'
+            } relative h-full`}>
               {currentSteps.steps.map((step) => (
                 <motion.div 
                   key={step.id}
