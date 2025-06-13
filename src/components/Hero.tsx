@@ -45,16 +45,10 @@ const Hero = () => {
           {showBadge && (
             <motion.div 
               variants={itemVariants}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6 relative"
+              className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6"
             >
               <Zap className="w-4 h-4 mr-2" />
               <span className="text-sm font-medium font-inter tracking-wide">The First AI Organic Outbound Platform</span>
-              <button
-                onClick={() => setShowBadge(false)}
-                className="ml-3 w-4 h-4 rounded-full bg-red-500 hover:bg-red-600 transition-colors flex items-center justify-center text-white text-xs"
-              >
-                ×
-              </button>
             </motion.div>
           )}
           
@@ -92,7 +86,11 @@ const Hero = () => {
               variants={itemVariants}
               className="mb-8 transform scale-105"
             >
-              <PlatformDemo onClose={() => setShowDemo(false)} />
+              <PlatformDemo 
+                onClose={() => setShowDemo(false)} 
+                onCloseBadge={() => setShowBadge(false)}
+                showBadge={showBadge}
+              />
             </motion.div>
           )}
         </motion.div>

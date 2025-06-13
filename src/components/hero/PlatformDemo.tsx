@@ -1,12 +1,15 @@
+
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2, Trash2, Upload, Camera } from 'lucide-react';
 
 interface PlatformDemoProps {
   onClose: () => void;
+  onCloseBadge: () => void;
+  showBadge: boolean;
 }
 
-const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
+const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) => {
   const [activeTab, setActiveTab] = useState('cues');
   const [isHeartLiked, setIsHeartLiked] = useState(false);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
@@ -370,7 +373,7 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
         <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
           <div className="flex space-x-1 mr-4">
             <button 
-              onClick={onClose}
+              onClick={showBadge ? onCloseBadge : onClose}
               className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
             ></button>
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
