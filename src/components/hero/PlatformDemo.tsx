@@ -1,7 +1,6 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2, Trash2, Upload, Camera } from 'lucide-react';
+import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2, Trash2, Upload, Camera, Maximize2, Minimize2 } from 'lucide-react';
 
 interface PlatformDemoProps {
   onClose: () => void;
@@ -24,6 +23,7 @@ const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) =
   const [notificationsRead, setNotificationsRead] = useState(false);
   const [showNotificationPanel, setShowNotificationPanel] = useState(true);
   const [showAvatarPanel, setShowAvatarPanel] = useState(true);
+  const [isFullscreen, setIsFullscreen] = useState(false);
 
   const handleLikeClick = () => {
     setIsHeartLiked(!isHeartLiked);
@@ -78,6 +78,10 @@ const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) =
   const handleCloseAvatarMenu = () => {
     setShowAvatarPanel(false);
     setShowAvatarMenu(false);
+  };
+
+  const toggleFullscreen = () => {
+    setIsFullscreen(!isFullscreen);
   };
 
   const tabContent = {
@@ -364,11 +368,13 @@ const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) =
   };
 
   return (
-    <div className="relative max-w-7xl mx-auto">
+    <div className={`relative ${isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'max-w-7xl mx-auto'}`}>
       {/* Gradient background */}
-      <div className="absolute inset-0 -m-10 bg-gradient-to-br from-convrt-purple/20 via-convrt-purple/20 to-convrt-purple/20 rounded-3xl blur-3xl opacity-40"></div>
+      {!isFullscreen && (
+        <div className="absolute inset-0 -m-10 bg-gradient-to-br from-convrt-purple/20 via-convrt-purple/20 to-convrt-purple/20 rounded-3xl blur-3xl opacity-40"></div>
+      )}
       
-      <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm">
+      <div className={`relative ${isFullscreen ? 'h-full' : 'rounded-2xl'} overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm`}>
         {/* Platform UI Header */}
         <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
           <div className="flex space-x-1 mr-4">
@@ -377,7 +383,16 @@ const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) =
               className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
             ></button>
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-            <div className="w-3 h-3 rounded-full bg-green-500"></div>
+            <button 
+              onClick={toggleFullscreen}
+              className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer flex items-center justify-center"
+            >
+              {isFullscreen ? (
+                <Minimize2 className="w-2 h-2 text-white" />
+              ) : (
+                <Maximize2 className="w-2 h-2 text-white" />
+              )}
+            </button>
           </div>
           
           <div className="flex space-x-1 overflow-x-auto scrollbar-hide flex-1">
@@ -593,7 +608,7 @@ const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) =
         </div>
         
         {/* Main Content Area */}
-        <div className="bg-gray-50 p-10 min-h-[700px] relative">
+        <div className={`bg-gray-50 p-10 ${isFullscreen ? 'h-[calc(100vh-80px)] overflow-y-auto' : 'min-h-[700px]'} relative`}>
           <AnimatePresence mode="wait">
             <motion.div 
               key={activeTab}
