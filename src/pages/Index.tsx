@@ -8,12 +8,10 @@ import Navbar from "../components/Navbar";
 import ImagePortionSlider from "../components/ImagePortionSlider";
 import HiddenContactForm from "../components/HiddenContactForm";
 import Footer from "../components/Footer";
-import MouseFollower from "../components/MouseFollower";
 
 const Index = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
-      <MouseFollower />
       <Navbar />
       <Hero />
       <ProductShowcase />
