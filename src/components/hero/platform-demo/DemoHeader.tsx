@@ -1,7 +1,5 @@
-
 import React from 'react';
 import { Minimize2, Maximize2, X, Bell, User } from 'lucide-react';
-
 interface DemoHeaderProps {
   activeTab: string;
   setActiveTab: (tab: string) => void;
@@ -15,7 +13,6 @@ interface DemoHeaderProps {
   notificationsRead: boolean;
   avatarImage: string | null;
 }
-
 const DemoHeader = ({
   activeTab,
   setActiveTab,
@@ -36,41 +33,19 @@ const DemoHeader = ({
     agents: 'AI Agents',
     campaigns: 'Campaigns'
   };
-
-  return (
-    <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
+  return <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4 mt-10">
       <div className="flex space-x-1 mr-4">
-        <button 
-          onClick={onClose}
-          className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
-        ></button>
+        <button onClick={onClose} className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"></button>
         <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-        <button 
-          onClick={onToggleFullscreen}
-          className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer flex items-center justify-center"
-        >
-          {isFullscreen ? (
-            <Minimize2 className="w-2 h-2 text-white" />
-          ) : (
-            <Maximize2 className="w-2 h-2 text-white" />
-          )}
+        <button onClick={onToggleFullscreen} className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer flex items-center justify-center">
+          {isFullscreen ? <Minimize2 className="w-2 h-2 text-white" /> : <Maximize2 className="w-2 h-2 text-white" />}
         </button>
       </div>
       
       <div className="flex space-x-1 overflow-x-auto scrollbar-hide flex-1">
-        {Object.entries(tabContent).map(([key, label]) => (
-          <button 
-            key={key}
-            onClick={() => setActiveTab(key)}
-            className={`px-4 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer whitespace-nowrap ${
-              activeTab === key 
-                ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
-                : 'text-gray-600 hover:bg-gray-100 border-transparent'
-            }`}
-          >
+        {Object.entries(tabContent).map(([key, label]) => <button key={key} onClick={() => setActiveTab(key)} className={`px-4 py-3 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer whitespace-nowrap ${activeTab === key ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' : 'text-gray-600 hover:bg-gray-100 border-transparent'}`}>
             {label}
-          </button>
-        ))}
+          </button>)}
       </div>
       
       <div className="ml-auto flex items-center space-x-4">
@@ -84,40 +59,22 @@ const DemoHeader = ({
         </div>
         
         {/* Notifications Bell */}
-        {showNotificationPanel && (
-          <div className="relative">
-            <button
-              onClick={onNotificationClick}
-              className="p-2 hover:bg-gray-100 rounded-full transition-colors relative"
-            >
+        {showNotificationPanel && <div className="relative">
+            <button onClick={onNotificationClick} className="p-2 hover:bg-gray-100 rounded-full transition-colors relative">
               <Bell className="w-5 h-5 text-gray-600" />
-              {!notificationsRead && (
-                <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center">
+              {!notificationsRead && <div className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full flex items-center justify-center">
                   <span className="text-xs text-white font-bold">3</span>
-                </div>
-              )}
+                </div>}
             </button>
-          </div>
-        )}
+          </div>}
         
         {/* Interactive Avatar */}
-        {showAvatarPanel && (
-          <div className="relative">
-            <button
-              onClick={onAvatarClick}
-              className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:ring-2 hover:ring-convrt-purple/20 transition-all overflow-hidden"
-            >
-              {avatarImage ? (
-                <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover" />
-              ) : (
-                <User className="w-4 h-4 text-gray-600" />
-              )}
+        {showAvatarPanel && <div className="relative">
+            <button onClick={onAvatarClick} className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center hover:ring-2 hover:ring-convrt-purple/20 transition-all overflow-hidden">
+              {avatarImage ? <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover" /> : <User className="w-4 h-4 text-gray-600" />}
             </button>
-          </div>
-        )}
+          </div>}
       </div>
-    </div>
-  );
+    </div>;
 };
-
 export default DemoHeader;
