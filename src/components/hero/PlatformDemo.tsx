@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe } from 'lucide-react';
+import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2 } from 'lucide-react';
 
 const PlatformDemo = () => {
   const [activeTab, setActiveTab] = useState('cues');
@@ -9,6 +9,34 @@ const PlatformDemo = () => {
   const [isFloatingHeartLiked, setIsFloatingHeartLiked] = useState(false);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
   const [showNotifications, setShowNotifications] = useState(false);
+  const [newComment, setNewComment] = useState('');
+  const [comments, setComments] = useState([
+    { id: 1, user: 'Mike Johnson', text: 'Great achievement! Congratulations on hitting your targets.', time: '2h ago' },
+    { id: 2, user: 'Lisa Wang', text: 'Would love to learn more about the automation tools you mentioned.', time: '1h ago' }
+  ]);
+
+  const handleLikeClick = () => {
+    setIsHeartLiked(!isHeartLiked);
+    // Add animation effect that pops up and vanishes
+  };
+
+  const handleAddComment = () => {
+    if (newComment.trim()) {
+      const comment = {
+        id: comments.length + 1,
+        user: 'You',
+        text: newComment,
+        time: 'now'
+      };
+      setComments([...comments, comment]);
+      setNewComment('');
+    }
+  };
+
+  const handleShare = () => {
+    navigator.clipboard.writeText(window.location.href);
+    // You could add a toast notification here
+  };
 
   const tabContent = {
     cues: {
@@ -40,25 +68,76 @@ const PlatformDemo = () => {
               
               <div className="flex items-center justify-between p-4 border-t border-gray-200">
                 <div className="flex items-center space-x-4 text-gray-500">
-                  <button 
+                  <motion.button 
                     className="flex items-center space-x-2 hover:text-red-500 transition-colors cursor-pointer"
-                    onClick={() => setIsHeartLiked(!isHeartLiked)}
+                    onClick={handleLikeClick}
+                    whileTap={{ scale: 1.2 }}
+                    animate={isHeartLiked ? { scale: [1, 1.3, 1] } : {}}
+                    transition={{ duration: 0.3 }}
                   >
-                    <Heart className={`w-5 h-5 transition-all duration-300 ${isHeartLiked ? 'fill-red-500 text-red-500 scale-110' : ''}`} />
+                    <Heart className={`w-5 h-5 transition-all duration-300 ${isHeartLiked ? 'fill-red-500 text-red-500' : ''}`} />
                     <span className="text-sm font-medium">{isHeartLiked ? '90' : '89'}</span>
-                  </button>
+                  </motion.button>
                   <button className="flex items-center space-x-2 hover:text-blue-500 transition-colors cursor-pointer">
                     <MessageCircle className="w-5 h-5" />
-                    <span className="text-sm font-medium">12</span>
+                    <span className="text-sm font-medium">{comments.length}</span>
                   </button>
-                  <button className="flex items-center space-x-2 hover:text-green-500 transition-colors cursor-pointer">
-                    <ThumbsUp className="w-5 h-5" />
+                  <button 
+                    onClick={handleShare}
+                    className="flex items-center space-x-2 hover:text-green-500 transition-colors cursor-pointer"
+                  >
+                    <Share2 className="w-5 h-5" />
                     <span className="text-sm font-medium">Share</span>
                   </button>
                 </div>
                 <div className="flex items-center space-x-2 bg-convrt-purple/10 text-convrt-purple px-3 py-2 rounded-lg">
                   <Target className="w-4 h-4" />
                   <span className="text-sm font-medium">High Priority Cue</span>
+                </div>
+              </div>
+            </div>
+            
+            {/* Comments Section */}
+            <div className="border-t border-gray-200 p-4">
+              <div className="space-y-3 mb-4">
+                {comments.map((comment) => (
+                  <div key={comment.id} className="flex space-x-3">
+                    <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center">
+                      <User className="w-4 h-4 text-gray-600" />
+                    </div>
+                    <div className="flex-1">
+                      <div className="bg-gray-50 rounded-lg p-3">
+                        <div className="flex items-center space-x-2 mb-1">
+                          <span className="text-sm font-medium text-gray-900">{comment.user}</span>
+                          <span className="text-xs text-gray-500">{comment.time}</span>
+                        </div>
+                        <p className="text-sm text-gray-700">{comment.text}</p>
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+              
+              {/* Add Comment Input */}
+              <div className="flex space-x-3">
+                <div className="w-8 h-8 rounded-full bg-convrt-purple/20 flex items-center justify-center">
+                  <User className="w-4 h-4 text-convrt-purple" />
+                </div>
+                <div className="flex-1 flex space-x-2">
+                  <input
+                    type="text"
+                    value={newComment}
+                    onChange={(e) => setNewComment(e.target.value)}
+                    placeholder="Write a comment..."
+                    className="flex-1 px-3 py-2 border border-gray-200 rounded-lg text-sm focus:outline-none focus:ring-2 focus:ring-convrt-purple/20"
+                    onKeyPress={(e) => e.key === 'Enter' && handleAddComment()}
+                  />
+                  <button
+                    onClick={handleAddComment}
+                    className="px-4 py-2 bg-convrt-purple text-white rounded-lg text-sm hover:bg-convrt-purple-hover transition-colors"
+                  >
+                    <Send className="w-4 h-4" />
+                  </button>
                 </div>
               </div>
             </div>
@@ -231,90 +310,6 @@ const PlatformDemo = () => {
           ))}
         </div>
       )
-    },
-    analytics: {
-      title: "Performance Analytics",
-      subtitle: "Data-Driven Insights",
-      description: "Deep dive into your outreach performance with comprehensive analytics and actionable insights.",
-      content: (
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-medium text-gray-700">Response Rate Trend</h4>
-                <TrendingUp className="w-5 h-5 text-green-500" />
-              </div>
-              <div className="text-3xl font-bold text-green-600 mb-2">+23%</div>
-              <p className="text-sm text-gray-500">vs last month</p>
-            </div>
-            <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-              <div className="flex items-center justify-between mb-4">
-                <h4 className="font-medium text-gray-700">Best Performing Time</h4>
-                <Clock className="w-5 h-5 text-blue-500" />
-              </div>
-              <div className="text-2xl font-bold text-blue-600 mb-2">2-4 PM</div>
-              <p className="text-sm text-gray-500">Tuesdays & Wednesdays</p>
-            </div>
-          </div>
-          <div className="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-            <h4 className="font-medium text-gray-700 mb-4">Top Performing Subject Lines</h4>
-            <div className="space-y-3">
-              {[
-                { subject: "Quick question about [Company]", rate: "34%" },
-                { subject: "Saw your recent LinkedIn post", rate: "28%" },
-                { subject: "Mutual connection recommended I reach out", rate: "25%" }
-              ].map((line, i) => (
-                <div key={i} className="flex justify-between items-center p-3 bg-gray-50 rounded-lg">
-                  <span className="text-sm text-gray-700">{line.subject}</span>
-                  <span className="text-sm font-medium text-convrt-purple">{line.rate}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      )
-    },
-    integrations: {
-      title: "Integrations Hub",
-      subtitle: "Connect Your Sales Stack",
-      description: "Seamlessly integrate with your existing CRM, email tools, and sales platforms for unified workflow.",
-      content: (
-        <div className="space-y-6">
-          <div className="grid grid-cols-2 gap-4">
-            {[
-              { name: "Salesforce", status: "Connected", icon: "🏢" },
-              { name: "HubSpot", status: "Connected", icon: "🟠" },
-              { name: "Gmail", status: "Connected", icon: "📧" },
-              { name: "Slack", status: "Available", icon: "💬" },
-              { name: "Zoom", status: "Available", icon: "📹" },
-              { name: "Calendly", status: "Connected", icon: "📅" }
-            ].map((integration, i) => (
-              <div key={i} className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-shadow cursor-pointer">
-                <div className="flex items-center justify-between">
-                  <div className="flex items-center space-x-3">
-                    <div className="text-2xl">{integration.icon}</div>
-                    <div>
-                      <h4 className="font-medium text-gray-900">{integration.name}</h4>
-                      <p className={`text-sm ${
-                        integration.status === 'Connected' ? 'text-green-600' : 'text-gray-500'
-                      }`}>
-                        {integration.status}
-                      </p>
-                    </div>
-                  </div>
-                  {integration.status === 'Connected' ? (
-                    <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                  ) : (
-                    <button className="text-xs text-convrt-purple hover:text-convrt-purple-hover">
-                      Connect
-                    </button>
-                  )}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )
     }
   };
 
@@ -348,8 +343,6 @@ const PlatformDemo = () => {
                 {key === 'seeds' && 'Seeds (156)'}
                 {key === 'agents' && 'AI Agents'}
                 {key === 'campaigns' && 'Campaigns'}
-                {key === 'analytics' && 'Analytics'}
-                {key === 'integrations' && 'Integrations'}
               </button>
             ))}
           </div>
@@ -493,10 +486,10 @@ const PlatformDemo = () => {
         <motion.button
           onClick={() => setIsFloatingHeartLiked(!isFloatingHeartLiked)}
           animate={{ 
-            y: [0, -10, 0],
+            y: [0, -6, 0],
           }}
           transition={{
-            duration: 3,
+            duration: 4,
             repeat: Infinity,
             ease: "easeInOut"
           }}

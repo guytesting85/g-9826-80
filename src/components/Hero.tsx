@@ -81,12 +81,12 @@ const Hero = () => {
           <motion.div 
             ref={demoRef}
             variants={itemVariants}
-            className="mb-32 transform scale-105"
+            className="mb-16 transform scale-105"
           >
             <PlatformDemo />
           </motion.div>
           
-          {/* Stats Section - More spacing from showcase */}
+          {/* Stats Section - Reduced spacing from showcase */}
           <StatsSection statsRef={statsRef} />
         </motion.div>
       </div>
