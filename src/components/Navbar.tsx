@@ -15,6 +15,14 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const navigationItems = [
+    { href: "#product", label: "Product" },
+    { href: "#how-it-works", label: "How It Works" },
+    { href: "#testimonials", label: "Case Studies" },
+    { href: "#skills", label: "Technologies" },
+    { href: "#contact", label: "Contact" }
+  ];
   
   return (
     <nav 
@@ -38,18 +46,15 @@ const Navbar = () => {
         
         {/* Desktop Menu */}
         <div className="hidden md:flex items-center space-x-8">
-          <a href="#how-it-works" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
-            How It Works
-          </a>
-          <a href="#testimonials" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
-            Case Studies
-          </a>
-          <a href="#product" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
-            Product
-          </a>
-          <a href="#skills" className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors">
-            Technologies
-          </a>
+          {navigationItems.map((item) => (
+            <a 
+              key={item.href}
+              href={item.href} 
+              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
+            >
+              {item.label}
+            </a>
+          ))}
           <a href="#contact" className="button-primary">
             Get Started
           </a>
@@ -70,34 +75,16 @@ const Navbar = () => {
       {isMobileMenuOpen && (
         <div className="md:hidden absolute top-full left-0 right-0 bg-white shadow-lg py-4 px-6">
           <div className="flex flex-col space-y-4">
-            <a 
-              href="#how-it-works" 
-              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              How It Works
-            </a>
-            <a 
-              href="#testimonials" 
-              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Case Studies
-            </a>
-            <a 
-              href="#product" 
-              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Product
-            </a>
-            <a 
-              href="#skills" 
-              className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
-              onClick={() => setIsMobileMenuOpen(false)}
-            >
-              Technologies
-            </a>
+            {navigationItems.map((item) => (
+              <a 
+                key={item.href}
+                href={item.href} 
+                className="text-convrt-dark-blue/80 hover:text-convrt-dark-blue font-medium transition-colors"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                {item.label}
+              </a>
+            ))}
             <a 
               href="#contact" 
               className="button-primary w-full text-center"
