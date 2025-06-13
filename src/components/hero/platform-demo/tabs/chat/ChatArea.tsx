@@ -25,16 +25,20 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
     scrollToBottom();
   }, [messages]);
 
-  const handleSend = () => {
+  const handleSend = (e?: React.FormEvent) => {
+    if (e) {
+      e.preventDefault();
+    }
     if (newMessage.trim()) {
       onSendMessage(newMessage.trim());
       setNewMessage('');
     }
   };
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
+  const handleKeyDown = (e: React.KeyboardEvent) => {
     if (e.key === 'Enter' && !e.shiftKey) {
       e.preventDefault();
+      e.stopPropagation();
       handleSend();
     }
   };
@@ -119,12 +123,12 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
           ? 'bg-gray-800 border-gray-700' 
           : 'bg-white border-gray-200'
       }`}>
-        <div className="flex items-center space-x-3">
+        <form onSubmit={handleSend} className="flex items-center space-x-3">
           <input
             type="text"
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
+            onKeyDown={handleKeyDown}
             placeholder="Type your message…"
             className={`flex-1 px-4 py-3 rounded-full border transition-all focus:outline-none focus:ring-2 focus:ring-convrt-purple ${
               theme === 'dark'
@@ -133,16 +137,17 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
             }`}
           />
           <button
-            onClick={handleSend}
+            type="submit"
             disabled={!newMessage.trim()}
             className="bg-convrt-purple text-white p-3 rounded-full hover:bg-convrt-purple-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed shadow-lg hover:shadow-xl"
           >
             <Send className="w-5 h-5" />
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
 };
 
 export default ChatArea;
+
