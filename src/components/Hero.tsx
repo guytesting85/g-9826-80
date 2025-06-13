@@ -4,10 +4,8 @@ import AnimatedBackground from './AnimatedBackground';
 import { ArrowRight, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
 import PlatformDemo from './hero/PlatformDemo';
-import StatsSection from './hero/StatsSection';
 
 const Hero = () => {
-  const statsRef = useRef<HTMLDivElement>(null);
   const demoRef = useRef<HTMLDivElement>(null);
 
   // Animation variants
@@ -85,9 +83,6 @@ const Hero = () => {
           >
             <PlatformDemo />
           </motion.div>
-          
-          {/* Stats Section - Much closer to showcase */}
-          <StatsSection statsRef={statsRef} />
         </motion.div>
       </div>
     </section>

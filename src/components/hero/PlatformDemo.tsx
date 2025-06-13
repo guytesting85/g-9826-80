@@ -23,10 +23,10 @@ const PlatformDemo = () => {
 
   const handleFloatingHeartClick = () => {
     setIsFloatingHeartLiked(true);
-    // Hide the floating heart after animation
+    // Hide the floating heart after animation with a longer delay for visual appeal
     setTimeout(() => {
       setShowFloatingHeart(false);
-    }, 1000);
+    }, 2000);
   };
 
   const handleAddComment = () => {
@@ -352,7 +352,7 @@ const PlatformDemo = () => {
       <div className="absolute inset-0 -m-10 bg-gradient-to-br from-convrt-purple/20 via-convrt-purple/20 to-convrt-purple/20 rounded-3xl blur-3xl opacity-40"></div>
       
       <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm">
-        {/* Platform UI Header - Enhanced with more tabs and interactive elements */}
+        {/* Platform UI Header */}
         <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
           <div className="flex space-x-1 mr-4">
             <div className="w-3 h-3 rounded-full bg-red-500"></div>
@@ -552,7 +552,7 @@ const PlatformDemo = () => {
           </div>
         </div>
         
-        {/* Main Content Area - Bigger and enhanced */}
+        {/* Main Content Area */}
         <div className="bg-gray-50 p-10 min-h-[700px]">
           <AnimatePresence mode="wait">
             <motion.div 
@@ -574,41 +574,50 @@ const PlatformDemo = () => {
         </div>
       </div>
       
-      {/* Floating UI Element - Smooth animation */}
+      {/* Floating UI Element - Improved smooth animation */}
       <AnimatePresence>
         {showFloatingHeart && (
           <motion.div
             initial={{ y: 20, opacity: 0 }}
             animate={{ y: 0, opacity: 1 }}
             exit={{ 
-              scale: [1, 1.2, 0],
+              scale: [1, 1.5, 0],
               opacity: [1, 1, 0],
-              y: [0, -10, -20]
+              y: [0, -30, -60],
+              rotate: [0, 10, 0]
             }}
             transition={{ 
-              exit: { duration: 1, ease: "easeOut" }
+              exit: { duration: 2, ease: "easeOut" }
             }}
             className="absolute -left-8 top-1/3 z-10"
           >
             <motion.button
               onClick={handleFloatingHeartClick}
               animate={{ 
-                y: [0, -6, 0],
+                y: [0, -8, 0],
+                rotate: [0, 2, -2, 0]
               }}
               transition={{
-                duration: 3,
+                duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="bg-white/80 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20 flex items-center cursor-pointer hover:bg-white/90 transition-all duration-300 hover:scale-105"
+              className="bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20 flex items-center cursor-pointer hover:bg-white/95 transition-all duration-300 hover:scale-105"
             >
-              <div className={`rounded-lg p-2 mr-3 transition-all duration-300 ${
-                isFloatingHeartLiked ? 'bg-red-100' : 'bg-[#6936F5]/20'
-              }`}>
+              <motion.div 
+                className={`rounded-lg p-2 mr-3 transition-all duration-300 ${
+                  isFloatingHeartLiked ? 'bg-red-100' : 'bg-[#6936F5]/20'
+                }`}
+                animate={isFloatingHeartLiked ? { 
+                  scale: [1, 1.3, 1.1, 1.3, 1],
+                  rotate: [0, -10, 10, -5, 0] 
+                } : {}}
+                transition={{ duration: 1.5 }}
+              >
                 <Heart className={`w-4 h-4 transition-all duration-300 ${
-                  isFloatingHeartLiked ? 'text-red-500 fill-red-500 scale-110' : 'text-[#6936F5]'
+                  isFloatingHeartLiked ? 'text-red-500 fill-red-500' : 'text-[#6936F5]'
                 }`} />
-              </div>
+              </motion.div>
               <div>
                 <div className="text-gray-800 text-sm font-medium">New interaction</div>
                 <div className="text-gray-600 text-xs">Liked your comment</div>
