@@ -1,5 +1,5 @@
 
-import React, { useRef } from 'react';
+import React, { useRef, useState } from 'react';
 import AnimatedBackground from './AnimatedBackground';
 import { ArrowRight, Zap } from 'lucide-react';
 import { motion } from 'framer-motion';
@@ -7,6 +7,8 @@ import PlatformDemo from './hero/PlatformDemo';
 
 const Hero = () => {
   const demoRef = useRef<HTMLDivElement>(null);
+  const [showBadge, setShowBadge] = useState(true);
+  const [showDemo, setShowDemo] = useState(true);
 
   // Animation variants
   const containerVariants = {
@@ -40,13 +42,21 @@ const Hero = () => {
           variants={containerVariants}
           className="max-w-6xl mx-auto text-center"
         >
-          <motion.div 
-            variants={itemVariants}
-            className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6"
-          >
-            <Zap className="w-4 h-4 mr-2" />
-            <span className="text-sm font-medium font-inter tracking-wide">The First AI Organic Outbound Platform</span>
-          </motion.div>
+          {showBadge && (
+            <motion.div 
+              variants={itemVariants}
+              className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6 relative"
+            >
+              <Zap className="w-4 h-4 mr-2" />
+              <span className="text-sm font-medium font-inter tracking-wide">The First AI Organic Outbound Platform</span>
+              <button
+                onClick={() => setShowBadge(false)}
+                className="ml-3 w-4 h-4 rounded-full bg-red-500 hover:bg-red-600 transition-colors flex items-center justify-center text-white text-xs"
+              >
+                ×
+              </button>
+            </motion.div>
+          )}
           
           <motion.h1 
             variants={itemVariants}
@@ -75,14 +85,16 @@ const Hero = () => {
             </a>
           </motion.div>
           
-          {/* Modern Platform Showcase - Made bigger */}
-          <motion.div 
-            ref={demoRef}
-            variants={itemVariants}
-            className="mb-8 transform scale-105"
-          >
-            <PlatformDemo />
-          </motion.div>
+          {/* Modern Platform Showcase - Only render if showDemo is true */}
+          {showDemo && (
+            <motion.div 
+              ref={demoRef}
+              variants={itemVariants}
+              className="mb-8 transform scale-105"
+            >
+              <PlatformDemo onClose={() => setShowDemo(false)} />
+            </motion.div>
+          )}
         </motion.div>
       </div>
     </section>

@@ -1,9 +1,12 @@
-
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Check, Heart, MessageCircle, ThumbsUp, Send, Save, Clock, User, BarChart2, Sparkles, ArrowRight, ArrowLeft, X, Target, Zap, Users, Bot, Mail, Calendar, Phone, Settings, Bell, Star, TrendingUp, Activity, FileText, Globe, Share2, Trash2, Upload, Camera } from 'lucide-react';
 
-const PlatformDemo = () => {
+interface PlatformDemoProps {
+  onClose: () => void;
+}
+
+const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
   const [activeTab, setActiveTab] = useState('cues');
   const [isHeartLiked, setIsHeartLiked] = useState(false);
   const [showAvatarMenu, setShowAvatarMenu] = useState(false);
@@ -18,7 +21,6 @@ const PlatformDemo = () => {
   const [notificationsRead, setNotificationsRead] = useState(false);
   const [showNotificationPanel, setShowNotificationPanel] = useState(true);
   const [showAvatarPanel, setShowAvatarPanel] = useState(true);
-  const [showPlatformDemo, setShowPlatformDemo] = useState(true);
 
   const handleLikeClick = () => {
     setIsHeartLiked(!isHeartLiked);
@@ -63,10 +65,6 @@ const PlatformDemo = () => {
     if (!showNotifications) {
       setNotificationsRead(true);
     }
-  };
-
-  const handleClosePlatformDemo = () => {
-    setShowPlatformDemo(false);
   };
 
   const handleCloseNotifications = () => {
@@ -362,10 +360,6 @@ const PlatformDemo = () => {
     }
   };
 
-  if (!showPlatformDemo) {
-    return null;
-  }
-
   return (
     <div className="relative max-w-7xl mx-auto">
       {/* Gradient background */}
@@ -376,7 +370,7 @@ const PlatformDemo = () => {
         <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
           <div className="flex space-x-1 mr-4">
             <button 
-              onClick={handleClosePlatformDemo}
+              onClick={onClose}
               className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
             ></button>
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
