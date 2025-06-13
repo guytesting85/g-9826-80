@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Code, Database, Cloud, Brain, Globe, Shield, Zap, Users, BarChart3, Smartphone, Palette, Settings } from "lucide-react";
@@ -124,13 +125,13 @@ const SkillsShowcase = () => {
   };
 
   return (
-    <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" id="skills">
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden transition-colors duration-300" id="skills">
       <div className="container-section-1">
         <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-4xl font-bold text-convrt-dark-blue mb-6">
+          <h2 className="text-3xl md:text-4xl font-bold text-convrt-dark-blue dark:text-white mb-6 transition-colors duration-300">
             Advanced Technologies
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-300">
             Explore the cutting-edge technologies that power our AI platform and drive exceptional results.
           </p>
         </div>
@@ -145,7 +146,7 @@ const SkillsShowcase = () => {
           {skillsData.map((skill) => (
             <motion.div
               key={skill.id}
-              className="relative p-6 rounded-2xl bg-white border border-gray-100 transition-all duration-300 hover:shadow-xl hover:shadow-convrt-purple/5"
+              className="relative p-6 rounded-2xl bg-white dark:bg-gray-800 border border-gray-100 dark:border-gray-700 transition-all duration-300 hover:shadow-xl hover:shadow-convrt-purple/5 dark:hover:shadow-convrt-purple/10"
               variants={cardVariants}
               whileHover="hover"
               onMouseEnter={() => setHoveredCard(skill.id)}
@@ -159,10 +160,10 @@ const SkillsShowcase = () => {
                   <skill.icon className="w-5 h-5" style={{ color: skill.color }} />
                 </div>
               </div>
-              <h3 className="text-xl font-semibold text-convrt-dark-blue mb-3">
+              <h3 className="text-xl font-semibold text-convrt-dark-blue dark:text-white mb-3 transition-colors duration-300">
                 {skill.title}
               </h3>
-              <p className="text-gray-600 leading-relaxed">{skill.description}</p>
+              <p className="text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-300">{skill.description}</p>
             </motion.div>
           ))}
         </motion.div>

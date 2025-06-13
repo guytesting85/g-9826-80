@@ -10,7 +10,7 @@ const testimonials = [
     title: "Senior Manager, Sales Ops & Strategy at Otter.ai",
     company: "Otter.ai",
     logo: "otter",
-    bgColor: "bg-[#efeaf5]",
+    bgColor: "bg-[#efeaf5] dark:bg-purple-900/30",
   },
   {
     id: 2,
@@ -19,7 +19,7 @@ const testimonials = [
     title: "Connecteam",
     company: "Connecteam",
     logo: "connecteam",
-    bgColor: "bg-[#fde7dc]",
+    bgColor: "bg-[#fde7dc] dark:bg-orange-900/30",
   },
   {
     id: 3,
@@ -28,7 +28,7 @@ const testimonials = [
     title: "Spectinga",
     company: "Spectinga",
     logo: "spectinga",
-    bgColor: "bg-[#e9e9e9]",
+    bgColor: "bg-[#e9e9e9] dark:bg-gray-700",
   }
 ];
 
@@ -38,27 +38,27 @@ const stats = [
     value: "$500k",
     description: "on hiring costs saved",
     company: "Otter.ai",
-    bgColor: "bg-[#efeaf5]",
+    bgColor: "bg-[#efeaf5] dark:bg-purple-900/30",
   },
   {
     id: 2,
     value: "Handshake",
     description: "",
     company: "Handshake",
-    bgColor: "bg-white",
+    bgColor: "bg-white dark:bg-gray-800",
   },
   {
     id: 3,
     value: "Sumup",
     description: "",
     company: "Sumup",
-    bgColor: "bg-white",
+    bgColor: "bg-white dark:bg-gray-800",
   }
 ];
 
 const Testimonials = () => {
   return (
-    <section className="py-8 pt-20 bg-white" id="testimonials">
+    <section className="py-8 pt-20 bg-white dark:bg-gray-900 transition-colors duration-300" id="testimonials">
       <div className="container-section max-w-6xl mx-auto">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -67,7 +67,7 @@ const Testimonials = () => {
           viewport={{ once: true }}
           className="mb-8 text-center"
         >
-          <h2 className="text-3xl font-bold mb-6">Trusted by industry leaders</h2>
+          <h2 className="text-3xl font-bold mb-6 text-gray-900 dark:text-white transition-colors duration-300">Trusted by industry leaders</h2>
         </motion.div>
 
         <div className="grid grid-cols-12 gap-4">
@@ -79,13 +79,13 @@ const Testimonials = () => {
             viewport={{ once: true }}
             className="col-span-12 md:col-span-4 lg:col-span-3 rounded-xl overflow-hidden"
           >
-            <div className={`h-full ${stats[0].bgColor} p-8 flex flex-col`}>
+            <div className={`h-full ${stats[0].bgColor} p-8 flex flex-col transition-colors duration-300`}>
               <div className="mt-auto">
-                <div className="text-5xl font-bold mb-2">{stats[0].value}</div>
-                <div className="text-gray-600">{stats[0].description}</div>
+                <div className="text-5xl font-bold mb-2 text-gray-900 dark:text-white">{stats[0].value}</div>
+                <div className="text-gray-600 dark:text-gray-300">{stats[0].description}</div>
               </div>
               <div className="mt-auto pt-6">
-                <div className="font-bold text-lg">
+                <div className="font-bold text-lg text-gray-900 dark:text-white">
                   <span className="font-black">OI</span>•<span className="font-black">I</span> Otter.ai
                 </div>
               </div>
@@ -98,10 +98,10 @@ const Testimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
             viewport={{ once: true }}
-            className="col-span-12 md:col-span-4 lg:col-span-3 rounded-xl overflow-hidden border border-gray-100"
+            className="col-span-12 md:col-span-4 lg:col-span-3 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700"
           >
-            <div className="h-full flex items-center justify-center p-6">
-              <div className="font-black text-2xl italic">Handshake</div>
+            <div className={`h-full flex items-center justify-center p-6 ${stats[1].bgColor} transition-colors duration-300`}>
+              <div className="font-black text-2xl italic text-gray-900 dark:text-white">Handshake</div>
             </div>
           </motion.div>
 
@@ -113,13 +113,13 @@ const Testimonials = () => {
             viewport={{ once: true }}
             className="col-span-12 md:col-span-8 lg:col-span-6 rounded-xl overflow-hidden"
           >
-            <div className={`h-full ${testimonials[0].bgColor} p-8 flex flex-col`}>
-              <div className="text-2xl font-medium mb-8">
+            <div className={`h-full ${testimonials[0].bgColor} p-8 flex flex-col transition-colors duration-300`}>
+              <div className="text-2xl font-medium mb-8 text-gray-900 dark:text-white">
                 "{testimonials[0].quote}"
               </div>
               <div className="mt-auto">
-                <div className="font-medium">{testimonials[0].name}</div>
-                <div className="text-gray-600 text-sm">{testimonials[0].title}</div>
+                <div className="font-medium text-gray-900 dark:text-white">{testimonials[0].name}</div>
+                <div className="text-gray-600 dark:text-gray-300 text-sm">{testimonials[0].title}</div>
               </div>
             </div>
           </motion.div>
@@ -132,12 +132,12 @@ const Testimonials = () => {
             viewport={{ once: true }}
             className="col-span-12 md:col-span-7 lg:col-span-6 rounded-xl overflow-hidden"
           >
-            <div className={`h-full ${testimonials[1].bgColor} p-8 flex flex-col`}>
-              <div className="text-2xl font-medium mb-8">
+            <div className={`h-full ${testimonials[1].bgColor} p-8 flex flex-col transition-colors duration-300`}>
+              <div className="text-2xl font-medium mb-8 text-gray-900 dark:text-white">
                 "{testimonials[1].quote}"
               </div>
               <div className="mt-auto">
-                <div className="font-bold text-lg">connecteam</div>
+                <div className="font-bold text-lg text-gray-900 dark:text-white">connecteam</div>
               </div>
             </div>
           </motion.div>
@@ -148,11 +148,11 @@ const Testimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.5 }}
             viewport={{ once: true }}
-            className="col-span-12 md:col-span-5 lg:col-span-3 rounded-xl overflow-hidden border border-gray-100"
+            className="col-span-12 md:col-span-5 lg:col-span-3 rounded-xl overflow-hidden border border-gray-100 dark:border-gray-700"
           >
-            <div className="h-full flex items-center justify-center p-6">
-              <div className="font-black text-xl">
-                <span className="inline-block bg-black text-white px-1 py-0.5 rounded">∫</span> sumup°
+            <div className={`h-full flex items-center justify-center p-6 ${stats[2].bgColor} transition-colors duration-300`}>
+              <div className="font-black text-xl text-gray-900 dark:text-white">
+                <span className="inline-block bg-black dark:bg-white text-white dark:text-black px-1 py-0.5 rounded">∫</span> sumup°
               </div>
             </div>
           </motion.div>
@@ -165,12 +165,12 @@ const Testimonials = () => {
             viewport={{ once: true }}
             className="col-span-12 md:col-span-12 lg:col-span-3 rounded-xl overflow-hidden"
           >
-            <div className={`h-full ${testimonials[2].bgColor} p-8 flex flex-col`}>
-              <div className="text-2xl font-medium mb-8">
+            <div className={`h-full ${testimonials[2].bgColor} p-8 flex flex-col transition-colors duration-300`}>
+              <div className="text-2xl font-medium mb-8 text-gray-900 dark:text-white">
                 "{testimonials[2].quote}"
               </div>
               <div className="mt-auto">
-                <div className="font-bold flex items-center">
+                <div className="font-bold flex items-center text-gray-900 dark:text-white">
                   <span className="inline-block mr-1">⊙</span> spectinga
                 </div>
               </div>

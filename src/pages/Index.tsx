@@ -7,10 +7,11 @@ import SkillsShowcase from "../components/SkillsShowcase";
 import Navbar from "../components/Navbar";
 import ImagePortionSlider from "../components/ImagePortionSlider";
 import HiddenContactForm from "../components/HiddenContactForm";
+import Footer from "../components/Footer";
 
 const Index = () => {
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-white dark:bg-gray-900 transition-colors duration-300">
       <Navbar />
       <Hero />
       <ProductShowcase />
@@ -19,6 +20,7 @@ const Index = () => {
       <SkillsShowcase />
       <ImagePortionSlider />
       <HiddenContactForm />
+      <Footer />
     </div>
   );
 };

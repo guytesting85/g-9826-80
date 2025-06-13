@@ -1,3 +1,4 @@
+
 import React, { useRef, useState } from 'react';
 import { Check, X, Maximize2, Minimize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -8,6 +9,12 @@ const ProductShowcase = () => {
   const contentRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(true);
   const [isFullscreen, setIsFullscreen] = useState(false);
+  const [activeTab, setActiveTab] = useState('insights');
+
+  const tabs = [
+    { key: 'insights', label: 'AI Insights', url: 'convrt.ai/insights' },
+    { key: 'analytics', label: 'Analytics', url: 'convrt.ai/analytics' }
+  ];
 
   const containerVariants = {
     hidden: { opacity: 0 },
@@ -35,6 +42,105 @@ const ProductShowcase = () => {
 
   const handleClose = () => {
     setIsVisible(false);
+  };
+
+  const getCurrentUrl = () => {
+    const currentTab = tabs.find(tab => tab.key === activeTab);
+    return currentTab ? currentTab.url : 'convrt.ai/dashboard';
+  };
+
+  const renderTabContent = () => {
+    if (activeTab === 'analytics') {
+      return (
+        <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-[20px] border border-white/60 dark:border-gray-600/60 shadow-lg p-6 transition-colors duration-300">
+          <div className="flex items-center mb-4">
+            <div className="h-8 w-8 rounded-full bg-[#6936F5] flex items-center justify-center text-white mr-3">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M3 3v5h5" />
+                <path d="M6 17l4-4 4 4 6-6" />
+                <path d="M18 7h5v5" />
+              </svg>
+            </div>
+            <h3 className="text-lg font-semibold text-convrt-dark-blue dark:text-white">Performance Analytics</h3>
+          </div>
+          
+          <div className="space-y-4">
+            <div className="grid grid-cols-2 gap-4">
+              <div className="p-4 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
+                <div className="text-2xl font-bold text-convrt-purple">94%</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Engagement Rate</div>
+              </div>
+              <div className="p-4 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
+                <div className="text-2xl font-bold text-green-600">3.2x</div>
+                <div className="text-sm text-gray-600 dark:text-gray-300">Response Improvement</div>
+              </div>
+            </div>
+            
+            <div>
+              <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Recent Metrics:</h4>
+              <ul className="space-y-2">
+                <li className="flex items-start">
+                  <span className="text-[#6936F5] mr-2">•</span>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">256 prospects engaged this week</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#6936F5] mr-2">•</span>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">87% positive sentiment score</span>
+                </li>
+                <li className="flex items-start">
+                  <span className="text-[#6936F5] mr-2">•</span>
+                  <span className="text-sm text-gray-700 dark:text-gray-300">42 qualified meetings scheduled</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      );
+    }
+
+    // Default insights content
+    return (
+      <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-[20px] border border-white/60 dark:border-gray-600/60 shadow-lg p-6 transition-colors duration-300">
+        <div className="flex items-center mb-4">
+          <div className="h-8 w-8 rounded-full bg-[#6936F5] flex items-center justify-center text-white mr-3">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M9.5 2a4.61 4.61 0 0 1 2.44 6.47A4.25 4.25 0 0 1 15.45 12h.05c2.5.1 4.25 1 4.5 2.73V15a3 3 0 0 1-2.3 2.92l-2.53.42a3.52 3.52 0 0 0-3.77-1.65L10.5 15.5"></path>
+              <path d="M15 9.5a4.61 4.61 0 0 0-2.44-6.47A4.25 4.25 0 0 0 9.55 0H9.5c-2.5.1-4.25 1-4.5 2.73V3a3 3 0 0 0 2.3 2.92l2.53.42a3.52 3.52 0 0 0 3.77-1.65L14.5 3.5"></path>
+              <path d="M4 8h2.5a1.5 1.5 0 0 1 1.5 1.5V12"></path>
+              <path d="M4 16h2.5a1.5 1.5 0 0 0 1.5-1.5V12"></path>
+              <path d="M13 16a3 3 0 1 0 0-6"></path>
+            </svg>
+          </div>
+          <h3 className="text-lg font-semibold text-convrt-dark-blue dark:text-white">Insights Report</h3>
+        </div>
+        
+        <div className="space-y-4">
+          <div className="p-4 bg-[#F9F6F3] dark:bg-gray-700 rounded-lg border border-gray-100 dark:border-gray-600">
+            <p className="text-gray-700 dark:text-gray-300 text-sm leading-relaxed">
+              Based on social media activity, your prospect shows interest in sustainability initiatives and has recently shared content about AI implementation in their industry.
+            </p>
+          </div>
+          
+          <div>
+            <h4 className="text-sm font-medium text-gray-800 dark:text-gray-200 mb-2">Recommended Talking Points:</h4>
+            <ul className="space-y-2">
+              <li className="flex items-start">
+                <span className="text-[#6936F5] mr-2">•</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Their recent post about renewable energy</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-[#6936F5] mr-2">•</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Shared connections at Techstars</span>
+              </li>
+              <li className="flex items-start">
+                <span className="text-[#6936F5] mr-2">•</span>
+                <span className="text-sm text-gray-700 dark:text-gray-300">Recent company announcement about new market entry</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -91,25 +197,44 @@ const ProductShowcase = () => {
                   isFullscreen ? 'fixed inset-4 z-50' : ''
                 }`}
               >
-                <div className="px-8 py-6 border-b border-gray-200/70 dark:border-gray-700/70 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm flex items-center justify-between transition-colors duration-300">
-                  <div className="flex items-center space-x-2">
-                    <button 
-                      onClick={handleClose}
-                      className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
-                    ></button>
-                    <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
-                    <button 
-                      onClick={toggleFullscreen}
-                      className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer flex items-center justify-center"
-                    >
-                      {isFullscreen ? (
-                        <Minimize2 className="w-2 h-2 text-white" />
-                      ) : (
-                        <Maximize2 className="w-2 h-2 text-white" />
-                      )}
-                    </button>
+                <div className="px-8 py-6 border-b border-gray-200/70 dark:border-gray-700/70 bg-white/80 dark:bg-gray-800/80 backdrop-blur-sm transition-colors duration-300">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className="flex items-center space-x-2">
+                      <button 
+                        onClick={handleClose}
+                        className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
+                      ></button>
+                      <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
+                      <button 
+                        onClick={toggleFullscreen}
+                        className="w-3 h-3 rounded-full bg-green-500 hover:bg-green-600 transition-colors cursor-pointer flex items-center justify-center"
+                      >
+                        {isFullscreen ? (
+                          <Minimize2 className="w-2 h-2 text-white" />
+                        ) : (
+                          <Maximize2 className="w-2 h-2 text-white" />
+                        )}
+                      </button>
+                    </div>
+                    <div className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">{getCurrentUrl()}</div>
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-400 transition-colors duration-300">convrt.ai/dashboard</div>
+                  
+                  {/* Tabs */}
+                  <div className="flex space-x-1">
+                    {tabs.map((tab) => (
+                      <button
+                        key={tab.key}
+                        onClick={() => setActiveTab(tab.key)}
+                        className={`px-4 py-2 rounded-t-lg font-medium text-sm border-b-2 transition-all cursor-pointer whitespace-nowrap ${
+                          activeTab === tab.key 
+                            ? 'text-convrt-purple bg-convrt-purple/10 border-convrt-purple' 
+                            : 'text-gray-600 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 border-transparent'
+                        }`}
+                      >
+                        {tab.label}
+                      </button>
+                    ))}
+                  </div>
                 </div>
                 
                 <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-gray-50/50 to-purple-50/50 dark:from-gray-800/50 dark:to-gray-700/50 transition-colors duration-300 ${
@@ -136,46 +261,7 @@ const ProductShowcase = () => {
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-white/90 dark:bg-gray-800/90 backdrop-blur-sm rounded-[20px] border border-white/60 dark:border-gray-600/60 shadow-lg p-6 transition-colors duration-300">
-                    <div className="flex items-center mb-4">
-                      <div className="h-8 w-8 rounded-full bg-[#6936F5] flex items-center justify-center text-white mr-3">
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M9.5 2a4.61 4.61 0 0 1 2.44 6.47A4.25 4.25 0 0 1 15.45 12h.05c2.5.1 4.25 1 4.5 2.73V15a3 3 0 0 1-2.3 2.92l-2.53.42a3.52 3.52 0 0 0-3.77-1.65L10.5 15.5"></path>
-                          <path d="M15 9.5a4.61 4.61 0 0 0-2.44-6.47A4.25 4.25 0 0 0 9.55 0H9.5c-2.5.1-4.25 1-4.5 2.73V3a3 3 0 0 0 2.3 2.92l2.53.42a3.52 3.52 0 0 0 3.77-1.65L14.5 3.5"></path>
-                          <path d="M4 8h2.5a1.5 1.5 0 0 1 1.5 1.5V12"></path>
-                          <path d="M4 16h2.5a1.5 1.5 0 0 0 1.5-1.5V12"></path>
-                          <path d="M13 16a3 3 0 1 0 0-6"></path>
-                        </svg>
-                      </div>
-                      <h3 className="text-lg font-semibold text-convrt-dark-blue">Insights Report</h3>
-                    </div>
-                    
-                    <div className="space-y-4">
-                      <div className="p-4 bg-[#F9F6F3] rounded-lg border border-gray-100">
-                        <p className="text-gray-700 text-sm leading-relaxed">
-                          Based on social media activity, your prospect shows interest in sustainability initiatives and has recently shared content about AI implementation in their industry.
-                        </p>
-                      </div>
-                      
-                      <div>
-                        <h4 className="text-sm font-medium text-gray-800 mb-2">Recommended Talking Points:</h4>
-                        <ul className="space-y-2">
-                          <li className="flex items-start">
-                            <span className="text-[#6936F5] mr-2">•</span>
-                            <span className="text-sm text-gray-700">Their recent post about renewable energy</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-[#6936F5] mr-2">•</span>
-                            <span className="text-sm text-gray-700">Shared connections at Techstars</span>
-                          </li>
-                          <li className="flex items-start">
-                            <span className="text-[#6936F5] mr-2">•</span>
-                            <span className="text-sm text-gray-700">Recent company announcement about new market entry</span>
-                          </li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
+                  {renderTabContent()}
                 </div>
               </motion.div>
             </motion.div>

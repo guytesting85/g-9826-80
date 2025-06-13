@@ -52,7 +52,7 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="bg-gradient-to-br from-slate-50 via-purple-50/40 to-blue-50/40 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 border-t border-gray-200 dark:border-gray-700">
+    <footer className="bg-white dark:bg-gray-900 border-t border-gray-200 dark:border-gray-700 transition-colors duration-300">
       <div className="container-section max-w-7xl mx-auto">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-8 py-12">
           {/* Logo and Description */}
@@ -64,7 +64,7 @@ const Footer = () => {
                 className="h-8"
               />
             </div>
-            <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed">
+            <p className="text-gray-600 dark:text-gray-400 mb-6 leading-relaxed transition-colors duration-300">
               The first AI organic outbound platform that helps you build trust and engage prospects before you reach out.
             </p>
             <div className="flex space-x-4">
@@ -72,7 +72,7 @@ const Footer = () => {
                 <a
                   key={index}
                   href={social.href}
-                  className="w-10 h-10 bg-white dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-convrt-purple dark:hover:text-convrt-purple hover:bg-convrt-purple/10 transition-all duration-300 shadow-sm hover:shadow-md"
+                  className="w-10 h-10 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center text-gray-600 dark:text-gray-400 hover:text-convrt-purple dark:hover:text-convrt-purple hover:bg-convrt-purple/10 transition-all duration-300 shadow-sm hover:shadow-md"
                   aria-label={social.label}
                 >
                   <social.icon className="w-4 h-4" />
@@ -84,7 +84,7 @@ const Footer = () => {
           {/* Footer Links */}
           {footerLinks.map((section, index) => (
             <div key={index} className="lg:col-span-1">
-              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4 transition-colors duration-300">
                 {section.title}
               </h3>
               <ul className="space-y-3">
@@ -106,10 +106,10 @@ const Footer = () => {
         {/* Bottom Section */}
         <div className="border-t border-gray-200 dark:border-gray-700 py-8">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-            <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400">
+            <div className="flex items-center space-x-2 text-gray-600 dark:text-gray-400 transition-colors duration-300">
               <span>© {currentYear} Convrt.ai. All rights reserved.</span>
             </div>
-            <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-400">
+            <div className="flex items-center space-x-1 text-gray-600 dark:text-gray-400 transition-colors duration-300">
               <span>Made with</span>
               <Heart className="w-4 h-4 text-red-500 fill-current" />
               <span>by</span>
