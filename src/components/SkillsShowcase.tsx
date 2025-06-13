@@ -1,119 +1,170 @@
-
-import React from 'react';
-import { motion } from 'framer-motion';
-import { Code, Database, Cloud, Shield, Zap, Users, BarChart3, Bot, Mail, Target, Brain, Globe, Lock } from 'lucide-react';
+import React, { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import { Code, Database, Cloud, Brain, Globe, Shield, Zap, Users, BarChart3, Smartphone, Palette, Settings } from "lucide-react";
 
 const SkillsShowcase = () => {
+  const [hoveredCard, setHoveredCard] = useState(null);
+
+  const skillsData = [
+    {
+      id: 1,
+      title: "AI-Driven Automation",
+      description: "Automate repetitive tasks and streamline workflows with intelligent AI agents.",
+      icon: Brain,
+      color: "#6936F5",
+    },
+    {
+      id: 2,
+      title: "Cloud Infrastructure",
+      description: "Scalable and secure cloud infrastructure ensures high availability and performance.",
+      icon: Cloud,
+      color: "#00A3FF",
+    },
+    {
+      id: 3,
+      title: "Data Analytics",
+      description: "Gain actionable insights from your data with advanced analytics and visualization tools.",
+      icon: BarChart3,
+      color: "#FF6B6B",
+    },
+    {
+      id: 4,
+      title: "Cybersecurity",
+      description: "Protect your data and systems with robust cybersecurity measures and threat detection.",
+      icon: Shield,
+      color: "#32CD32",
+    },
+    {
+      id: 5,
+      title: "Mobile Optimization",
+      description: "Ensure a seamless user experience across all devices with mobile-first design principles.",
+      icon: Smartphone,
+      color: "#FFD700",
+    },
+    {
+      id: 6,
+      title: "Global Reach",
+      description: "Expand your reach with multi-language support and localized content delivery.",
+      icon: Globe,
+      color: "#E9967A",
+    },
+    {
+      id: 7,
+      title: "API Integrations",
+      description: "Seamlessly integrate with other platforms and services through robust API integrations.",
+      icon: Zap,
+      color: "#9400D3",
+    },
+    {
+      id: 8,
+      title: "User Management",
+      description: "Manage user access and permissions with a centralized user management system.",
+      icon: Users,
+      color: "#4682B4",
+    },
+    {
+      id: 9,
+      title: "Customization",
+      description: "Tailor the platform to your specific needs with customizable features and settings.",
+      icon: Settings,
+      color: "#808080",
+    },
+    {
+      id: 10,
+      title: "Database Solutions",
+      description: "Efficiently store and manage your data with scalable database solutions.",
+      icon: Database,
+      color: "#D2691E",
+    },
+    {
+      id: 11,
+      title: "UI/UX Design",
+      description: "Intuitive and visually appealing user interface and user experience design.",
+      icon: Palette,
+      color: "#8FBC8F",
+    },
+    {
+      id: 12,
+      title: "Code Quality",
+      description: "High-quality code ensures reliability, maintainability, and scalability.",
+      icon: Code,
+      color: "#A9A9A9",
+    },
+  ];
+
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1,
-        delayChildren: 0.2
-      }
-    }
+        staggerChildren: 0.15,
+        delayChildren: 0.2,
+      },
+    },
   };
 
-  const itemVariants = {
-    hidden: { y: 30, opacity: 0 },
+  const cardVariants = {
+    hidden: { y: 50, opacity: 0 },
     visible: {
       y: 0,
       opacity: 1,
-      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
-    }
+      transition: {
+        duration: 0.6,
+        ease: "easeInOut",
+      },
+    },
+    hover: {
+      scale: 1.05,
+      y: -10,
+      transition: {
+        duration: 0.3,
+        ease: "easeInOut",
+      },
+    },
   };
 
-  const skills = [
-    {
-      category: "AI & Machine Learning",
-      skills: [
-        { name: "Natural Language Processing", icon: <Bot className="w-6 h-6" />, level: 95 },
-        { name: "Predictive Analytics", icon: <BarChart3 className="w-6 h-6" />, level: 90 },
-        { name: "Behavioral Analysis", icon: <Users className="w-6 h-6" />, level: 88 },
-        { name: "Deep Learning Models", icon: <Brain className="w-6 h-6" />, level: 92 }
-      ]
-    },
-    {
-      category: "Platform Integration",
-      skills: [
-        { name: "CRM Integration", icon: <Database className="w-6 h-6" />, level: 92 },
-        { name: "Social Media APIs", icon: <Cloud className="w-6 h-6" />, level: 89 },
-        { name: "Email Automation", icon: <Mail className="w-6 h-6" />, level: 94 },
-        { name: "Real-time Processing", icon: <Zap className="w-6 h-6" />, level: 87 }
-      ]
-    },
-    {
-      category: "Sales Optimization",
-      skills: [
-        { name: "Lead Scoring", icon: <Target className="w-6 h-6" />, level: 91 },
-        { name: "Conversion Tracking", icon: <Zap className="w-6 h-6" />, level: 87 },
-        { name: "Performance Analytics", icon: <BarChart3 className="w-6 h-6" />, level: 93 },
-        { name: "Market Intelligence", icon: <Globe className="w-6 h-6" />, level: 85 }
-      ]
-    }
-  ];
-
   return (
-    <section className="py-24 bg-white">
-      <div className="container-section">
+    <section className="py-20 bg-gradient-to-br from-gray-50 to-white relative overflow-hidden" id="skills">
+      <div className="container-section max-w-7xl mx-auto">
+        <div className="text-center mb-16">
+          <h2 className="text-3xl md:text-4xl font-bold text-convrt-dark-blue mb-6">
+            Advanced Technologies
+          </h2>
+          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            Explore the cutting-edge technologies that power our AI platform and drive exceptional results.
+          </p>
+        </div>
+
         <motion.div
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+          variants={containerVariants}
           initial="hidden"
           whileInView="visible"
-          viewport={{ once: true, margin: "-100px" }}
-          variants={containerVariants}
-          className="max-w-7xl mx-auto"
+          viewport={{ once: true }}
         >
-          <motion.div variants={itemVariants} className="text-center mb-16">
-            <div className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6">
-              <Code className="w-4 h-4 mr-2" />
-              <span className="text-sm font-medium font-inter tracking-wide">Our Expertise</span>
-            </div>
-            <h2 className="font-inter font-bold text-4xl md:text-5xl text-convrt-dark-blue mb-6">
-              Built with <span className="text-convrt-purple">Cutting-Edge</span> Technology
-            </h2>
-            <p className="text-xl text-convrt-dark-blue/70 max-w-3xl mx-auto leading-relaxed">
-              Our platform combines advanced AI, seamless integrations, and proven sales methodologies
-            </p>
-          </motion.div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {skills.map((category, categoryIndex) => (
-              <motion.div
-                key={categoryIndex}
-                variants={itemVariants}
-                className="feature-card p-6"
-              >
-                <h3 className="font-inter font-semibold text-lg text-convrt-dark-blue mb-6">
-                  {category.category}
-                </h3>
-                <div className="space-y-4">
-                  {category.skills.map((skill, skillIndex) => (
-                    <div key={skillIndex} className="space-y-2">
-                      <div className="flex items-center justify-between">
-                        <div className="flex items-center space-x-2">
-                          <div className="p-1.5 rounded-lg bg-convrt-purple/10 text-convrt-purple">
-                            {skill.icon}
-                          </div>
-                          <span className="font-medium text-convrt-dark-blue text-sm">{skill.name}</span>
-                        </div>
-                        <span className="text-xs font-semibold text-convrt-purple">{skill.level}%</span>
-                      </div>
-                      <div className="w-full bg-gray-200 rounded-full h-1.5">
-                        <motion.div
-                          className="bg-gradient-to-r from-convrt-purple to-convrt-purple-light h-1.5 rounded-full"
-                          initial={{ width: 0 }}
-                          whileInView={{ width: `${skill.level}%` }}
-                          viewport={{ once: true }}
-                          transition={{ duration: 1.5, delay: categoryIndex * 0.2 + skillIndex * 0.1 }}
-                        />
-                      </div>
-                    </div>
-                  ))}
+          {skillsData.map((skill) => (
+            <motion.div
+              key={skill.id}
+              className="relative p-6 rounded-2xl bg-white border border-gray-100 transition-all duration-300 hover:shadow-xl hover:shadow-convrt-purple/5"
+              variants={cardVariants}
+              whileHover="hover"
+              onMouseEnter={() => setHoveredCard(skill.id)}
+              onMouseLeave={() => setHoveredCard(null)}
+            >
+              <div className="absolute top-4 right-4">
+                <div
+                  className="w-8 h-8 rounded-full flex items-center justify-center"
+                  style={{ backgroundColor: `${skill.color}20` }}
+                >
+                  <skill.icon className="w-5 h-5" style={{ color: skill.color }} />
                 </div>
-              </motion.div>
-            ))}
-          </div>
+              </div>
+              <h3 className="text-xl font-semibold text-convrt-dark-blue mb-3">
+                {skill.title}
+              </h3>
+              <p className="text-gray-600 leading-relaxed">{skill.description}</p>
+            </motion.div>
+          ))}
         </motion.div>
       </div>
     </section>

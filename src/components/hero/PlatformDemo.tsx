@@ -17,6 +17,7 @@ const PlatformDemo = () => {
   const [notificationsRead, setNotificationsRead] = useState(false);
   const [showNotificationPanel, setShowNotificationPanel] = useState(true);
   const [showAvatarPanel, setShowAvatarPanel] = useState(true);
+  const [showPlatformDemo, setShowPlatformDemo] = useState(true);
 
   const handleLikeClick = () => {
     setIsHeartLiked(!isHeartLiked);
@@ -61,6 +62,10 @@ const PlatformDemo = () => {
     if (!showNotifications) {
       setNotificationsRead(true);
     }
+  };
+
+  const handleClosePlatformDemo = () => {
+    setShowPlatformDemo(false);
   };
 
   const handleCloseNotifications = () => {
@@ -356,6 +361,10 @@ const PlatformDemo = () => {
     }
   };
 
+  if (!showPlatformDemo) {
+    return null;
+  }
+
   return (
     <div className="relative max-w-7xl mx-auto">
       {/* Gradient background */}
@@ -365,7 +374,10 @@ const PlatformDemo = () => {
         {/* Platform UI Header */}
         <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
           <div className="flex space-x-1 mr-4">
-            <div className="w-3 h-3 rounded-full bg-red-500"></div>
+            <button 
+              onClick={handleClosePlatformDemo}
+              className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
+            ></button>
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
             <div className="w-3 h-3 rounded-full bg-green-500"></div>
           </div>
