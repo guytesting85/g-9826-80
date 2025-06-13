@@ -35,7 +35,10 @@ const Hero = () => {
           </motion.h1>
           
           <motion.p variants={itemVariants} className="font-inter text-xl text-convrt-dark-blue/80 dark:text-gray-300 max-w-3xl mx-auto mb-8 leading-relaxed">
-            <RotatingText texts={jobTitles} interval={2500} className="text-convrt-purple font-semibold" /> | Async mind. Strategic build. 
+            <span className="inline-block min-w-[200px] text-left">
+              <RotatingText texts={jobTitles} interval={2500} className="text-convrt-purple font-semibold" />
+            </span>
+            <span className="whitespace-nowrap"> | Async mind. Strategic build.</span>
           </motion.p>
           
           <motion.div variants={itemVariants} className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8">

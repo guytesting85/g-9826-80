@@ -18,9 +18,10 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const messagesContainerRef = useRef<HTMLDivElement>(null);
   const [shouldAutoScroll, setShouldAutoScroll] = useState(true);
+  const [userHasScrolled, setUserHasScrolled] = useState(false);
 
   const scrollToBottom = () => {
-    if (shouldAutoScroll && messagesEndRef.current) {
+    if (shouldAutoScroll && !userHasScrolled && messagesEndRef.current) {
       messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
     }
   };
@@ -29,17 +30,27 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
   const checkScrollPosition = () => {
     if (messagesContainerRef.current) {
       const { scrollTop, scrollHeight, clientHeight } = messagesContainerRef.current;
-      const isNearBottom = scrollHeight - scrollTop - clientHeight < 100;
+      const isNearBottom = scrollHeight - scrollTop - clientHeight < 50;
       setShouldAutoScroll(isNearBottom);
+      
+      // Track if user has manually scrolled
+      if (scrollTop < scrollHeight - clientHeight - 50) {
+        setUserHasScrolled(true);
+      } else {
+        setUserHasScrolled(false);
+      }
     }
   };
 
   useEffect(() => {
-    // Only scroll if user is near the bottom
-    if (shouldAutoScroll) {
-      scrollToBottom();
+    // Only scroll on new messages if user hasn't manually scrolled up
+    if (shouldAutoScroll && !userHasScrolled) {
+      const timer = setTimeout(() => {
+        scrollToBottom();
+      }, 100);
+      return () => clearTimeout(timer);
     }
-  }, [messages, shouldAutoScroll]);
+  }, [messages, shouldAutoScroll, userHasScrolled]);
 
   const handleSend = (e?: React.FormEvent) => {
     if (e) {
@@ -47,7 +58,9 @@ const ChatArea = ({ messages, activeUserId, users, onSendMessage }: ChatAreaProp
       e.stopPropagation();
     }
     if (newMessage.trim()) {
-      setShouldAutoScroll(true); // Enable auto-scroll when user sends message
+      // Reset scroll behavior when user sends message
+      setUserHasScrolled(false);
+      setShouldAutoScroll(true);
       onSendMessage(newMessage.trim());
       setNewMessage('');
     }
