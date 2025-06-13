@@ -8,6 +8,9 @@ import Testimonials from "../components/Testimonials";
 import SkillsShowcase from "../components/SkillsShowcase";
 import Pricing from "../components/Pricing";
 import Navbar from "../components/Navbar";
+import ImagePortionSlider from "../components/ImagePortionSlider";
+import CustomerReviews from "../components/CustomerReviews";
+import HiddenContactForm from "../components/HiddenContactForm";
 
 const Index = () => {
   return (
@@ -21,6 +24,9 @@ const Index = () => {
       <Testimonials />
       <SkillsShowcase />
       <Pricing />
+      <ImagePortionSlider />
+      <CustomerReviews />
+      <HiddenContactForm />
     </div>
   );
 };

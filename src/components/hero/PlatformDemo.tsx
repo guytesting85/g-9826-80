@@ -23,10 +23,10 @@ const PlatformDemo = () => {
 
   const handleFloatingHeartClick = () => {
     setIsFloatingHeartLiked(true);
-    // Hide the floating heart after animation with a longer delay for visual appeal
+    // Create a beautiful vanishing animation
     setTimeout(() => {
       setShowFloatingHeart(false);
-    }, 2000);
+    }, 1500);
   };
 
   const handleAddComment = () => {
@@ -574,54 +574,142 @@ const PlatformDemo = () => {
         </div>
       </div>
       
-      {/* Floating UI Element - Improved smooth animation */}
+      {/* Enhanced Floating UI Element */}
       <AnimatePresence>
         {showFloatingHeart && (
           <motion.div
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
+            initial={{ 
+              y: 100, 
+              opacity: 0,
+              scale: 0.8,
+              rotate: -10
+            }}
+            animate={{ 
+              y: 0, 
+              opacity: 1,
+              scale: 1,
+              rotate: 0
+            }}
             exit={{ 
-              scale: [1, 1.5, 0],
+              scale: [1, 1.2, 0],
               opacity: [1, 1, 0],
-              y: [0, -30, -60],
-              rotate: [0, 10, 0]
+              y: [0, -20, -100],
+              rotate: [0, 180, 360],
+              filter: ["blur(0px)", "blur(2px)", "blur(10px)"]
             }}
             transition={{ 
-              exit: { duration: 2, ease: "easeOut" }
+              initial: { duration: 0.8, type: "spring", bounce: 0.4 },
+              exit: { duration: 1.5, ease: "easeOut" }
             }}
-            className="absolute -left-8 top-1/3 z-10"
+            className="fixed left-8 top-1/2 transform -translate-y-1/2 z-20"
           >
             <motion.button
               onClick={handleFloatingHeartClick}
               animate={{ 
-                y: [0, -8, 0],
-                rotate: [0, 2, -2, 0]
+                y: [0, -15, 0],
+                rotate: [0, 3, -3, 0],
+                scale: [1, 1.05, 1]
               }}
               transition={{
                 duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20 flex items-center cursor-pointer hover:bg-white/95 transition-all duration-300 hover:scale-105"
+              whileHover={{ 
+                scale: 1.1,
+                rotate: 5,
+                transition: { duration: 0.2 }
+              }}
+              whileTap={{ 
+                scale: 0.95,
+                transition: { duration: 0.1 }
+              }}
+              className="relative bg-white/95 backdrop-blur-md p-6 rounded-2xl shadow-2xl border border-white/40 flex items-center cursor-pointer group overflow-hidden"
             >
+              {/* Animated background gradient */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-convrt-purple/10 via-pink-500/10 to-red-500/10"
+                animate={isFloatingHeartLiked ? {
+                  background: [
+                    "linear-gradient(45deg, rgba(105, 54, 245, 0.1), rgba(236, 72, 153, 0.1), rgba(239, 68, 68, 0.1))",
+                    "linear-gradient(45deg, rgba(239, 68, 68, 0.3), rgba(236, 72, 153, 0.3), rgba(105, 54, 245, 0.3))",
+                    "linear-gradient(45deg, rgba(105, 54, 245, 0.1), rgba(236, 72, 153, 0.1), rgba(239, 68, 68, 0.1))"
+                  ]
+                } : {}}
+                transition={{ duration: 2 }}
+              />
+
+              {/* Floating particles */}
+              {isFloatingHeartLiked && (
+                <>
+                  {[...Array(8)].map((_, i) => (
+                    <motion.div
+                      key={i}
+                      className="absolute w-2 h-2 bg-red-400 rounded-full"
+                      initial={{ 
+                        scale: 0,
+                        x: 0,
+                        y: 0
+                      }}
+                      animate={{
+                        scale: [0, 1, 0],
+                        x: [0, (Math.random() - 0.5) * 100],
+                        y: [0, (Math.random() - 0.5) * 100],
+                        opacity: [1, 0.5, 0]
+                      }}
+                      transition={{
+                        duration: 1.5,
+                        delay: i * 0.1,
+                        ease: "easeOut"
+                      }}
+                      style={{
+                        left: '50%',
+                        top: '50%'
+                      }}
+                    />
+                  ))}
+                </>
+              )}
+
               <motion.div 
-                className={`rounded-lg p-2 mr-3 transition-all duration-300 ${
-                  isFloatingHeartLiked ? 'bg-red-100' : 'bg-[#6936F5]/20'
+                className={`rounded-xl p-3 mr-4 transition-all duration-500 ${
+                  isFloatingHeartLiked ? 'bg-red-100' : 'bg-convrt-purple/20'
                 }`}
                 animate={isFloatingHeartLiked ? { 
-                  scale: [1, 1.3, 1.1, 1.3, 1],
-                  rotate: [0, -10, 10, -5, 0] 
+                  scale: [1, 1.4, 1.2, 1.4, 1],
+                  rotate: [0, -15, 15, -10, 0]
                 } : {}}
-                transition={{ duration: 1.5 }}
+                transition={{ duration: 2 }}
               >
-                <Heart className={`w-4 h-4 transition-all duration-300 ${
-                  isFloatingHeartLiked ? 'text-red-500 fill-red-500' : 'text-[#6936F5]'
+                <Heart className={`w-6 h-6 transition-all duration-500 ${
+                  isFloatingHeartLiked ? 'text-red-500 fill-red-500' : 'text-convrt-purple'
                 }`} />
               </motion.div>
-              <div>
-                <div className="text-gray-800 text-sm font-medium">New interaction</div>
-                <div className="text-gray-600 text-xs">Liked your comment</div>
+              
+              <div className="relative z-10">
+                <motion.div 
+                  className="text-gray-800 text-base font-semibold"
+                  animate={isFloatingHeartLiked ? { 
+                    color: ["#1f2937", "#dc2626", "#1f2937"]
+                  } : {}}
+                  transition={{ duration: 1.5 }}
+                >
+                  {isFloatingHeartLiked ? "Thanks! 💫" : "New interaction"}
+                </motion.div>
+                <div className="text-gray-600 text-sm">
+                  {isFloatingHeartLiked ? "You're awesome!" : "Someone liked your post"}
+                </div>
               </div>
+
+              {/* Pulse ring effect */}
+              <motion.div
+                className="absolute inset-0 rounded-2xl border-2 border-convrt-purple/30"
+                animate={isFloatingHeartLiked ? {
+                  scale: [1, 1.5, 2],
+                  opacity: [0.5, 0.2, 0]
+                } : {}}
+                transition={{ duration: 1.5 }}
+              />
             </motion.button>
           </motion.div>
         )}
