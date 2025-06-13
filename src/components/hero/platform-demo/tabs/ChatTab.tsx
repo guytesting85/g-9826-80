@@ -1,7 +1,11 @@
 
 import React, { useState, useRef, useEffect } from 'react';
-import { Send, User, Users, Phone, Video, MoreVertical } from 'lucide-react';
+import { User } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import LoginCard from './chat/LoginCard';
+import ChatHeader from './chat/ChatHeader';
+import MessageBubble from './chat/MessageBubble';
+import MessageInput from './chat/MessageInput';
 
 interface Message {
   id: string;
@@ -57,7 +61,6 @@ const ChatTab = () => {
   }, [messages]);
 
   const handleLogin = (userType: 'user1' | 'user2') => {
-    // Simple mock authentication - in real app, this would be proper authentication
     if (loginForm.userId && loginForm.password) {
       setCurrentUser(userType);
       setLoginForm({ userId: '', password: '' });
@@ -84,128 +87,6 @@ const ChatTab = () => {
     }
   };
 
-  const formatTime = (date: Date) => {
-    return date.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
-  };
-
-  const LoginCard = ({ userType, title }: { userType: 'user1' | 'user2', title: string }) => (
-    <div className="bg-white dark:bg-gray-800 rounded-xl p-6 border border-gray-200 dark:border-gray-700">
-      <div className="text-center mb-6">
-        <div className="w-16 h-16 bg-convrt-purple rounded-full flex items-center justify-center mx-auto mb-4">
-          <User className="w-8 h-8 text-white" />
-        </div>
-        <h3 className="text-lg font-semibold text-gray-900 dark:text-white">{title}</h3>
-        <p className="text-sm text-gray-600 dark:text-gray-400">Sign in to start chatting</p>
-      </div>
-      
-      <div className="space-y-4">
-        <input
-          type="text"
-          placeholder="User ID"
-          value={loginForm.userId}
-          onChange={(e) => setLoginForm(prev => ({ ...prev, userId: e.target.value }))}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-convrt-purple bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={loginForm.password}
-          onChange={(e) => setLoginForm(prev => ({ ...prev, password: e.target.value }))}
-          className="w-full px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-convrt-purple bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-        />
-        <button
-          onClick={() => handleLogin(userType)}
-          className="w-full bg-convrt-purple text-white py-2 px-4 rounded-lg hover:bg-convrt-purple-hover transition-colors"
-        >
-          Sign In as {title}
-        </button>
-      </div>
-    </div>
-  );
-
-  const ChatInterface = () => (
-    <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden h-[600px] flex flex-col">
-      {/* Chat Header */}
-      <div className="bg-convrt-purple text-white px-6 py-4 flex items-center justify-between">
-        <div className="flex items-center space-x-3">
-          <div className="w-10 h-10 bg-white/20 rounded-full flex items-center justify-center">
-            <Users className="w-5 h-5" />
-          </div>
-          <div>
-            <h3 className="font-semibold">Group Chat</h3>
-            <p className="text-sm text-white/80">
-              {Object.values(users).filter(u => u.isOnline).length} online
-            </p>
-          </div>
-        </div>
-        <div className="flex items-center space-x-2">
-          <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-            <Phone className="w-5 h-5" />
-          </button>
-          <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-            <Video className="w-5 h-5" />
-          </button>
-          <button className="p-2 hover:bg-white/10 rounded-lg transition-colors">
-            <MoreVertical className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
-
-      {/* Messages Area */}
-      <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-900">
-        <AnimatePresence>
-          {messages.map((message) => (
-            <motion.div
-              key={message.id}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              exit={{ opacity: 0, y: -20 }}
-              className={`flex ${message.sender === currentUser ? 'justify-end' : 'justify-start'}`}
-            >
-              <div className={`max-w-xs lg:max-w-md px-4 py-2 rounded-lg ${
-                message.sender === currentUser
-                  ? 'bg-convrt-purple text-white'
-                  : 'bg-white dark:bg-gray-700 text-gray-900 dark:text-white border border-gray-200 dark:border-gray-600'
-              }`}>
-                <div className="text-sm font-medium mb-1">
-                  {users[message.sender]?.name}
-                </div>
-                <div className="text-sm">{message.text}</div>
-                <div className={`text-xs mt-1 ${
-                  message.sender === currentUser ? 'text-white/70' : 'text-gray-500 dark:text-gray-400'
-                }`}>
-                  {formatTime(message.timestamp)}
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </AnimatePresence>
-        <div ref={messagesEndRef} />
-      </div>
-
-      {/* Message Input */}
-      <div className="border-t border-gray-200 dark:border-gray-600 p-4 bg-white dark:bg-gray-800">
-        <div className="flex items-center space-x-2">
-          <input
-            type="text"
-            value={newMessage}
-            onChange={(e) => setNewMessage(e.target.value)}
-            onKeyPress={handleKeyPress}
-            placeholder="Type a message..."
-            className="flex-1 px-4 py-2 border border-gray-300 dark:border-gray-600 rounded-full focus:outline-none focus:ring-2 focus:ring-convrt-purple bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-white"
-          />
-          <button
-            onClick={handleSendMessage}
-            disabled={!newMessage.trim()}
-            className="bg-convrt-purple text-white p-2 rounded-full hover:bg-convrt-purple-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-          >
-            <Send className="w-5 h-5" />
-          </button>
-        </div>
-      </div>
-    </div>
-  );
-
   if (!currentUser) {
     return (
       <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
@@ -214,14 +95,26 @@ const ChatTab = () => {
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <LoginCard userType="user1" title="User 1" />
+          <LoginCard 
+            userType="user1" 
+            title="User 1" 
+            loginForm={loginForm}
+            setLoginForm={setLoginForm}
+            onLogin={handleLogin}
+          />
         </motion.div>
         <motion.div
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.2 }}
         >
-          <LoginCard userType="user2" title="User 2" />
+          <LoginCard 
+            userType="user2" 
+            title="User 2" 
+            loginForm={loginForm}
+            setLoginForm={setLoginForm}
+            onLogin={handleLogin}
+          />
         </motion.div>
       </div>
     );
@@ -249,7 +142,31 @@ const ChatTab = () => {
           Sign Out
         </button>
       </div>
-      <ChatInterface />
+      
+      <div className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 overflow-hidden h-[600px] flex flex-col">
+        <ChatHeader users={users} />
+        
+        <div className="flex-1 overflow-y-auto p-4 space-y-4 bg-gray-50 dark:bg-gray-900">
+          <AnimatePresence>
+            {messages.map((message) => (
+              <MessageBubble 
+                key={message.id}
+                message={message}
+                users={users}
+                currentUser={currentUser}
+              />
+            ))}
+          </AnimatePresence>
+          <div ref={messagesEndRef} />
+        </div>
+
+        <MessageInput 
+          newMessage={newMessage}
+          setNewMessage={setNewMessage}
+          onSend={handleSendMessage}
+          onKeyPress={handleKeyPress}
+        />
+      </div>
     </motion.div>
   );
 };

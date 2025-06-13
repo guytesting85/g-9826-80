@@ -46,3 +46,10 @@ export interface TabInfo {
   subtitle: string;
   description: string;
 }
+
+export interface User {
+  id: string;
+  name: string;
+  avatar?: string;
+  isOnline: boolean;
+}
