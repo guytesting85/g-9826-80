@@ -9,7 +9,6 @@ import SkillsShowcase from "../components/SkillsShowcase";
 import Pricing from "../components/Pricing";
 import Navbar from "../components/Navbar";
 import ImagePortionSlider from "../components/ImagePortionSlider";
-import CustomerReviews from "../components/CustomerReviews";
 import HiddenContactForm from "../components/HiddenContactForm";
 
 const Index = () => {
@@ -25,7 +24,6 @@ const Index = () => {
       <SkillsShowcase />
       <Pricing />
       <ImagePortionSlider />
-      <CustomerReviews />
       <HiddenContactForm />
     </div>
   );

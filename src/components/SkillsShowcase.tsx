@@ -1,7 +1,7 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-import { Code, Database, Cloud, Shield, Zap, Users, BarChart3, Bot, Mail, Target, Brain, Cpu, Globe, Lock } from 'lucide-react';
+import { Code, Database, Cloud, Shield, Zap, Users, BarChart3, Bot, Mail, Target, Brain, Globe, Lock } from 'lucide-react';
 
 const SkillsShowcase = () => {
   const containerVariants = {
@@ -40,7 +40,7 @@ const SkillsShowcase = () => {
         { name: "CRM Integration", icon: <Database className="w-6 h-6" />, level: 92 },
         { name: "Social Media APIs", icon: <Cloud className="w-6 h-6" />, level: 89 },
         { name: "Email Automation", icon: <Mail className="w-6 h-6" />, level: 94 },
-        { name: "Real-time Processing", icon: <Cpu className="w-6 h-6" />, level: 87 }
+        { name: "Real-time Processing", icon: <Zap className="w-6 h-6" />, level: 87 }
       ]
     },
     {
@@ -50,15 +50,6 @@ const SkillsShowcase = () => {
         { name: "Conversion Tracking", icon: <Zap className="w-6 h-6" />, level: 87 },
         { name: "Performance Analytics", icon: <BarChart3 className="w-6 h-6" />, level: 93 },
         { name: "Market Intelligence", icon: <Globe className="w-6 h-6" />, level: 85 }
-      ]
-    },
-    {
-      category: "Security & Compliance",
-      skills: [
-        { name: "Data Encryption", icon: <Shield className="w-6 h-6" />, level: 96 },
-        { name: "GDPR Compliance", icon: <Lock className="w-6 h-6" />, level: 94 },
-        { name: "Privacy Protection", icon: <Shield className="w-6 h-6" />, level: 91 },
-        { name: "Secure APIs", icon: <Code className="w-6 h-6" />, level: 89 }
       ]
     }
   ];
@@ -82,11 +73,11 @@ const SkillsShowcase = () => {
               Built with <span className="text-convrt-purple">Cutting-Edge</span> Technology
             </h2>
             <p className="text-xl text-convrt-dark-blue/70 max-w-3xl mx-auto leading-relaxed">
-              Our platform combines advanced AI, seamless integrations, proven sales methodologies, and enterprise-grade security
+              Our platform combines advanced AI, seamless integrations, and proven sales methodologies
             </p>
           </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {skills.map((category, categoryIndex) => (
               <motion.div
                 key={categoryIndex}
