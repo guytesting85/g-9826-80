@@ -7,7 +7,6 @@ import PlatformDemo from './hero/PlatformDemo';
 
 const Hero = () => {
   const demoRef = useRef<HTMLDivElement>(null);
-  const [showBadge, setShowBadge] = useState(true);
   const [showDemo, setShowDemo] = useState(true);
 
   // Animation variants
@@ -42,15 +41,13 @@ const Hero = () => {
           variants={containerVariants}
           className="max-w-6xl mx-auto text-center"
         >
-          {showBadge && (
-            <motion.div 
-              variants={itemVariants}
-              className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6"
-            >
-              <Zap className="w-4 h-4 mr-2" />
-              <span className="text-sm font-medium font-inter tracking-wide">The First AI Organic Outbound Platform</span>
-            </motion.div>
-          )}
+          <motion.div 
+            variants={itemVariants}
+            className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6"
+          >
+            <Zap className="w-4 h-4 mr-2" />
+            <span className="text-sm font-medium font-inter tracking-wide">The First AI Organic Outbound Platform</span>
+          </motion.div>
           
           <motion.h1 
             variants={itemVariants}
@@ -88,8 +85,8 @@ const Hero = () => {
             >
               <PlatformDemo 
                 onClose={() => setShowDemo(false)} 
-                onCloseBadge={() => setShowBadge(false)}
-                showBadge={showBadge}
+                onCloseBadge={() => {}} 
+                showBadge={true}
               />
             </motion.div>
           )}

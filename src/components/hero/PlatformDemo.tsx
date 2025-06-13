@@ -373,7 +373,7 @@ const PlatformDemo = ({ onClose, onCloseBadge, showBadge }: PlatformDemoProps) =
         <div className="bg-white border-b border-gray-200 flex items-center px-6 py-4">
           <div className="flex space-x-1 mr-4">
             <button 
-              onClick={showBadge ? onCloseBadge : onClose}
+              onClick={onClose}
               className="w-3 h-3 rounded-full bg-red-500 hover:bg-red-600 transition-colors cursor-pointer"
             ></button>
             <div className="w-3 h-3 rounded-full bg-yellow-500"></div>
