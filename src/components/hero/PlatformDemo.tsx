@@ -23,9 +23,10 @@ const PlatformDemo = () => {
 
   const handleFloatingHeartClick = () => {
     setIsFloatingHeartLiked(true);
+    // Hide the floating heart after animation with a longer delay for visual appeal
     setTimeout(() => {
       setShowFloatingHeart(false);
-    }, 3000);
+    }, 2000);
   };
 
   const handleAddComment = () => {
@@ -121,6 +122,7 @@ const PlatformDemo = () => {
               </div>
             </div>
             
+            {/* Comments Section */}
             <div className="border-t border-gray-200 p-4">
               <div className="space-y-3 mb-4">
                 {comments.map((comment) => (
@@ -149,6 +151,7 @@ const PlatformDemo = () => {
                 ))}
               </div>
               
+              {/* Add Comment Input */}
               <div className="flex space-x-3">
                 <div className="w-8 h-8 rounded-full bg-convrt-purple/20 flex items-center justify-center">
                   <User className="w-4 h-4 text-convrt-purple" />
@@ -345,6 +348,7 @@ const PlatformDemo = () => {
 
   return (
     <div className="relative max-w-7xl mx-auto">
+      {/* Gradient background */}
       <div className="absolute inset-0 -m-10 bg-gradient-to-br from-convrt-purple/20 via-convrt-purple/20 to-convrt-purple/20 rounded-3xl blur-3xl opacity-40"></div>
       
       <div className="relative rounded-2xl overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm">
@@ -463,16 +467,13 @@ const PlatformDemo = () => {
                       </div>
                     </div>
                     <div className="p-2">
-                      <label className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors text-left cursor-pointer">
+                      <button
+                        onClick={() => setShowAvatarUpload(true)}
+                        className="w-full flex items-center space-x-3 p-3 hover:bg-gray-50 rounded-lg transition-colors text-left"
+                      >
                         <Camera className="w-4 h-4 text-gray-500" />
                         <span className="text-sm text-gray-700">Change Avatar</span>
-                        <input
-                          type="file"
-                          accept="image/*"
-                          onChange={handleAvatarUpload}
-                          className="hidden"
-                        />
-                      </label>
+                      </button>
                       {[
                         { icon: Settings, label: "Account Settings" },
                         { icon: BarChart2, label: "My Performance" },
@@ -497,10 +498,61 @@ const PlatformDemo = () => {
                   </motion.div>
                 )}
               </AnimatePresence>
+              
+              {/* Avatar Upload Modal */}
+              <AnimatePresence>
+                {showAvatarUpload && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="fixed inset-0 bg-black/50 flex items-center justify-center z-50"
+                    onClick={() => setShowAvatarUpload(false)}
+                  >
+                    <motion.div
+                      initial={{ scale: 0.95, opacity: 0 }}
+                      animate={{ scale: 1, opacity: 1 }}
+                      exit={{ scale: 0.95, opacity: 0 }}
+                      className="bg-white rounded-xl p-6 w-80 mx-4"
+                      onClick={(e) => e.stopPropagation()}
+                    >
+                      <div className="flex items-center justify-between mb-4">
+                        <h3 className="font-medium text-gray-900">Upload Avatar</h3>
+                        <button
+                          onClick={() => setShowAvatarUpload(false)}
+                          className="text-gray-400 hover:text-gray-600"
+                        >
+                          <X className="w-5 h-5" />
+                        </button>
+                      </div>
+                      <div className="text-center">
+                        <div className="w-20 h-20 rounded-full bg-gray-100 mx-auto mb-4 flex items-center justify-center overflow-hidden">
+                          {avatarImage ? (
+                            <img src={avatarImage} alt="Avatar" className="w-full h-full object-cover" />
+                          ) : (
+                            <Camera className="w-8 h-8 text-gray-400" />
+                          )}
+                        </div>
+                        <label className="button-primary cursor-pointer inline-flex items-center">
+                          <Upload className="w-4 h-4 mr-2" />
+                          Choose Image
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={handleAvatarUpload}
+                            className="hidden"
+                          />
+                        </label>
+                      </div>
+                    </motion.div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         </div>
         
+        {/* Main Content Area */}
         <div className="bg-gray-50 p-10 min-h-[700px]">
           <AnimatePresence mode="wait">
             <motion.div 
@@ -522,122 +574,60 @@ const PlatformDemo = () => {
         </div>
       </div>
       
-      {/* Enhanced Floating Heart Animation */}
+      {/* Floating UI Element - Improved smooth animation */}
       <AnimatePresence>
         {showFloatingHeart && (
           <motion.div
-            initial={{ y: 20, opacity: 0, scale: 0.8 }}
-            animate={{ 
-              y: 0, 
-              opacity: 1, 
-              scale: 1,
-            }}
-            exit={isFloatingHeartLiked ? {
-              scale: [1, 2, 0],
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            exit={{ 
+              scale: [1, 1.5, 0],
               opacity: [1, 1, 0],
-              y: [0, -50, -100],
-              rotate: [0, 360, 720],
-              transition: { 
-                duration: 3,
-                ease: [0.25, 0.46, 0.45, 0.94],
-                times: [0, 0.6, 1]
-              }
-            } : {
-              opacity: 0,
-              scale: 0.8,
-              y: 20
+              y: [0, -30, -60],
+              rotate: [0, 10, 0]
+            }}
+            transition={{ 
+              exit: { duration: 2, ease: "easeOut" }
             }}
             className="absolute -left-8 top-1/3 z-10"
           >
             <motion.button
               onClick={handleFloatingHeartClick}
               animate={{ 
-                y: [-8, 8, -8],
-                rotate: [-2, 2, -2],
-                scale: [1, 1.05, 1]
+                y: [0, -8, 0],
+                rotate: [0, 2, -2, 0]
               }}
               transition={{
-                duration: 3,
+                duration: 4,
                 repeat: Infinity,
                 ease: "easeInOut"
               }}
-              className="bg-white/95 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/30 flex items-center cursor-pointer hover:bg-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
+              className="bg-white/90 backdrop-blur-md p-4 rounded-xl shadow-xl border border-white/20 flex items-center cursor-pointer hover:bg-white/95 transition-all duration-300 hover:scale-105"
             >
               <motion.div 
-                className={`rounded-lg p-2 mr-3 transition-all duration-500 ${
-                  isFloatingHeartLiked ? 'bg-red-100' :bg-gradient-to-br from-pink-100 to-red-100'
+                className={`rounded-lg p-2 mr-3 transition-all duration-300 ${
+                  isFloatingHeartLiked ? 'bg-red-100' : 'bg-[#6936F5]/20'
                 }`}
                 animate={isFloatingHeartLiked ? { 
-                  scale: [1, 1.5, 1.2, 1.8, 1],
-                  rotate: [0, -15, 15, -10, 0],
-                  backgroundColor: ['#fecaca', '#dc2626', '#fecaca']
-                } : {
-                  scale: [1, 1.1, 1],
-                  rotate: [0, 5, -5, 0]
-                }}
-                transition={{ 
-                  duration: isFloatingHeartLiked ? 2 : 2,
-                  repeat: isFloatingHeartLiked ? 0 : Infinity,
-                  ease: "easeInOut"
-                }}
+                  scale: [1, 1.3, 1.1, 1.3, 1],
+                  rotate: [0, -10, 10, -5, 0] 
+                } : {}}
+                transition={{ duration: 1.5 }}
               >
-                <motion.div
-                  animate={isFloatingHeartLiked ? {
-                    filter: ['brightness(1)', 'brightness(1.5)', 'brightness(1)']
-                  } : {}}
-                  transition={{ duration: 2 }}
-                >
-                  <Heart className={`w-4 h-4 transition-all duration-500 ${
-                    isFloatingHeartLiked ? 'text-red-500 fill-red-500' : 'text-pink-500 fill-pink-200'
-                  }`} />
-                </motion.div>
+                <Heart className={`w-4 h-4 transition-all duration-300 ${
+                  isFloatingHeartLiked ? 'text-red-500 fill-red-500' : 'text-[#6936F5]'
+                }`} />
               </motion.div>
               <div>
-                <motion.div 
-                  className="text-gray-800 text-sm font-medium"
-                  animate={isFloatingHeartLiked ? {
-                    color: ['#1f2937', '#dc2626', '#1f2937']
-                  } : {}}
-                  transition={{ duration: 2 }}
-                >
-                  New interaction
-                </motion.div>
+                <div className="text-gray-800 text-sm font-medium">New interaction</div>
                 <div className="text-gray-600 text-xs">Liked your comment</div>
               </div>
-              
-              {/* Sparkle effects when liked */}
-              {isFloatingHeartLiked && (
-                <>
-                  {[...Array(6)].map((_, i) => (
-                    <motion.div
-                      key={i}
-                      className="absolute w-1 h-1 bg-yellow-400 rounded-full"
-                      initial={{ 
-                        x: 0, 
-                        y: 0, 
-                        scale: 0,
-                        opacity: 1
-                      }}
-                      animate={{
-                        x: Math.cos(i * 60 * Math.PI / 180) * 40,
-                        y: Math.sin(i * 60 * Math.PI / 180) * 40,
-                        scale: [0, 1, 0],
-                        opacity: [1, 1, 0]
-                      }}
-                      transition={{
-                        duration: 1.5,
-                        delay: 0.5,
-                        ease: "easeOut"
-                      }}
-                    />
-                  ))}
-                </>
-              )}
             </motion.button>
           </motion.div>
         )}
       </AnimatePresence>
       
+      {/* Click outside handlers */}
       {(showAvatarMenu || showNotifications) && (
         <div 
           className="fixed inset-0 z-40" 
