@@ -1,182 +1,134 @@
 
 import React from 'react';
 import { motion } from 'framer-motion';
-
-const testimonials = [
-  {
-    id: 1,
-    quote: "Alice allowed us to scale outbound efforts without sacrificing personalization. It's been a crucial multiplier for our team.",
-    name: "Matthew Lenhart",
-    title: "Senior Manager, Sales Ops & Strategy at Otter.ai",
-    company: "Otter.ai",
-    logo: "otter",
-    bgColor: "bg-[#efeaf5]",
-  },
-  {
-    id: 2,
-    quote: "Mike allows us to retarget hundreds of thousands of old leads. It's like unlocking a new opportunity we never thought was possible.",
-    name: "Sales Team",
-    title: "Connecteam",
-    company: "Connecteam",
-    logo: "connecteam",
-    bgColor: "bg-[#fde7dc]",
-  },
-  {
-    id: 3,
-    quote: "With Mike, we could reach customers in languages we couldn't otherwise support.",
-    name: "Growth Marketing",
-    title: "Spectinga",
-    company: "Spectinga",
-    logo: "spectinga",
-    bgColor: "bg-[#e9e9e9]",
-  }
-];
-
-const stats = [
-  {
-    id: 1,
-    value: "$500k",
-    description: "on hiring costs saved",
-    company: "Otter.ai",
-    bgColor: "bg-[#efeaf5]",
-  },
-  {
-    id: 2,
-    value: "Handshake",
-    description: "",
-    company: "Handshake",
-    bgColor: "bg-white",
-  },
-  {
-    id: 3,
-    value: "Sumup",
-    description: "",
-    company: "Sumup",
-    bgColor: "bg-white",
-  }
-];
+import { Star, Quote } from 'lucide-react';
 
 const Testimonials = () => {
+  const testimonials = [
+    {
+      name: "Sarah Johnson",
+      role: "VP of Sales",
+      company: "TechFlow Inc.",
+      image: "/lovable-uploads/8324ce9d-a25b-4480-beb0-990b38071d97.png",
+      quote: "Convrt.ai has completely transformed our outreach strategy. We're seeing 3x higher response rates and building genuine relationships with prospects.",
+      rating: 5
+    },
+    {
+      name: "Michael Chen",
+      role: "Business Development Manager",
+      company: "Growth Solutions",
+      image: "/lovable-uploads/50d7bc89-98fd-49a5-b67f-94230c5d3ca5.png",
+      quote: "The AI insights are incredible. It's like having a research team that never sleeps, finding the perfect conversation starters for every prospect.",
+      rating: 5
+    },
+    {
+      name: "Emily Rodriguez",
+      role: "Head of Marketing",
+      company: "Innovation Labs",
+      image: "/lovable-uploads/ceb0d5d2-2d83-407f-bb1e-8f6959b93eb9.png",
+      quote: "Our conversion rates have skyrocketed since using Convrt.ai. The personalized touchpoints make all the difference in building trust.",
+      rating: 5
+    }
+  ];
+
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
+    }
+  };
+
   return (
-    <section className="py-8 pt-20 bg-white" id="testimonials">
+    <section className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300" id="testimonials">
       <div className="container-section max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          className="mb-8 text-center"
+          variants={containerVariants}
+          className="text-center mb-16"
         >
-          <h2 className="text-3xl font-bold mb-6">Trusted by industry leaders</h2>
+          <motion.div 
+            variants={itemVariants}
+            className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6"
+          >
+            <Star className="w-4 h-4 mr-2" />
+            <span className="text-sm font-medium tracking-wide">Customer Success</span>
+          </motion.div>
+          <motion.h2 
+            variants={itemVariants}
+            className="text-4xl md:text-5xl font-bold text-convrt-dark-blue dark:text-white mb-6 tracking-tight transition-colors duration-300"
+          >
+            Trusted by Sales Teams <span className="text-convrt-purple">Worldwide</span>
+          </motion.h2>
+          <motion.p 
+            variants={itemVariants}
+            className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed transition-colors duration-300"
+          >
+            See how leading companies are transforming their outreach and building meaningful relationships with Convrt.ai
+          </motion.p>
         </motion.div>
 
-        <div className="grid grid-cols-12 gap-4">
-          {/* Stats box */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.1 }}
-            viewport={{ once: true }}
-            className="col-span-12 md:col-span-4 lg:col-span-3 rounded-xl overflow-hidden"
-          >
-            <div className={`h-full ${stats[0].bgColor} p-8 flex flex-col`}>
-              <div className="mt-auto">
-                <div className="text-5xl font-bold mb-2">{stats[0].value}</div>
-                <div className="text-gray-600">{stats[0].description}</div>
-              </div>
-              <div className="mt-auto pt-6">
-                <div className="font-bold text-lg">
-                  <span className="font-black">OI</span>•<span className="font-black">I</span> Otter.ai
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
+          viewport={{ once: true }}
+          variants={containerVariants}
+          className="grid grid-cols-1 md:grid-cols-3 gap-8"
+        >
+          {testimonials.map((testimonial, index) => (
+            <motion.div 
+              key={index}
+              variants={itemVariants}
+              className="group"
+            >
+              <div className="bg-gradient-to-br from-white to-gray-50/50 dark:from-gray-800 dark:to-gray-700/50 p-8 rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 border border-gray-100 dark:border-gray-700 h-full relative overflow-hidden">
+                <div className="absolute top-4 right-4 opacity-10 group-hover:opacity-20 transition-opacity">
+                  <Quote className="w-12 h-12 text-convrt-purple" />
+                </div>
+                
+                <div className="flex items-center mb-4">
+                  {[...Array(testimonial.rating)].map((_, i) => (
+                    <Star key={i} className="w-5 h-5 text-yellow-400 fill-current" />
+                  ))}
+                </div>
+                
+                <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-6 italic transition-colors duration-300">
+                  "{testimonial.quote}"
+                </p>
+                
+                <div className="flex items-center">
+                  <img 
+                    src={testimonial.image} 
+                    alt={testimonial.name}
+                    className="w-12 h-12 rounded-full object-cover mr-4"
+                  />
+                  <div>
+                    <h4 className="font-semibold text-convrt-dark-blue dark:text-white transition-colors duration-300">
+                      {testimonial.name}
+                    </h4>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                      {testimonial.role} at {testimonial.company}
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
-          </motion.div>
-
-          {/* Handshake box */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="col-span-12 md:col-span-4 lg:col-span-3 rounded-xl overflow-hidden border border-gray-100"
-          >
-            <div className="h-full flex items-center justify-center p-6">
-              <div className="font-black text-2xl italic">Handshake</div>
-            </div>
-          </motion.div>
-
-          {/* First testimonial */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.3 }}
-            viewport={{ once: true }}
-            className="col-span-12 md:col-span-8 lg:col-span-6 rounded-xl overflow-hidden"
-          >
-            <div className={`h-full ${testimonials[0].bgColor} p-8 flex flex-col`}>
-              <div className="text-2xl font-medium mb-8">
-                "{testimonials[0].quote}"
-              </div>
-              <div className="mt-auto">
-                <div className="font-medium">{testimonials[0].name}</div>
-                <div className="text-gray-600 text-sm">{testimonials[0].title}</div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Second testimonial */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.4 }}
-            viewport={{ once: true }}
-            className="col-span-12 md:col-span-7 lg:col-span-6 rounded-xl overflow-hidden"
-          >
-            <div className={`h-full ${testimonials[1].bgColor} p-8 flex flex-col`}>
-              <div className="text-2xl font-medium mb-8">
-                "{testimonials[1].quote}"
-              </div>
-              <div className="mt-auto">
-                <div className="font-bold text-lg">connecteam</div>
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Sumup box */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.5 }}
-            viewport={{ once: true }}
-            className="col-span-12 md:col-span-5 lg:col-span-3 rounded-xl overflow-hidden border border-gray-100"
-          >
-            <div className="h-full flex items-center justify-center p-6">
-              <div className="font-black text-xl">
-                <span className="inline-block bg-black text-white px-1 py-0.5 rounded">∫</span> sumup°
-              </div>
-            </div>
-          </motion.div>
-
-          {/* Third testimonial */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.6 }}
-            viewport={{ once: true }}
-            className="col-span-12 md:col-span-12 lg:col-span-3 rounded-xl overflow-hidden"
-          >
-            <div className={`h-full ${testimonials[2].bgColor} p-8 flex flex-col`}>
-              <div className="text-2xl font-medium mb-8">
-                "{testimonials[2].quote}"
-              </div>
-              <div className="mt-auto">
-                <div className="font-bold flex items-center">
-                  <span className="inline-block mr-1">⊙</span> spectinga
-                </div>
-              </div>
-            </div>
-          </motion.div>
-        </div>
+            </motion.div>
+          ))}
+        </motion.div>
       </div>
     </section>
   );

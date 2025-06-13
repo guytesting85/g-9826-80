@@ -1,233 +1,173 @@
 
-import React, { useState, useRef, useCallback } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React, { useState, useRef, useEffect } from 'react';
+import { motion, useMotionValue, useSpring, useTransform } from 'framer-motion';
+import { Sparkles, Zap, Target, TrendingUp } from 'lucide-react';
 
 const ImagePortionSlider = () => {
-  const [sliderValue, setSliderValue] = useState(50);
-  const [currentSlide, setCurrentSlide] = useState(0);
-  const [isDragging, setIsDragging] = useState(false);
-  const containerRef = useRef<HTMLDivElement>(null);
+  const [isHovered, setIsHovered] = useState(false);
+  const constraintsRef = useRef<HTMLDivElement>(null);
+  const x = useMotionValue(0);
+  const springX = useSpring(x, { stiffness: 300, damping: 30 });
+  const clipPath = useTransform(springX, [-200, 200], ['inset(0 50% 0 0)', 'inset(0 0 0 50%)']);
 
-  const slides = [
+  const features = [
     {
-      title: "Response Rate Transformation",
-      before: {
-        icon: "📉",
-        title: "Before AI",
-        stats: ["2% Response Rate", "Generic Messages", "No Personalization"]
-      },
-      after: {
-        icon: "📈",
-        title: "After AI",
-        stats: ["47% Response Rate", "Personalized Messages", "Perfect Timing"]
-      }
+      icon: Sparkles,
+      title: "AI-Powered Insights",
+      description: "Discover hidden opportunities in your prospect's digital footprint"
     },
     {
-      title: "Lead Quality Enhancement",
-      before: {
-        icon: "🎯",
-        title: "Before AI",
-        stats: ["20% Qualified Leads", "Random Targeting", "High Bounce Rate"]
-      },
-      after: {
-        icon: "🏆",
-        title: "After AI",
-        stats: ["85% Qualified Leads", "Smart Targeting", "High Engagement"]
-      }
+      icon: Target,
+      title: "Precision Targeting",
+      description: "Connect with the right people at the perfect moment"
     },
     {
-      title: "Time Efficiency Boost",
-      before: {
-        icon: "⏰",
-        title: "Before AI",
-        stats: ["8 Hours/Day Manual", "Repetitive Tasks", "Slow Follow-ups"]
-      },
-      after: {
-        icon: "⚡",
-        title: "After AI",
-        stats: ["2 Hours/Day Oversight", "Automated Tasks", "Instant Follow-ups"]
-      }
+      icon: TrendingUp,
+      title: "Higher Conversion",
+      description: "Turn cold prospects into warm conversations effortlessly"
+    },
+    {
+      icon: Zap,
+      title: "Lightning Fast",
+      description: "Automate your research and outreach in seconds, not hours"
     }
   ];
 
-  const handleMouseDown = useCallback((e: React.MouseEvent) => {
-    setIsDragging(true);
-    updateSliderValue(e);
-  }, []);
-
-  const handleMouseMove = useCallback((e: React.MouseEvent) => {
-    if (isDragging) {
-      updateSliderValue(e);
-    }
-  }, [isDragging]);
-
-  const handleMouseUp = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const handleTouchStart = useCallback((e: React.TouchEvent) => {
-    setIsDragging(true);
-    updateSliderValueTouch(e);
-  }, []);
-
-  const handleTouchMove = useCallback((e: React.TouchEvent) => {
-    if (isDragging) {
-      updateSliderValueTouch(e);
-    }
-  }, [isDragging]);
-
-  const handleTouchEnd = useCallback(() => {
-    setIsDragging(false);
-  }, []);
-
-  const updateSliderValue = (e: React.MouseEvent) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = e.clientX - rect.left;
-      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-      setSliderValue(percentage);
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: { 
+      opacity: 1,
+      transition: { 
+        staggerChildren: 0.2,
+        delayChildren: 0.3
+      }
     }
   };
 
-  const updateSliderValueTouch = (e: React.TouchEvent) => {
-    if (containerRef.current) {
-      const rect = containerRef.current.getBoundingClientRect();
-      const x = e.touches[0].clientX - rect.left;
-      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
-      setSliderValue(percentage);
+  const itemVariants = {
+    hidden: { y: 30, opacity: 0 },
+    visible: { 
+      y: 0, 
+      opacity: 1,
+      transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] }
     }
   };
-
-  const nextSlide = () => {
-    setCurrentSlide((prev) => (prev + 1) % slides.length);
-    setSliderValue(50); // Reset slider position
-  };
-
-  const prevSlide = () => {
-    setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setSliderValue(50); // Reset slider position
-  };
-
-  const currentSlideData = slides[currentSlide];
 
   return (
-    <section className="pb-16 bg-white">
-      <div className="container-section max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
+    <section className="py-20 bg-white dark:bg-gray-900 transition-colors duration-300 overflow-hidden">
+      <div className="container-section max-w-7xl mx-auto">
+        <motion.div 
+          initial="hidden"
+          whileInView="visible"
           viewport={{ once: true }}
-          className="text-center mb-12"
+          variants={containerVariants}
+          className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center"
         >
-          <h2 className="text-3xl font-bold mb-4 text-convrt-dark-blue">See the Transformation</h2>
-          <p className="text-xl text-convrt-dark-blue/80 mb-8">
-            Drag the slider to see how our AI transforms your outreach results
-          </p>
-        </motion.div>
+          {/* Content Side */}
+          <motion.div variants={containerVariants} className="space-y-8">
+            <motion.div variants={itemVariants}>
+              <div className="inline-flex items-center px-4 py-2 rounded-full bg-convrt-purple/10 text-convrt-purple mb-6">
+                <Zap className="w-4 h-4 mr-2" />
+                <span className="text-sm font-medium tracking-wide">Why Choose Convrt.ai</span>
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-convrt-dark-blue dark:text-white mb-6 tracking-tight transition-colors duration-300">
+                The Future of <span className="text-convrt-purple">Intelligent</span> Outreach
+              </h2>
+              <p className="text-xl text-gray-600 dark:text-gray-300 leading-relaxed transition-colors duration-300">
+                Transform your sales process with AI that understands context, builds relationships, and drives results.
+              </p>
+            </motion.div>
 
-        <div className="relative">
-          {/* Navigation Buttons */}
-          <button
-            onClick={prevSlide}
-            className="absolute left-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors"
-          >
-            <ChevronLeft className="w-6 h-6 text-convrt-dark-blue" />
-          </button>
-          
-          <button
-            onClick={nextSlide}
-            className="absolute right-4 top-1/2 -translate-y-1/2 z-20 bg-white shadow-lg rounded-full p-3 hover:bg-gray-50 transition-colors"
-          >
-            <ChevronRight className="w-6 h-6 text-convrt-dark-blue" />
-          </button>
+            <motion.div variants={containerVariants} className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {features.map((feature, index) => (
+                <motion.div 
+                  key={index}
+                  variants={itemVariants}
+                  className="flex items-start space-x-4 p-4 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors duration-300"
+                >
+                  <div className="w-12 h-12 rounded-lg bg-convrt-purple/10 flex items-center justify-center flex-shrink-0">
+                    <feature.icon className="w-6 h-6 text-convrt-purple" />
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-convrt-dark-blue dark:text-white mb-1 transition-colors duration-300">
+                      {feature.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 dark:text-gray-400 transition-colors duration-300">
+                      {feature.description}
+                    </p>
+                  </div>
+                </motion.div>
+              ))}
+            </motion.div>
 
-          {/* Slide Container */}
-          <AnimatePresence mode="wait">
-            <motion.div
-              key={currentSlide}
-              initial={{ opacity: 0, x: 20 }}
-              animate={{ opacity: 1, x: 0 }}
-              exit={{ opacity: 0, x: -20 }}
-              transition={{ duration: 0.5 }}
-              className="relative w-full h-96 rounded-2xl overflow-hidden shadow-2xl cursor-ew-resize"
-              ref={containerRef}
-              onMouseDown={handleMouseDown}
-              onMouseMove={handleMouseMove}
-              onMouseUp={handleMouseUp}
-              onMouseLeave={handleMouseUp}
-              onTouchStart={handleTouchStart}
-              onTouchMove={handleTouchMove}
-              onTouchEnd={handleTouchEnd}
+            <motion.div variants={itemVariants}>
+              <button className="button-primary">
+                Start Your Free Trial
+              </button>
+            </motion.div>
+          </motion.div>
+
+          {/* Interactive Visual Side */}
+          <motion.div 
+            variants={itemVariants}
+            className="relative"
+            onHoverStart={() => setIsHovered(true)}
+            onHoverEnd={() => setIsHovered(false)}
+          >
+            <div 
+              ref={constraintsRef}
+              className="relative w-full h-96 rounded-2xl overflow-hidden shadow-2xl border border-gray-200 dark:border-gray-700"
             >
               {/* Before Image */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-red-100 to-red-200 flex items-center justify-center"
-                style={{
-                  clipPath: `polygon(0 0, ${sliderValue}% 0, ${sliderValue}% 100%, 0 100%)`
-                }}
-              >
-                <div className="text-center p-8">
-                  <div className="text-6xl mb-4">{currentSlideData.before.icon}</div>
-                  <h3 className="text-2xl font-bold text-red-800 mb-2">{currentSlideData.before.title}</h3>
-                  {currentSlideData.before.stats.map((stat, index) => (
-                    <p key={index} className="text-red-700">{stat}</p>
-                  ))}
+              <div className="absolute inset-0 bg-gradient-to-br from-gray-100 to-gray-300 dark:from-gray-700 dark:to-gray-800 flex items-center justify-center">
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-gray-300 dark:bg-gray-600 mx-auto mb-4 flex items-center justify-center">
+                    <span className="text-2xl">😴</span>
+                  </div>
+                  <h3 className="text-xl font-semibold text-gray-600 dark:text-gray-300 mb-2">Before Convrt.ai</h3>
+                  <p className="text-gray-500 dark:text-gray-400">Cold, generic outreach</p>
                 </div>
               </div>
 
               {/* After Image */}
-              <div 
-                className="absolute inset-0 bg-gradient-to-r from-green-100 to-green-200 flex items-center justify-center"
-                style={{
-                  clipPath: `polygon(${sliderValue}% 0, 100% 0, 100% 100%, ${sliderValue}% 100%)`
-                }}
+              <motion.div 
+                className="absolute inset-0 bg-gradient-to-br from-convrt-purple/20 to-convrt-purple-light/20 flex items-center justify-center"
+                style={{ clipPath }}
               >
-                <div className="text-center p-8">
-                  <div className="text-6xl mb-4">{currentSlideData.after.icon}</div>
-                  <h3 className="text-2xl font-bold text-green-800 mb-2">{currentSlideData.after.title}</h3>
-                  {currentSlideData.after.stats.map((stat, index) => (
-                    <p key={index} className="text-green-700">{stat}</p>
-                  ))}
+                <div className="text-center">
+                  <div className="w-16 h-16 rounded-full bg-convrt-purple mx-auto mb-4 flex items-center justify-center">
+                    <Sparkles className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-convrt-dark-blue dark:text-white mb-2">With Convrt.ai</h3>
+                  <p className="text-convrt-purple font-medium">Personalized, intelligent outreach</p>
                 </div>
-              </div>
+              </motion.div>
 
-              {/* Slider Line */}
-              <div 
-                className="absolute top-0 bottom-0 w-1 bg-white shadow-lg z-10 pointer-events-none"
-                style={{ left: `${sliderValue}%`, transform: 'translateX(-50%)' }}
+              {/* Draggable Slider */}
+              <motion.div
+                drag="x"
+                dragConstraints={constraintsRef}
+                dragElastic={0.1}
+                style={{ x: springX }}
+                className="absolute top-0 bottom-0 w-1 bg-white shadow-lg cursor-grab active:cursor-grabbing"
+                whileDrag={{ scale: 1.1 }}
               >
-                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+                <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg border-2 border-convrt-purple flex items-center justify-center">
                   <div className="w-2 h-2 bg-convrt-purple rounded-full"></div>
                 </div>
-              </div>
-            </motion.div>
-          </AnimatePresence>
+              </motion.div>
 
-          {/* Slide Indicators */}
-          <div className="flex justify-center mt-6 space-x-2">
-            {slides.map((_, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  setCurrentSlide(index);
-                  setSliderValue(50);
-                }}
-                className={`w-3 h-3 rounded-full transition-colors ${
-                  index === currentSlide ? 'bg-convrt-purple' : 'bg-gray-300'
-                }`}
-              />
-            ))}
-          </div>
-
-          {/* Slide Title */}
-          <div className="text-center mt-4">
-            <h3 className="text-lg font-semibold text-convrt-dark-blue">
-              {currentSlideData.title}
-            </h3>
-          </div>
-        </div>
+              {/* Instruction Text */}
+              <motion.div 
+                className="absolute bottom-4 left-1/2 transform -translate-x-1/2 text-sm text-gray-600 dark:text-gray-300 bg-white/90 dark:bg-gray-800/90 px-3 py-1 rounded-full backdrop-blur-sm"
+                animate={{ opacity: isHovered ? 0 : 1 }}
+                transition={{ duration: 0.3 }}
+              >
+                Drag to compare
+              </motion.div>
+            </div>
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

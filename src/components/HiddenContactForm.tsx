@@ -34,7 +34,7 @@ const HiddenContactForm = () => {
   };
 
   return (
-    <section id='contact' className="py-24 bg-gradient-to-br from-convrt-purple/5 via-white to-convrt-purple/10 relative overflow-hidden">
+    <section id='contact' className="py-24 bg-gradient-to-br from-slate-50 via-purple-50/30 to-blue-50/30 dark:from-gray-900 dark:via-gray-800/30 dark:to-gray-900/30 relative overflow-hidden transition-colors duration-300">
       {/* Background Elements */}
       <div className="absolute inset-0 bg-grid-pattern opacity-30"></div>
       <div className="absolute top-10 left-10 w-32 h-32 bg-convrt-purple/10 rounded-full blur-3xl"></div>
@@ -52,10 +52,10 @@ const HiddenContactForm = () => {
             <Mail className="w-4 h-4 mr-2" />
             <span className="text-sm font-medium font-inter tracking-wide">Get in Touch</span>
           </div>
-          <h2 className="font-inter font-bold text-4xl md:text-5xl text-convrt-dark-blue mb-6">
+          <h2 className="font-inter font-bold text-4xl md:text-5xl text-convrt-dark-blue dark:text-white mb-6 transition-colors duration-300">
             Ready to Transform Your <span className="text-convrt-purple">Outreach?</span>
           </h2>
-          <p className="text-xl text-convrt-dark-blue/70 max-w-2xl mx-auto leading-relaxed">
+          <p className="text-xl text-convrt-dark-blue/70 dark:text-gray-300 max-w-2xl mx-auto leading-relaxed transition-colors duration-300">
             Let's discuss how our AI can help you build meaningful relationships with your prospects
           </p>
         </motion.div>
@@ -78,7 +78,7 @@ const HiddenContactForm = () => {
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-convrt-purple to-convrt-purple-hover rounded-3xl blur-lg opacity-75 group-hover:opacity-100 transition-opacity"></div>
                 
-                <div className="relative bg-white border border-convrt-purple/20 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500">
+                <div className="relative bg-white dark:bg-gray-800 border border-convrt-purple/20 dark:border-gray-700 p-8 rounded-3xl shadow-xl hover:shadow-2xl transition-all duration-500">
                   <motion.div
                     animate={{ 
                       rotate: [0, 10, -10, 0],
@@ -96,10 +96,10 @@ const HiddenContactForm = () => {
                     </div>
                   </motion.div>
                   
-                  <h3 className="text-2xl font-bold text-convrt-dark-blue mb-3">
+                  <h3 className="text-2xl font-bold text-convrt-dark-blue dark:text-white mb-3 transition-colors duration-300">
                     Start Your Journey
                   </h3>
-                  <p className="text-convrt-dark-blue/70 mb-6">
+                  <p className="text-convrt-dark-blue/70 dark:text-gray-300 mb-6 transition-colors duration-300">
                     Click to reveal your personalized contact experience
                   </p>
                   
@@ -123,13 +123,13 @@ const HiddenContactForm = () => {
               transition={{ duration: 0.6, type: "spring", bounce: 0.2 }}
               className="relative max-w-2xl mx-auto"
             >
-              <div className="relative bg-white p-8 md:p-12 rounded-3xl shadow-2xl border border-convrt-purple/10">
+              <div className="relative bg-white dark:bg-gray-800 p-8 md:p-12 rounded-3xl shadow-2xl border border-convrt-purple/10 dark:border-gray-700 transition-colors duration-300">
                 {/* Close button */}
                 <button
                   onClick={() => setIsRevealed(false)}
-                  className="absolute top-6 right-6 p-2 hover:bg-gray-100 rounded-full transition-colors z-10"
+                  className="absolute top-6 right-6 p-2 hover:bg-gray-100 dark:hover:bg-gray-700 rounded-full transition-colors z-10"
                 >
-                  <X className="w-5 h-5 text-gray-500" />
+                  <X className="w-5 h-5 text-gray-500 dark:text-gray-400" />
                 </button>
 
                 <AnimatePresence mode="wait">
@@ -145,8 +145,8 @@ const HiddenContactForm = () => {
                         <div className="w-20 h-20 mx-auto bg-gradient-to-r from-convrt-purple to-convrt-purple-light rounded-2xl flex items-center justify-center mb-6">
                           <Mail className="w-10 h-10 text-white" />
                         </div>
-                        <h3 className="text-3xl font-bold text-convrt-dark-blue mb-3">Let's Connect</h3>
-                        <p className="text-convrt-dark-blue/70">Tell us about your outreach goals and challenges</p>
+                        <h3 className="text-3xl font-bold text-convrt-dark-blue dark:text-white mb-3 transition-colors duration-300">Let's Connect</h3>
+                        <p className="text-convrt-dark-blue/70 dark:text-gray-300 transition-colors duration-300">Tell us about your outreach goals and challenges</p>
                       </div>
 
                       {/* Contact Form */}
@@ -165,7 +165,7 @@ const HiddenContactForm = () => {
                             onChange={handleInputChange}
                             placeholder="Your Name"
                             required
-                            className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-convrt-purple transition-colors bg-gray-50/50"
+                            className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:border-convrt-purple transition-colors bg-gray-50/50 dark:bg-gray-700/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                           />
                         </motion.div>
 
@@ -183,7 +183,7 @@ const HiddenContactForm = () => {
                             onChange={handleInputChange}
                             placeholder="Your Email"
                             required
-                            className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-convrt-purple transition-colors bg-gray-50/50"
+                            className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:border-convrt-purple transition-colors bg-gray-50/50 dark:bg-gray-700/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                           />
                         </motion.div>
 
@@ -201,7 +201,7 @@ const HiddenContactForm = () => {
                             placeholder="Tell us about your outreach goals and current challenges..."
                             required
                             rows={4}
-                            className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 rounded-xl focus:outline-none focus:border-convrt-purple transition-colors resize-none bg-gray-50/50"
+                            className="w-full pl-12 pr-4 py-4 border-2 border-gray-200 dark:border-gray-600 rounded-xl focus:outline-none focus:border-convrt-purple transition-colors resize-none bg-gray-50/50 dark:bg-gray-700/50 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                           />
                         </motion.div>
 
@@ -231,12 +231,12 @@ const HiddenContactForm = () => {
                         initial={{ scale: 0 }}
                         animate={{ scale: 1 }}
                         transition={{ type: "spring", bounce: 0.5, delay: 0.2 }}
-                        className="w-20 h-20 mx-auto bg-green-100 rounded-full flex items-center justify-center mb-6"
+                        className="w-20 h-20 mx-auto bg-green-100 dark:bg-green-900/30 rounded-full flex items-center justify-center mb-6"
                       >
-                        <CheckCircle className="w-10 h-10 text-green-600" />
+                        <CheckCircle className="w-10 h-10 text-green-600 dark:text-green-400" />
                       </motion.div>
-                      <h3 className="text-2xl font-bold text-convrt-dark-blue mb-3">Message Sent!</h3>
-                      <p className="text-convrt-dark-blue/70">Thank you for reaching out. We'll get back to you within 24 hours.</p>
+                      <h3 className="text-2xl font-bold text-convrt-dark-blue dark:text-white mb-3 transition-colors duration-300">Message Sent!</h3>
+                      <p className="text-convrt-dark-blue/70 dark:text-gray-300 transition-colors duration-300">Thank you for reaching out. We'll get back to you within 24 hours.</p>
                     </motion.div>
                   )}
                 </AnimatePresence>
