@@ -165,13 +165,13 @@ const ImagePortionSlider = () => {
                       initial={{ opacity: 0, x: -20 }}
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.1 }}
-                      className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border-l-4 border-blue-500"
+                      className="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg border border-blue-200 dark:border-blue-700"
                       style={{ userSelect: 'none' }}
                     >
-                      <div className="flex items-start justify-between">
-                        <div className="flex items-start space-x-3 flex-1">
-                          <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color} mt-1`} />
-                          <div>
+                      <div className="flex items-center justify-between">
+                        <div className="flex items-center space-x-3">
+                          <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color}`} />
+                          <div className="text-left">
                             <h4 className="text-sm md:text-base font-semibold text-blue-800 dark:text-blue-300">{item.title}</h4>
                             <p className="text-xs md:text-sm text-blue-600 dark:text-blue-400">{item.subtitle}</p>
                             {item.year && (
@@ -247,14 +247,14 @@ const ImagePortionSlider = () => {
 
             {/* Achievements Section - RIGHT ALIGNED */}
             <div 
-              className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30 flex items-center"
+              className="absolute inset-0 bg-gradient-to-br from-yellow-100 to-yellow-200 dark:from-yellow-900/30 dark:to-yellow-800/30 flex items-center justify-end"
               style={{ 
                 clipPath: `inset(0 0 0 ${secondSliderPosition}%)`,
                 userSelect: 'none'
               }}
             >
-              <div className="w-full p-4 md:p-8 flex justify-end" style={{ userSelect: 'none' }}>
-                <div className="text-right max-w-md">
+              <div className="p-4 md:p-8" style={{ userSelect: 'none' }}>
+                <div className="text-right">
                   <div className="flex items-center justify-end mb-6">
                     <h3 className="text-2xl md:text-3xl font-bold text-yellow-700 dark:text-yellow-400 mr-3">ACHIEVEMENTS</h3>
                     <Briefcase className="w-8 h-8 text-yellow-600 dark:text-yellow-400" />
@@ -266,10 +266,10 @@ const ImagePortionSlider = () => {
                         initial={{ opacity: 0, x: 20 }}
                         whileInView={{ opacity: 1, x: 0 }}
                         transition={{ delay: index * 0.1 }}
-                        className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border-r-4 border-yellow-500"
+                        className="bg-yellow-50 dark:bg-yellow-900/20 p-4 rounded-lg border border-yellow-200 dark:border-yellow-700"
                         style={{ userSelect: 'none' }}
                       >
-                        <div className="flex items-start justify-between">
+                        <div className="flex items-center justify-between">
                           <a 
                             href={item.link} 
                             target="_blank" 
@@ -279,12 +279,12 @@ const ImagePortionSlider = () => {
                           >
                             <ExternalLink className="w-4 h-4" />
                           </a>
-                          <div className="flex items-start space-x-3 flex-1 text-right">
-                            <div>
+                          <div className="flex items-center space-x-3">
+                            <div className="text-right">
                               <h4 className="text-sm md:text-base font-semibold text-yellow-800 dark:text-yellow-300">{item.title}</h4>
                               <p className="text-xs md:text-sm text-yellow-600 dark:text-yellow-400">{item.subtitle}</p>
                             </div>
-                            <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color} mt-1`} />
+                            <item.icon className={`w-5 h-5 md:w-6 md:h-6 ${item.color}`} />
                           </div>
                         </div>
                       </motion.div>

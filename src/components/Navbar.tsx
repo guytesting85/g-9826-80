@@ -37,13 +37,8 @@ const Navbar = () => {
       <div className="container max-w-7xl mx-auto flex items-center justify-between">
         <div className="flex items-center">
           <a href="/" className="flex items-center">
-            <div className="flex items-center space-x-2">
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-convrt-purple to-purple-600 flex items-center justify-center text-white font-bold text-lg">
-                P
-              </div>
-              <span className="text-xl font-bold text-convrt-dark-blue dark:text-white">
-                Pranav
-              </span>
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-convrt-purple to-purple-600 flex items-center justify-center text-white font-bold text-lg">
+              P
             </div>
           </a>
         </div>
