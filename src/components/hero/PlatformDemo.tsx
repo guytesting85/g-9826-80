@@ -68,7 +68,6 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
         <NotificationPanel 
           isOpen={platformDemo.showNotifications}
           onClose={platformDemo.closeNotifications}
-          onMarkAsRead={platformDemo.markNotificationsAsRead}
         />
       </AnimatePresence>
 
