@@ -8,6 +8,7 @@ import AvatarMenu from './platform-demo/AvatarMenu';
 import AvatarUploadModal from './platform-demo/AvatarUploadModal';
 import { usePlatformDemo } from '../../hooks/usePlatformDemo';
 import { useAvatar } from '../../hooks/useAvatar';
+import { floatingVariants } from '../../utils/animations';
 
 interface PlatformDemoProps {
   onClose: () => void;
@@ -25,12 +26,16 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
   };
 
   return (
-    <div className={`relative ${platformDemo.isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'max-w-7xl mx-auto'}`}>
+    <motion.div 
+      variants={floatingVariants}
+      animate="animate"
+      className={`relative ${platformDemo.isFullscreen ? 'fixed inset-0 z-50 bg-white' : 'max-w-7xl mx-auto'}`}
+    >
       {!platformDemo.isFullscreen && (
-        <div className="absolute inset-0 -m-10 bg-gradient-to-br from-convrt-purple/20 via-convrt-purple/20 to-convrt-purple/20 rounded-3xl blur-3xl opacity-40"></div>
+        <div className="absolute inset-0 -m-10 bg-gradient-to-br from-purple-100/60 via-blue-50/60 to-indigo-100/60 rounded-3xl blur-3xl opacity-50"></div>
       )}
       
-      <div className={`relative ${platformDemo.isFullscreen ? 'h-full' : 'rounded-2xl'} overflow-hidden shadow-2xl border border-white/20 backdrop-blur-sm`}>
+      <div className={`relative ${platformDemo.isFullscreen ? 'h-full' : 'rounded-2xl'} overflow-hidden shadow-2xl shadow-purple-500/20 border border-white/30 backdrop-blur-sm bg-white/95`}>
         <DemoHeader
           activeTab={platformDemo.activeTab}
           setActiveTab={platformDemo.setActiveTab}
@@ -45,7 +50,7 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
           avatarImage={avatar.avatarImage}
         />
         
-        <div className={`bg-gray-50 p-10 ${platformDemo.isFullscreen ? 'h-[calc(100vh-80px)] overflow-y-auto' : 'min-h-[700px]'} relative`}>
+        <div className={`bg-gradient-to-br from-gray-50 to-purple-50/30 p-10 ${platformDemo.isFullscreen ? 'h-[calc(100vh-80px)] overflow-y-auto' : 'min-h-[700px]'} relative`}>
           <AnimatePresence mode="wait">
             <motion.div 
               key={platformDemo.activeTab}
@@ -92,7 +97,7 @@ const PlatformDemo = ({ onClose }: PlatformDemoProps) => {
           }}
         />
       )}
-    </div>
+    </motion.div>
   );
 };
 

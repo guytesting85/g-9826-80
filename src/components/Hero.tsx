@@ -11,7 +11,7 @@ const Hero = () => {
   const [showDemo, setShowDemo] = useState(true);
 
   return (
-    <section className="relative min-h-0 pt-20 pb-32 overflow-hidden bg-[#F9F6F3]">
+    <section className="relative min-h-0 pt-20 pb-32 overflow-hidden bg-gradient-to-br from-slate-50 via-purple-50/40 to-blue-50/40">
       <AnimatedBackground />
       
       <div className="container-section relative z-10">

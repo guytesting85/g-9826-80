@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import { Check, X, Maximize2, Minimize2 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { floatingVariants } from '../utils/animations';
 
 const ProductShowcase = () => {
   const sectionRef = useRef<HTMLDivElement>(null);
@@ -49,7 +50,7 @@ const ProductShowcase = () => {
               ease: "easeInOut"
             }
           }}
-          className="relative py-16 overflow-hidden bg-white" 
+          className="relative py-16 overflow-hidden bg-gradient-to-br from-slate-50 via-purple-50/30 to-blue-50/30" 
           id="product"
           layout
         >
@@ -85,12 +86,13 @@ const ProductShowcase = () => {
               variants={containerVariants}
             >
               <motion.div 
-                variants={itemVariants}
-                className={`relative bg-[#F9F6F3] rounded-[20px] overflow-hidden border border-gray-200 ${
+                variants={{...itemVariants, ...floatingVariants}}
+                animate="animate"
+                className={`relative bg-white/95 backdrop-blur-sm rounded-[20px] overflow-hidden border border-white/50 shadow-2xl shadow-purple-500/20 ${
                   isFullscreen ? 'fixed inset-4 z-50' : ''
                 }`}
               >
-                <div className="px-8 py-6 border-b border-gray-200 flex items-center justify-between">
+                <div className="px-8 py-6 border-b border-gray-200/70 bg-white/80 backdrop-blur-sm flex items-center justify-between">
                   <div className="flex items-center space-x-2">
                     <button 
                       onClick={handleClose}
@@ -111,7 +113,7 @@ const ProductShowcase = () => {
                   <div className="text-sm text-gray-500">convrt.ai/dashboard</div>
                 </div>
                 
-                <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 p-8 ${
+                <div className={`grid grid-cols-1 md:grid-cols-2 gap-8 p-8 bg-gradient-to-br from-gray-50/50 to-purple-50/50 ${
                   isFullscreen ? 'h-[calc(100vh-200px)] overflow-y-auto' : ''
                 }`}>
                   <div className="flex flex-col justify-center">
@@ -135,7 +137,7 @@ const ProductShowcase = () => {
                       ))}
                     </ul>
                   </div>
-                  <div className="bg-white rounded-[20px] border border-gray-200 p-6">
+                  <div className="bg-white/90 backdrop-blur-sm rounded-[20px] border border-white/60 shadow-lg p-6">
                     <div className="flex items-center mb-4">
                       <div className="h-8 w-8 rounded-full bg-[#6936F5] flex items-center justify-center text-white mr-3">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
