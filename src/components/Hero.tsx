@@ -65,7 +65,7 @@ const Hero = () => {
           
           <motion.div 
             variants={itemVariants}
-            className={`flex flex-col sm:flex-row justify-center items-center gap-4 ${showDemo ? 'mb-20' : 'mb-0'}`}
+            className="flex flex-col sm:flex-row justify-center items-center gap-4 mb-8"
           >
             <a href="#cta" className="button-primary flex items-center group font-inter font-medium">
               Get Started
@@ -76,21 +76,23 @@ const Hero = () => {
             </a>
           </motion.div>
           
-          {/* Modern Platform Showcase with proper AnimatePresence */}
-          <AnimatePresence>
+          {/* Modern Platform Showcase - Only render when showDemo is true */}
+          <AnimatePresence mode="wait">
             {showDemo && (
               <motion.div 
                 ref={demoRef}
                 variants={itemVariants}
-                className="transform scale-105"
-                initial={{ opacity: 1, height: "auto" }}
+                className="mt-12"
+                initial={{ opacity: 1, scale: 1 }}
                 exit={{ 
-                  opacity: 0, 
-                  height: 0,
-                  scale: 0.8,
-                  transition: { duration: 0.4, ease: "easeInOut" }
+                  opacity: 0,
+                  scale: 0.95,
+                  transition: { 
+                    duration: 0.3,
+                    ease: "easeInOut"
+                  }
                 }}
-                transition={{ duration: 0.3 }}
+                layout
               >
                 <PlatformDemo 
                   onClose={() => setShowDemo(false)} 
