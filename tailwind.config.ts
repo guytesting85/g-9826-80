@@ -129,7 +129,7 @@ export default {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         fadeIn: 'fadeIn 0.5s ease-in-out',
-        wave: 'wave 3s ease-in-out infinite',
+        wave: 'wave 8s ease-in-out infinite',
         floating: 'floating 3s ease-in-out infinite',
         pulse: 'pulse 2s ease-in-out infinite',
         gradient: 'gradient 5s ease infinite alternate',

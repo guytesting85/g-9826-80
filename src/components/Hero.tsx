@@ -46,7 +46,7 @@ const Hero = () => {
                 variants={itemVariants} 
                 initial={{ opacity: 1, scale: 1, height: "auto" }} 
                 exit={{ opacity: 0, scale: 0.95, height: 0, marginTop: 0, transition: { duration: 0.4, ease: "easeInOut" } }} 
-                className="mt-12 overflow-hidden" 
+                className="mt-12" 
                 layout
               >
                 <PlatformDemo onClose={() => setShowDemo(false)} onCloseBadge={() => {}} showBadge={true} />
